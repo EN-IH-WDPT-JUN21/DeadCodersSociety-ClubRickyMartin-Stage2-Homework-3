@@ -1,9 +1,12 @@
 public class Menu {
     public static void mainMenu(){
+
+
         Graphics.mainMenuGraphic();
         System.out.println();
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println("      Welcome to the CRM - Customer Relations Management *");
+        System.out.println("Welcome to the CRM - Customer Relations Management *");
+        System.out.println();
         Sounds.playSound();
     }
     public static void CRMDefinition(){
@@ -15,10 +18,10 @@ public class Menu {
         System.out.println();
     }
     public static void CRMTrueDefinition(){
-        System.out.println("Lesser known fact is that CRM stands for Club Ricky Martin");
+        System.out.println("Lesser known fact is that CRM stands for Club Ricky Martin.");
         System.out.println("Within this definition CRM Users are a group of devoted people who strongly believes that 90's are not yet lost!");
         System.out.println();
-        System.out.println("The undeniable Guru of the CRM Users is Ricky Martin Himself. Let him guide you through the life!");
+        System.out.println("The undeniable guru of the CRM Users is Ricky Martin!. Let him guide you through this hard day of work!");
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println();
     }

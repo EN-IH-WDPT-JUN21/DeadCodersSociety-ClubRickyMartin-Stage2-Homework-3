@@ -7,37 +7,22 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Lead tl = new Lead("John", "+48 501 501 501", "john_mck@gmail.com", "MCWoodworking");
-        System.out.println(tl.showLeadDetails());
 
         //temporary
+        //logo
         Menu.mainMenu();
+        //Wikipedia definition of CRM - after user will input "definition" as an input
         Menu.CRMDefinition();
-        Menu.CRMTrueDefinition();
-        System.out.println();
+        //Wikipedia definition of CRM (Club Ricky Martin) - after user will input "true definition" as an input
         Graphics.trueCRMGraphic();
+        Menu.CRMTrueDefinition();
 
+        //new lead with empty constructor - user will be prompted for the input
+        System.out.println();
+        Lead tl = new Lead();
+        System.out.println(tl.showLeadDetails());
 
-            System.out.println();
-            Scanner myScanner = new Scanner(System.in);
-            // Get input from the user
-            System.out.println("Please enter your mail");
-            String userInput = myScanner.nextLine();
-            System.out.println(Validations.isValidEmailAddress(userInput));
-
-            System.out.println("Please enter your phone number");
-            userInput = myScanner.nextLine();
-            System.out.println(Validations.isValidPhoneNumber(userInput));
-
-            System.out.println("Please enter your first name");
-            userInput = myScanner.nextLine();
-            System.out.println(Validations.isValidFirstName(userInput));
-
-            System.out.println("Please enter your last name");
-            userInput = myScanner.nextLine();
-            System.out.println(Validations.isValidLastName(userInput));
-
-        }
+    }
 
 }
 

@@ -5,6 +5,7 @@ import java.io.File;
 import java.util.Random;
 
 public class Sounds {
+    //sounds are intended to play when something special happens, like close_win
     public static void playSound() {
         final File dir = new File("src/main/audio");
         File[] files = dir.listFiles();

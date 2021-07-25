@@ -1,7 +1,10 @@
+import org.junit.platform.commons.util.StringUtils;
+
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.commons.lang.WordUtils;
 
 public class Validations {
 
@@ -31,11 +34,13 @@ public class Validations {
     // validate first name
     public static boolean isValidFirstName(String firstName)
     {
-        return firstName.matches( "[A-Z][a-zA-Z]*" );
+        String fName= WordUtils.capitalizeFully(firstName.trim());
+        return fName.matches( "[A-Z][a-zA-Z]*" );
     }
     // validate last name
     public static boolean isValidLastName(String lastName)
     {
-        return lastName.matches( "[a-zA-z]+([ '-][a-zA-Z]+)*" );
+        String lName= WordUtils.capitalizeFully(lastName.trim());
+        return lName.matches( "[a-zA-z]+([ '-][a-zA-Z]+)*" );
     }
 }

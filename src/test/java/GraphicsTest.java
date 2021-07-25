@@ -1,7 +1,32 @@
-public class Graphics {
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-    public static void mainMenuGraphic(){
-        System.out.println("""
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class GraphicsTest {
+
+    private final PrintStream standardOut = System.out;
+    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+
+    @BeforeEach
+    public void setUp() {
+        System.setOut(new PrintStream(outputStreamCaptor));
+    }
+
+    @AfterEach
+    public void tearDown() {
+        System.setOut(standardOut);
+    }
+
+    @Test
+    void mainMenuGraphic() {
+        Graphics.mainMenuGraphic();
+
+        assertEquals("""
 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
@@ -41,11 +66,15 @@ public class Graphics {
 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒░░                ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▓▒▒▒░░ ░            ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ ▓▒▒▒░░░░░          ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░▒░░         ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓""");
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░▒░░         ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓""",
+outputStreamCaptor.toString().trim());
     }
 
-    public static void trueCRMGraphic(){
-        System.out.println("""		
+    @Test
+    void trueCRMGraphic() {
+        Graphics.trueCRMGraphic();
+
+        assertEquals("""		
 :----.--------:::::--:---...--:.---.-::-..--..----.-----.``.-.----....`....``..`..``````````````.....-.....````````.````````....-...-..--.``````..::::-.`.:::--://::/++/:-oooo+/://///-:::/:-:/+/-o+///+
 /:--:::------------//::-:---:--.------------.--.......---..-.--.....-....`.`````..`````````````````.......``````...`...````````......-....``````.`....:---:---..-:/::++os+++os++++/::/.::----:://+++///+
 /::::---:::::::://+/:-----..-...-----....--.-----`.--....-:--------..````.`````````````````.```````...``.`````..``..```..`.``.`..```.```````````.`.-..:.-----::-:////+oo++/:////++:-:/-::-::---::/+/:///
@@ -147,6 +176,7 @@ NNNNNNNNNNNNNNNNNNNmNNNNNNNNNNNNNNmNNNNNNNmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmNNh
 NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmNNNNNNNmmNNNNNNNNNNmmmmNNNNNNNNNNNNNNNNmmmNmmmNmmNNNNNNNNmmmmmmmmmmmmmmmmmmmmmmNNNNNNmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmNNmmmmmmmmNmmmmNNNNmmNNNNNNNNNNNNNmh`
 NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmNNNNNNNmNNNNNNNNmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmNNNNNNmNmmmmmmmmmmmmmmmmmmmmmmmNNNNmmmNNNNNNmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmmmmmmmmmmmmmmmNNNNmmmNNNmmNNNNmNNNd-
 NNNNNNNNNNNNNNmNNNNNNNNNNNNNNNNNNNNNNmNNNNNNNNNNNNNNmmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmNNNNNmmmmmmmmmmmmmmmmmmmmmmmmmmNNmmmmNNNmNmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmmmmmmmmmmmmmmmmNNNmmNNNNmmNNNNmNNNm/
-mNNNNNNNNNNNNNmmNNmNNNmmNNNNNNNNNNNNNmmNNNNNNNNNNNNNmmmmmmmmmmmmmmmNNNNNNNNNNNNNNNmmmmddmmNmmmmmmmmmmmmmmmmmmmmmmmmmmNNmmmmNNNmNmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmmmmmmmmmmmmmmmmNNNmmNNNNNmmNNNNNNNms""");
+mNNNNNNNNNNNNNmmNNmNNNmmNNNNNNNNNNNNNmmNNNNNNNNNNNNNmmmmmmmmmmmmmmmNNNNNNNNNNNNNNNmmmmddmmNmmmmmmmmmmmmmmmmmmmmmmmmmmNNmmmmNNNmNmmNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNmmmmmmmmmmmmmmmmmNNNmmNNNNNmmNNNNNNNms"""
+                ,outputStreamCaptor.toString().trim());
     }
 }

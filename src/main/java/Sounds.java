@@ -31,7 +31,6 @@ public class Sounds {
             URL audioDirectoryUrl = Objects.requireNonNull(Sounds.class.getClassLoader().getResource("audio"));
             return new File(audioDirectoryUrl.toURI());
         } catch (URISyntaxException e) {
-            System.out.println("Error with getting audio/ directory");
             throw new IllegalStateException("Error with getting audio/ directory", e);
         }
     }

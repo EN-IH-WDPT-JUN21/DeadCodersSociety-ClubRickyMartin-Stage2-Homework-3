@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args){
 
-        //temporary
+        //temporary content
         //logo
         Menu.mainMenu();
         //Wikipedia definition of CRM - after user will input "definition" as an input

@@ -14,7 +14,7 @@ public class Lead {
 
     //constructor based on user input
     public Lead() {
-        setId();
+        this.id = idCounter.incrementAndGet();
 
         Scanner myScanner = new Scanner(System.in);
         // Get input from the user
@@ -68,7 +68,7 @@ public class Lead {
     }
 
     public Lead(String name, String phoneNumber, String email, String companyName) {
-        setId();
+        this.id = idCounter.incrementAndGet();
         setName(name);
         setPhoneNumber(phoneNumber);
         setEmail(email);
@@ -87,9 +87,7 @@ public class Lead {
     public int getId() {
         return this.id;
     }
-    public void setId() {
-        this.id = idCounter.incrementAndGet();
-    }
+
 
     public String getName() {
         return name;

@@ -1,23 +1,20 @@
 import org.apache.commons.lang.WordUtils;
 
-import java.io.Console;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Lead {
-    static int leadCount = 0;
+
+    private static AtomicInteger idCounter = new AtomicInteger(0);
     private int id;
     private String name;
     private String phoneNumber;
     private String email;
     private String companyName;
 
-    //counts the ammount of leads created
-    {
-        leadCount += 1;
-    }
     //constructor based on user input
     public Lead() {
-        setId();
+        this.id = idCounter.incrementAndGet();
 
         Scanner myScanner = new Scanner(System.in);
         // Get input from the user
@@ -71,7 +68,7 @@ public class Lead {
     }
 
     public Lead(String name, String phoneNumber, String email, String companyName) {
-        setId();
+        this.id = idCounter.incrementAndGet();
         setName(name);
         setPhoneNumber(phoneNumber);
         setEmail(email);
@@ -88,12 +85,9 @@ public class Lead {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
-    public void setId() {
-        this.id = leadCount;
-    }
 
     public String getName() {
         return name;

@@ -7,7 +7,6 @@ public class Menu {
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Welcome to the CRM - Customer Relations Management *");
         System.out.println();
-        Sounds.playSound();
     }
     public static void CRMDefinition(){
         System.out.println("According to Wikipedia:");

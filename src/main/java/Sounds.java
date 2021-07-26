@@ -8,7 +8,6 @@ import java.util.Objects;
 import java.util.Random;
 
 public class Sounds {
-    //sounds are intended to play when something special happens, like close_win
     public static void playSound() {
         final File dir = getAudioDirectory();
 

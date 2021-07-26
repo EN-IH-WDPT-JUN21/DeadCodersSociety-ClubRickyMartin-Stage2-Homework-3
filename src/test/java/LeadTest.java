@@ -26,7 +26,7 @@ class LeadTest {
     @Test
     void setId(){
         Lead lead1=new Lead("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
-        Lead lead2=new Lead("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
+        Lead lead2=new Lead("Jonathan Reeves", "500500700", "Reeves@gmail.com", "GooglyCats");
         assertEquals(lead1.getId()+1, lead2.getId());
     }
 

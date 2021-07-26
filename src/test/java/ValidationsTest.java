@@ -49,4 +49,18 @@ class ValidationsTest {
         assertFalse(Validations.isValidLastName("W4rczak"));
         assertFalse(Validations.isValidLastName("Danielewicz12"));
     }
+
+    @Test
+    void isValidMenuCommand() {
+
+
+
+
+        assertTrue(Validations.isValidMenuCommand("helP  "));
+        assertTrue(Validations.isValidMenuCommand("Show leads"));
+        assertTrue(Validations.isValidMenuCommand("close-won 1"));
+        assertFalse(Validations.isValidMenuCommand("close won 1"));
+        assertTrue(Validations.isValidMenuCommand("look up lead 2"));
+        assertFalse(Validations.isValidMenuCommand("look up lead two"));
+    }
 }

@@ -16,7 +16,7 @@ public class Lead {
     public Lead() {
         this.id = idCounter.incrementAndGet();
 
-        Scanner myScanner = new Scanner(System.in);
+        Reader myScanner = Reader.getInstance();
         // Get input from the user
         System.out.println("Please enter first name for this lead:");
         String userInput = myScanner.nextLine();
@@ -64,7 +64,7 @@ public class Lead {
             userInput = myScanner.nextLine();
         }
         setCompanyName(userInput);
-        myScanner.close();
+
     }
 
     public Lead(String name, String phoneNumber, String email, String companyName) {

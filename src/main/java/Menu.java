@@ -1,13 +1,72 @@
+import java.util.*;
+
 public class Menu {
-    public static void mainMenu(){
+    public static List<Lead> leadList=new ArrayList<>();
+    private static Reader console = Reader.getInstance();
+    private static String menuChoice="";
 
-
+    public static void welcomeScreen(){
         Graphics.mainMenuGraphic();
         System.out.println();
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Welcome to the CRM - Customer Relations Management *");
-        System.out.println();
+        Menu.mainMenu();
     }
+
+    public static void mainMenu(){
+        System.out.println();
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("What do you want to do?");
+        menuChoice= convertUserInputToCommand(console.nextLine());
+        //check if the input is one of the valid options
+        boolean validMainMenuOption = Validations.isValidMenuCommand(menuChoice);
+        //loop while input is an invalid option
+        while (!validMainMenuOption) {
+            System.out.println("This is not a valid option! Type help for the list of available commands.");
+            System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+            menuChoice= convertUserInputToCommand(console.nextLine());
+            validMainMenuOption = Validations.isValidMenuCommand(menuChoice);
+        }
+
+        switch (menuChoice) {
+            //create new lead
+            case "help" -> help();
+
+            // create new lead
+            case "newlead" -> createNewLead();
+
+            //just a security valve - probably redundant
+            default -> {
+                System.out.println("This option is not yet implemented");
+                Menu.mainMenu();
+            }
+        }
+    }
+
+    public static void createNewLead(){
+        Lead newLead= new Lead();
+        leadList.add(newLead);
+        System.out.println("New lead created: ");
+        System.out.println(leadList.get(newLead.getId()-1).showLeadDetails());
+        Menu.mainMenu();
+    }
+
+    public static String convertUserInputToCommand(String input){
+        return input.toLowerCase().replaceAll("\\s+", "");
+    }
+
+    public static void help(){
+        System.out.println("Available commands are: \n" +
+                "New Lead - allows creation of a new Lead,\n" +
+                "Show Leads - displays a list of all available Leads, \n" +
+                "Lookup Lead id - display Lead with given id,\n" +
+                "Convert id - converts Lead with given id to an Opportunity, \n" +
+                "Close-lost id - closes Opportunity with given id with status LOST, \n" +
+                "Convert id - closes Opportunity with given id with status WON, \n" +
+                "Help - displays list of available commands ");
+        Menu.mainMenu();
+    }
+
     public static void CRMDefinition(){
         System.out.println("According to Wikipedia:");
         System.out.println("Customer relationship management (CRM) is a process in which a business or other organization \n administers its interactions with customers, typically using data analysis to study large amounts of information.");

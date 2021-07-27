@@ -12,61 +12,6 @@ public class Lead {
     private String email;
     private String companyName;
 
-    //constructor based on user input
-    public Lead() {
-        this.id = idCounter.incrementAndGet();
-
-        Reader myScanner = Reader.getInstance();
-        // Get input from the user
-        System.out.println("Please enter first name for this lead:");
-        String userInput = myScanner.nextLine();
-        //valideate if the first name is valid
-        while(!Validations.isValidFirstName(userInput)){
-            System.out.println("This first name is invalid. Please enter valid first name for this lead:");
-            userInput = myScanner.nextLine();
-        }
-        String name = "".concat(userInput);
-        //validate if last name is valid
-        System.out.println("Please enter last name for this lead:");
-        userInput = myScanner.nextLine();
-        while(!Validations.isValidLastName(userInput)){
-            System.out.println("This last name is invalid. Please enter valid last name for this lead:");
-            userInput = myScanner.nextLine();
-        }
-        //use trimmed, capitalized name
-        name=name.concat(" ").concat(userInput);
-        setName(WordUtils.capitalizeFully(name.trim()));
-
-        //validate if phone number is valid
-        System.out.println("Please enter phone number for this lead:");
-        userInput = myScanner.nextLine();
-        while(!Validations.isValidPhoneNumber(userInput)){
-            System.out.println("This phone number is invalid. Please enter valid phone number for this lead:");
-            userInput = myScanner.nextLine();
-        }
-        //use validated user input
-        setPhoneNumber(userInput);
-
-        //validate if Email address is valid
-        System.out.println("Please enter email address for this lead:");
-        userInput = myScanner.nextLine();
-        while(!Validations.isValidEmailAddress(userInput)){
-            System.out.println("This email address is invalid. Please enter valid email address for this lead:");
-            userInput = myScanner.nextLine();
-        }
-        //use validated user input
-        setEmail(userInput);
-
-        System.out.println("Please enter company name for this lead:");
-        userInput = myScanner.nextLine();
-        while(userInput == null || userInput.isEmpty()){
-            System.out.println("Company name cannot be empty. Please enter valid company name for this lead:");
-            userInput = myScanner.nextLine();
-        }
-        setCompanyName(userInput);
-
-    }
-
     public Lead(String name, String phoneNumber, String email, String companyName) {
         this.id = idCounter.incrementAndGet();
         setName(name);

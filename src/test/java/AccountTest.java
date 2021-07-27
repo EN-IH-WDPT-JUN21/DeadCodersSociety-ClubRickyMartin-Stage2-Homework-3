@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class AccountTest {
 
   @BeforeEach
-  void setUp() {
-    resetPrivateStaticIntegerFieldToZero(Account.class, "accountCount");
+  void setUp() throws NoSuchFieldException, IllegalAccessException {
+    TestUtils.resetIdCounter(Opportunity.class);
   }
 
   @AfterEach

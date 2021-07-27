@@ -1,3 +1,5 @@
+import org.apache.commons.lang.WordUtils;
+
 import java.util.*;
 
 public class Menu {
@@ -40,6 +42,11 @@ public class Menu {
             case "newlead" -> createNewLead();
 
             // look up lead with given id
+            case "showleads" -> {
+                showLeads();
+            }
+
+            // look up lead with given id
             case "lookuplead" -> {
                 lookupLead(id);
             }
@@ -54,10 +61,63 @@ public class Menu {
     }
 
     public static void createNewLead(){
-        Lead newLead= new Lead();
+        String name;
+        String phoneNumber;
+        String email;
+        String companyName;
+
+        Reader myScanner = Reader.getInstance();
+        // Get input from the user
+        System.out.println("Please enter first name for this lead:");
+        String userInput = myScanner.nextLine();
+        //valideate if the first name is valid
+        while(!Validations.isValidFirstName(userInput)){
+            System.out.println("This first name is invalid. Please enter valid first name for this lead:");
+            userInput = myScanner.nextLine();
+        }
+        name = "".concat(userInput.trim());
+        //validate if last name is valid
+        System.out.println("Please enter last name for this lead:");
+        userInput = myScanner.nextLine();
+        while(!Validations.isValidLastName(userInput)){
+            System.out.println("This last name is invalid. Please enter valid last name for this lead:");
+            userInput = myScanner.nextLine();
+        }
+        //use trimmed, capitalized name
+        name=WordUtils.capitalizeFully(name.concat(" ").concat(userInput.trim())).trim();
+
+        //validate if phone number is valid
+        System.out.println("Please enter phone number for this lead:");
+        userInput = myScanner.nextLine();
+        while(!Validations.isValidPhoneNumber(userInput)){
+            System.out.println("This phone number is invalid. Please enter valid phone number for this lead:");
+            userInput = myScanner.nextLine();
+        }
+        //use validated user input
+        phoneNumber=userInput;
+
+        //validate if Email address is valid
+        System.out.println("Please enter email address for this lead:");
+        userInput = myScanner.nextLine();
+        while(!Validations.isValidEmailAddress(userInput)){
+            System.out.println("This email address is invalid. Please enter valid email address for this lead:");
+            userInput = myScanner.nextLine();
+        }
+        //use validated user input
+        email=userInput.trim();
+
+        System.out.println("Please enter company name for this lead:");
+        userInput = myScanner.nextLine();
+        while(userInput == null || userInput.isEmpty()){
+            System.out.println("Company name cannot be empty. Please enter valid company name for this lead:");
+            userInput = myScanner.nextLine();
+        }
+        companyName=userInput.trim();
+
+        Lead newLead= new Lead(name, phoneNumber, email, companyName);
         leadList.add(newLead);
         System.out.println("New lead created: ");
-        System.out.println(leadList.get(newLead.getId()-1).showLeadDetails());
+        System.out.println(newLead.showLeadDetails());
         Menu.mainMenu();
     }
 
@@ -75,6 +135,16 @@ public class Menu {
                 "Convert id - closes Opportunity with given id with status WON, \n" +
                 "Help - displays list of available commands ");
         Menu.mainMenu();
+    }
+
+    public static void showLeads(){
+        if (leadList==null || leadList.size()==0){
+            System.out.println("No leads found!");
+        } else {
+            for (Lead lead : leadList) {
+                System.out.println("Id: ".concat(String.valueOf(lead.getId())).concat(" Name: ").concat(lead.getName()));
+            }
+        }
     }
 
 

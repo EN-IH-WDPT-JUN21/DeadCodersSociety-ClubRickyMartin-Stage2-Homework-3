@@ -2,8 +2,11 @@ import java.util.*;
 
 public class Menu {
     public static List<Lead> leadList=new ArrayList<>();
+
     private static Reader console = Reader.getInstance();
     private static String menuChoice="";
+    private static String command="";
+    private static int id;
 
     public static void welcomeScreen(){
         Graphics.mainMenuGraphic();
@@ -27,13 +30,19 @@ public class Menu {
             menuChoice= convertUserInputToCommand(console.nextLine());
             validMainMenuOption = Validations.isValidMenuCommand(menuChoice);
         }
-
-        switch (menuChoice) {
+        command=Validations.removeAllDigits(menuChoice);
+        id=Validations.removeAllCharacters(menuChoice);
+        switch (command) {
             //create new lead
             case "help" -> help();
 
             // create new lead
             case "newlead" -> createNewLead();
+
+            // look up lead with given id
+            case "lookuplead" -> {
+                lookupLead(id);
+            }
 
             //just a security valve - probably redundant
             default -> {
@@ -41,6 +50,7 @@ public class Menu {
                 Menu.mainMenu();
             }
         }
+        Menu.mainMenu();
     }
 
     public static void createNewLead(){
@@ -65,6 +75,23 @@ public class Menu {
                 "Convert id - closes Opportunity with given id with status WON, \n" +
                 "Help - displays list of available commands ");
         Menu.mainMenu();
+    }
+
+
+    public static void lookupLead(int num){
+        int index=Validations.getLeadIndexById(leadList, num);
+        if(index==-1){
+            System.out.println("Lead with ID="
+                    .concat(String.valueOf(num))
+                    .concat(" was not found!"));
+        } else {
+            System.out.println("Lead found!");
+            System.out.println(leadList.get(index).showLeadDetails());
+        }
+    }
+
+    public static void convertLead(int num){
+
     }
 
     public static void CRMDefinition(){

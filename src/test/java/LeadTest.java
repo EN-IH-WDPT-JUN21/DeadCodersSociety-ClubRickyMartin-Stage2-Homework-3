@@ -12,8 +12,6 @@ import java.util.Scanner;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LeadTest {
-    PrintStream standardOut = System.out;
-    ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
 
     @BeforeEach

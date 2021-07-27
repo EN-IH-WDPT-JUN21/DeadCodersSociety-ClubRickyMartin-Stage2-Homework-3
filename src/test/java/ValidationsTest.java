@@ -52,10 +52,6 @@ class ValidationsTest {
 
     @Test
     void isValidMenuCommand() {
-
-
-
-
         assertTrue(Validations.isValidMenuCommand("helP  "));
         assertTrue(Validations.isValidMenuCommand("Show leads"));
         assertTrue(Validations.isValidMenuCommand("close-won 1"));

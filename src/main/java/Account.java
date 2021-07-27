@@ -1,7 +1,9 @@
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Account {
 
+  private static AtomicInteger idCounter = new AtomicInteger(0);
   private final int id;
   private Industry industry;
   private int employeeCount;
@@ -10,15 +12,10 @@ public class Account {
   private List<Contact> contactList;
   private List<Opportunity> opportunityList;
 
-  private static int accountCount = 0;
 
-  //counts the number of accounts created
-  {
-    accountCount++;
-    id = accountCount;
-  }
 
   public Account(Industry industry, int employeeCount, String city, String country, List<Contact> contactList, List<Opportunity> opportunityList) {
+    this.id = idCounter.incrementAndGet();
     this.industry = industry;
     this.employeeCount = employeeCount;
     this.city = city;

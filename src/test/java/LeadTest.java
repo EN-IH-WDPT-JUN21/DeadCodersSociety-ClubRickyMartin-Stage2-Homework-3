@@ -15,7 +15,8 @@ class LeadTest {
 
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws NoSuchFieldException, IllegalAccessException {
+        TestUtils.resetIdCounter(Lead.class);
     }
 
     @AfterEach

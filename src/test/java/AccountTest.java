@@ -19,7 +19,7 @@ class AccountTest {
   void tearDown() {
   }
 
-  public static void resetPrivateStaticIntegerFieldToZero(Class aClass, String fieldName) {
+  private void resetPrivateStaticIntegerFieldToZero(Class aClass, String fieldName) {
     try {
       // get declared field - f.e. `private static int accountCount` of `Account`
       //using magic (aka Reflection)
@@ -35,7 +35,7 @@ class AccountTest {
   }
 
   @Test
-  void AccountPropertiesHaveGivenValues() {
+  void accountPropertiesHaveGivenValues() {
     var acc = new Account(Industry.PRODUCE, 10, "Berlin", "USA", Collections.emptyList(), Collections.emptyList());
 
     assertEquals(Industry.PRODUCE, acc.getIndustry());
@@ -49,13 +49,13 @@ class AccountTest {
   }
 
   @Test
-  void FirstAccountGetsIdOne() {
+  void firstAccountGetsIdOne() {
     var acc = new Account(Industry.PRODUCE, 10, "Berlin", "USA", Collections.emptyList(), Collections.emptyList());
     assertEquals(1, acc.getId());
   }
 
   @Test
-  void SecondAccountGetsIdTwo() {
+  void secondAccountGetsIdTwo() {
     var acc1 = new Account(Industry.PRODUCE, 10, "Berlin", "USA", Collections.emptyList(), Collections.emptyList());
     var acc2 = new Account(Industry.PRODUCE, 10, "Berlin", "USA", Collections.emptyList(), Collections.emptyList());
     assertEquals(1, acc1.getId());

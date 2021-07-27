@@ -19,6 +19,15 @@ public class Contact {
         this.companyName = companyName;
     }
 
+    //returns contact details
+    public String showContactDetails(){
+        return "ID: ".concat(String.valueOf(this.getId())).concat("\n")
+                .concat("Company Name: ").concat(this.getCompanyName()).concat("\n")
+                .concat("Name: ").concat(this.getName()).concat("\n")
+                .concat("Phone Number: ").concat(this.getPhoneNumber()).concat("\n")
+                .concat("Email: ").concat(this.getEmail()).concat("\n");
+    }
+
     public int getId() {
         return id;
     }

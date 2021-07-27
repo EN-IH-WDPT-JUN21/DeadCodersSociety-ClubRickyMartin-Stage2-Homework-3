@@ -19,6 +19,16 @@ public class Opportunity {
         this.decisionMaker = decisionMaker;
     }
 
+    //returns Opportunity details
+    public String showOpportunityDetails(){
+        return "ID: ".concat(String.valueOf(this.getId())).concat("\n")
+                .concat("Status: ").concat(this.getStatus().name()).concat("\n")
+                .concat("Product: ").concat(this.getProduct().name()).concat("\n")
+                .concat("Quantity: ").concat(String.valueOf(this.getQuantity())).concat("\n")
+                .concat("Contact details: ").concat("\n")
+                .concat(this.getDecisionMaker().showContactDetails()).concat("\n");
+    }
+
     public int getId() {
         return id;
     }

@@ -12,7 +12,7 @@ class AccountTest {
 
   @BeforeEach
   void setUp() throws NoSuchFieldException, IllegalAccessException {
-    TestUtils.resetIdCounter(Opportunity.class);
+    TestUtils.resetIdCounter(Account.class);
   }
 
   @AfterEach

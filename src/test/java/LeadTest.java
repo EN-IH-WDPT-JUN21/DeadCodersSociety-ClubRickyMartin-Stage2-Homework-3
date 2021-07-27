@@ -36,7 +36,8 @@ class LeadTest {
         leadList.add(lead1);
         assertEquals("500500500", leadList.get(0).getPhoneNumber());
     }
-/* logic moved to menu function - test redundant
+
+    /*
     @Test
     void testNoArgsLeadConstructor(){
         List<Lead> leadList=new ArrayList<>();
@@ -55,7 +56,9 @@ class LeadTest {
         Lead lead1=new Lead();
         assertEquals("500500100", lead1.getPhoneNumber());
     }
-*/
+    */
+
+
     @Test
     void printLeadDetails() {
         Lead lead1=new Lead("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");

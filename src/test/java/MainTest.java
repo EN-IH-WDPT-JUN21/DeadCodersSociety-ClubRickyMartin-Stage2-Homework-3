@@ -37,6 +37,6 @@ class MainTest {
         "Welcome Warja\n", getOutput(outStream));
     assertEquals("", getOutput(errStream));
   }
-
   */
+
 }

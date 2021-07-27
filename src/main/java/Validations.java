@@ -52,6 +52,7 @@ public class Validations {
         final Pattern closeLost = Pattern.compile("close-lost\\d+");
         final Pattern closeWon = Pattern.compile("close-won\\d+");
         final Pattern help = Pattern.compile("help");
+
         //converts input into cleaned, lowercase command
         command=Menu.convertUserInputToCommand(command);
         return newLead.matcher(command).matches() ||
@@ -84,6 +85,54 @@ public class Validations {
             }
         }
         return -1;// not there is list
+    }
+
+
+    static Product getProduct(String string){
+        Product prod=null;
+        for (Product s : Product.values())
+        {
+            if (string.equalsIgnoreCase(s.toString()))
+            {
+                prod=s;
+            }
+        }
+        return prod;
+    }
+
+    static Industry getIndustry(String string){
+        Industry ind=null;
+        for (Industry s : Industry.values())
+        {
+            if (string.equalsIgnoreCase(s.toString()))
+            {
+                ind=s;
+            }
+        }
+        return ind;
+    }
+
+    public static boolean isValidInt(String input) {
+        boolean result = true;
+        try {
+            Integer.parseInt(input);
+        } catch (IllegalArgumentException ex) {
+            result = false;
+        }
+        return result;
+    }
+
+    public static int getPositiveInt(String input) {
+        int result;
+        try {
+            result=Integer.parseInt(input);
+            if(result<=0){
+                result=0;
+            }
+        } catch (IllegalArgumentException ex) {
+            result = 0;
+        }
+        return result;
     }
 
 }

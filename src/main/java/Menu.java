@@ -8,7 +8,7 @@ public class Menu {
     private static Reader console = Reader.getInstance();
     private static String menuChoice="";
     private static String command="";
-    private static int id;
+    private static int numericInput;
 
     public static void welcomeScreen(){
         Graphics.mainMenuGraphic();
@@ -33,7 +33,7 @@ public class Menu {
             validMainMenuOption = Validations.isValidMenuCommand(menuChoice);
         }
         command=Validations.removeAllDigits(menuChoice);
-        id=Validations.removeAllCharacters(menuChoice);
+        numericInput=Validations.removeAllCharacters(menuChoice);
         switch (command) {
             //create new lead
             case "help" -> help();
@@ -48,7 +48,12 @@ public class Menu {
 
             // look up lead with given id
             case "lookuplead" -> {
-                lookupLead(id);
+                lookupLead(numericInput);
+            }
+
+            // look up lead with given id
+            case "convert" -> {
+                convertLead(numericInput);
             }
 
             //just a security valve - probably redundant
@@ -66,51 +71,51 @@ public class Menu {
         String email;
         String companyName;
 
-        Reader myScanner = Reader.getInstance();
+        Reader console = Reader.getInstance();
         // Get input from the user
         System.out.println("Please enter first name for this lead:");
-        String userInput = myScanner.nextLine();
+        String userInput = console.nextLine();
         //valideate if the first name is valid
         while(!Validations.isValidFirstName(userInput)){
             System.out.println("This first name is invalid. Please enter valid first name for this lead:");
-            userInput = myScanner.nextLine();
+            userInput = console.nextLine();
         }
         name = "".concat(userInput.trim());
         //validate if last name is valid
         System.out.println("Please enter last name for this lead:");
-        userInput = myScanner.nextLine();
+        userInput = console.nextLine();
         while(!Validations.isValidLastName(userInput)){
             System.out.println("This last name is invalid. Please enter valid last name for this lead:");
-            userInput = myScanner.nextLine();
+            userInput = console.nextLine();
         }
         //use trimmed, capitalized name
         name=WordUtils.capitalizeFully(name.concat(" ").concat(userInput.trim())).trim();
 
         //validate if phone number is valid
         System.out.println("Please enter phone number for this lead:");
-        userInput = myScanner.nextLine();
+        userInput = console.nextLine();
         while(!Validations.isValidPhoneNumber(userInput)){
             System.out.println("This phone number is invalid. Please enter valid phone number for this lead:");
-            userInput = myScanner.nextLine();
+            userInput = console.nextLine();
         }
         //use validated user input
         phoneNumber=userInput;
 
         //validate if Email address is valid
         System.out.println("Please enter email address for this lead:");
-        userInput = myScanner.nextLine();
+        userInput = console.nextLine();
         while(!Validations.isValidEmailAddress(userInput)){
             System.out.println("This email address is invalid. Please enter valid email address for this lead:");
-            userInput = myScanner.nextLine();
+            userInput = console.nextLine();
         }
         //use validated user input
         email=userInput.trim();
 
         System.out.println("Please enter company name for this lead:");
-        userInput = myScanner.nextLine();
+        userInput = console.nextLine();
         while(userInput == null || userInput.isEmpty()){
             System.out.println("Company name cannot be empty. Please enter valid company name for this lead:");
-            userInput = myScanner.nextLine();
+            userInput = console.nextLine();
         }
         companyName=userInput.trim();
 
@@ -161,6 +166,108 @@ public class Menu {
     }
 
     public static void convertLead(int num){
+        int index=Validations.getLeadIndexById(leadList, num);
+
+        if(index==-1){
+            System.out.println("Lead with ID="
+                    .concat(String.valueOf(num))
+                    .concat(" was not found!"));
+        } else {
+            Lead lead=leadList.get(index);
+            Contact decisionMaker=new Contact(lead.getName(), lead.getPhoneNumber(), lead.getEmail(), lead.getCompanyName());
+            System.out.println("Lead found!");
+            System.out.println("New contact created with following data:");
+            System.out.println(decisionMaker.showContactDetails());
+            System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("Please choose the product for this opportunity. Available options are: ");
+            System.out.println(java.util.Arrays.asList(Product.values()));
+
+            menuChoice= convertUserInputToCommand(console.nextLine());
+            //loop while input is an invalid option
+            while (Validations.getProduct(menuChoice)==null) {
+                System.out.println("This is not a valid option! available options are:");
+                System.out.println(java.util.Arrays.asList(Product.values()));
+                System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+                menuChoice= convertUserInputToCommand(console.nextLine());
+            }
+            Product product=Validations.getProduct(menuChoice);
+
+            System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("Please choose the number of trucks for this opportunity.");
+
+            numericInput=Validations.getPositiveInt(console.nextLine());
+            while (numericInput<=0) {
+                System.out.println("This is not a valid quantity!");
+                System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+                numericInput=Validations.getPositiveInt(console.nextLine());
+            }
+
+            int quantity=numericInput;
+            Opportunity newOpportunity=new Opportunity(product, quantity, decisionMaker);
+            System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("New opportunity created as following: ");
+            System.out.println(newOpportunity.showOpportunityDetails());
+
+            leadList.remove(lead);
+            System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("Lead id: ".concat(String.valueOf(lead.getId())).concat(" was removed."));
+            Menu.createAccount(newOpportunity);
+        }
+    }
+
+    public static void createAccount(Opportunity opportunity){
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("Please choose the industry for this Account. Available options are: ");
+        System.out.println(Arrays.asList(Industry.values()));
+
+        menuChoice= convertUserInputToCommand(console.nextLine());
+        //loop while input is an invalid option
+        while (Validations.getIndustry(menuChoice)==null) {
+            System.out.println("This is not a valid option! available options are:");
+            System.out.println(java.util.Arrays.asList(Industry.values()));
+            System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+            menuChoice= convertUserInputToCommand(console.nextLine());
+        }
+        Industry industry=Validations.getIndustry(menuChoice);
+
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("Please choose the number of employees in this company.");
+
+        numericInput=Validations.getPositiveInt(console.nextLine());
+        while (numericInput<=0) {
+            System.out.println("This is not a valid quantity!");
+            System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+            numericInput=Validations.getPositiveInt(console.nextLine());
+        }
+        int employeeCount=numericInput;
+
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("Please provide the country code for this company. Type LIST for the country list");
+
+        menuChoice= convertUserInputToCommand(console.nextLine());
+        boolean isValidCode=ListCountry.isValidISOCountry(menuChoice);
+
+        while (isValidCode) {
+            if(menuChoice.compareToIgnoreCase("list")==0) {
+                ListCountry.run();
+                menuChoice= convertUserInputToCommand(console.nextLine());
+                isValidCode=ListCountry.isValidISOCountry(menuChoice);
+            }else {
+                System.out.println("This is not a valid country code! Type LIST for the country list.");
+                System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+                menuChoice = convertUserInputToCommand(console.nextLine());
+                isValidCode = ListCountry.isValidISOCountry(menuChoice);
+            }
+        }
+        String country=ListCountry.getCountry(menuChoice);
+
+
+        System.out.println("Please enter city name:");
+        String city=Validations.removeAllDigits(menuChoice);
+        city=WordUtils.capitalizeFully(city.trim());
+
+        Account newAccount=new Account(industry, employeeCount, city, country, opportunity.getDecisionMaker(), opportunity);
+        System.out.println(newAccount.getIndustry());
 
     }
 
@@ -180,5 +287,6 @@ public class Menu {
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println();
     }
+
 
 }

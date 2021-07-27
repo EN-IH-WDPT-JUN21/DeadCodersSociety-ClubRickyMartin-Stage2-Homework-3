@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -22,6 +23,18 @@ public class Account {
     this.country = country;
     this.contactList = contactList;
     this.opportunityList = opportunityList;
+  }
+
+  public Account(Industry industry, int employeeCount, String city, String country, Contact contact, Opportunity opportunity) {
+    this.id = idCounter.incrementAndGet();
+    this.industry = industry;
+    this.employeeCount = employeeCount;
+    this.city = city;
+    this.country = country;
+    this.contactList = new ArrayList<Contact>();
+    this.contactList.add(contact);
+    this.opportunityList = new ArrayList<Opportunity>();
+    this.opportunityList.add(opportunity);
   }
 
   public int getId() {

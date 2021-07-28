@@ -15,7 +15,7 @@ public class ListCountry {
 
 
 
-    public static void main(String[] args) {
+    public static void listCountry(String[] args) {
         ListCountry obj = new ListCountry();
         obj.run();
     }

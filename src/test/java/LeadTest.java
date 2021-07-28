@@ -22,6 +22,7 @@ class LeadTest {
     @AfterEach
     void tearDown() {
     }
+
     @Test
     void idIncrementation(){
         Lead lead1=new Lead("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
@@ -40,7 +41,6 @@ class LeadTest {
 
     @Test
     void testCreateNewLead(){
-        List<Lead> leadList=new ArrayList<>();
         String data = "Mat9" +
                 "\n Mat" +
                 "\n Poreda9" +
@@ -51,10 +51,9 @@ class LeadTest {
                 "\n mat.mat@gmail.com" +
                 "\n" +
                 "\n Ironhack";
+
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        Scanner scanner = new Scanner(System.in);
         Menu.createNewLead();
-        //Lead lead1=new Lead();
         assertEquals("500500100", Menu.leadList.get(0).getPhoneNumber());
     }
 

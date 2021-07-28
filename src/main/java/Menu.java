@@ -4,11 +4,13 @@ import java.util.*;
 
 public class Menu {
     public static List<Lead> leadList=new ArrayList<>();
-
+    public static List<Opportunity> opportunityList=new ArrayList<>();
+    public static List<Account> accountList=new ArrayList<>();
     private static Reader console = Reader.getInstance();
     private static String menuChoice="";
     private static String command="";
     private static int numericInput;
+    private static boolean audioOn=true;
 
     public static void welcomeScreen(){
         Graphics.mainMenuGraphic();
@@ -40,20 +42,31 @@ public class Menu {
 
             case "newlead" -> createNewLead();
 
-                // look up lead with given id
             case "showleads" -> showLeads();
 
-
-            // look up lead with given id
             case "lookuplead" -> lookupLead(numericInput);
 
+            case "lookupopportunity" -> lookupOpportunity(numericInput);
 
-            // look up lead with given id
+            case "lookupaccount" -> lookupOpportunity(numericInput);
+
             case "convert" ->  convertLead(numericInput);
 
+            case "close-lost" ->  closeOpportunity(numericInput, Status.CLOSED_LOST);
 
-            case "exit" ->{System.exit(0);
-            }
+            case "closelost" ->  closeOpportunity(numericInput, Status.CLOSED_LOST);
+
+            case "close-won" ->  closeOpportunity(numericInput, Status.CLOSED_WON);
+
+            case "closewon" ->  closeOpportunity(numericInput, Status.CLOSED_WON);
+
+            case "definition" -> Menu.CRMDefinition();
+
+            case "play" -> Sounds.playSound();
+
+            case "exit" -> System.exit(0);
+
+            case "*" -> Menu.CRMTrueDefinition();
 
             //just a security valve - probably redundant
             default -> {
@@ -129,14 +142,21 @@ public class Menu {
     }
 
     public static void help(){
-        System.out.println("Available commands are: \n" +
+        System.out.println(
+                "Available commands are: \n" +
                 "New Lead - allows creation of a new Lead,\n" +
                 "Show Leads - displays a list of all available Leads, \n" +
                 "Lookup Lead id - display Lead with given id,\n" +
                 "Convert id - converts Lead with given id to an Opportunity, \n" +
+                "Lookup Opportunity id - display Opportunity with given id,\n" +
                 "Close-lost id - closes Opportunity with given id with status LOST, \n" +
-                "Convert id - closes Opportunity with given id with status WON, \n" +
-                "Help - displays list of available commands ");
+                "Close-won id - closes Opportunity with given id with status WON, \n" +
+                "Help - displays list of available commands, \n" +
+                "Definition - displays definition of CRM, \n" +
+                "Play - play some music, \n" +
+                "EXIT - terminates the program. \n"
+        );
+
     }
 
     public static void showLeads(){
@@ -201,6 +221,8 @@ public class Menu {
 
             int quantity=numericInput;
             Opportunity newOpportunity=new Opportunity(product, quantity, decisionMaker);
+            opportunityList.add(newOpportunity);
+
             System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
             System.out.println("New opportunity created as following: ");
             System.out.println(newOpportunity.showOpportunityDetails());
@@ -265,8 +287,10 @@ public class Menu {
         city=WordUtils.capitalizeFully(city.trim());
 
         Account newAccount=new Account(industry, employeeCount, city, country, opportunity.getDecisionMaker(), opportunity);
-        System.out.println(newAccount.getIndustry());
+        accountList.add(newAccount);
 
+        System.out.println("New Account created with following details: ");
+        System.out.println(newAccount.showAccountDetails());
     }
 
     public static void CRMDefinition(){
@@ -278,13 +302,41 @@ public class Menu {
         System.out.println();
     }
     public static void CRMTrueDefinition(){
+        Graphics.trueCRMGraphic();
+        Sounds.playSound();
         System.out.println("Lesser known fact is that CRM stands for Club Ricky Martin.");
         System.out.println("Within this definition CRM Users are a group of devoted people who strongly believes that 90's are not yet lost!");
         System.out.println();
-        System.out.println("The undeniable guru of the CRM Users is Ricky Martin!. Let him guide you through this hard day of work!");
+        System.out.println("The undeniable guru of the CRM Users is Ricky Martin! Let him guide you through this hard day of work!");
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println();
     }
 
+    public static void lookupOpportunity(int num){
+        int index=Validations.getOpportunityIndexById(opportunityList, num);
+        if(index==-1){
+            System.out.println("Opportunity with ID="
+                    .concat(String.valueOf(num))
+                    .concat(" was not found!"));
+        } else {
+            System.out.println("Opportunity found!");
+            System.out.println(opportunityList.get(index).showOpportunityDetails());
+        }
+    }
+
+    public static void closeOpportunity(int num, Status status){
+        int index=Validations.getOpportunityIndexById(opportunityList, num);
+        if(index==-1){
+            System.out.println("Opportunity with ID="
+                    .concat(String.valueOf(num))
+                    .concat(" was not found!"));
+        } else {
+            opportunityList.get(index).setStatus(status);
+            System.out.println("Opportunity found and updated!");
+            System.out.println(opportunityList.get(index).showOpportunityDetails());
+        }
+    }
 
 }
+
+

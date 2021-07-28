@@ -47,23 +47,43 @@ public class Validations {
     public static boolean isValidMenuCommand(String command) {
         final Pattern newLead = Pattern.compile("newlead");
         final Pattern showLeads = Pattern.compile("showleads");
+        final Pattern showOpportunities = Pattern.compile("showopportunities");
+        final Pattern showAccounts = Pattern.compile("showaccounts");
         final Pattern lookUpLeads = Pattern.compile("lookuplead\\d+");
+        final Pattern lookUpOpportunity = Pattern.compile("lookupopportunity\\d+");
+        final Pattern lookUpAccount = Pattern.compile("lookupaccount\\d+");
         final Pattern convertLead = Pattern.compile("convert\\d+");
-        final Pattern closeLost = Pattern.compile("close-lost\\d+");
-        final Pattern closeWon = Pattern.compile("close-won\\d+");
+        final Pattern closeLost = Pattern.compile("closelost\\d+");
+        final Pattern closeWon = Pattern.compile("closewon\\d+");
+        final Pattern close_Lost = Pattern.compile("close-lost\\d+");
+        final Pattern close_Won = Pattern.compile("close-won\\d+");
         final Pattern help = Pattern.compile("help");
         final Pattern exit = Pattern.compile("exit");
+        final Pattern play = Pattern.compile("play");
+        final Pattern definition = Pattern.compile("definition");
+        final Pattern bonus = Pattern.compile("\\*");
+
 
         //converts input into cleaned, lowercase command
         command=Menu.convertUserInputToCommand(command);
         return newLead.matcher(command).matches() ||
                 showLeads.matcher(command).matches() ||
+                showOpportunities.matcher(command).matches() ||
+                showAccounts.matcher(command).matches() ||
                 lookUpLeads.matcher(command).matches() ||
                 convertLead.matcher(command).matches() ||
                 closeLost.matcher(command).matches() ||
                 closeWon.matcher(command).matches() ||
+                close_Lost.matcher(command).matches() ||
+                close_Won.matcher(command).matches() ||
                 exit.matcher(command).matches() ||
-                help.matcher(command).matches();
+                help.matcher(command).matches() ||
+                lookUpOpportunity.matcher(command).matches() ||
+                lookUpAccount.matcher(command).matches() ||
+                bonus.matcher(command).matches()||
+                definition.matcher(command).matches()||
+                play.matcher(command).matches()
+                ;
     }
     //removes all characters and leaves only digits - used to extract id from input
     public static int removeAllCharacters(String command){
@@ -86,7 +106,24 @@ public class Validations {
                 return i;
             }
         }
-        return -1;// not there is list
+        return -1;// if there is no given id in list
+    }
+
+    public static int getOpportunityIndexById(List<Opportunity> list, int id) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) !=null && list.get(i).getId()==id){
+                return i;
+            }
+        }
+        return -1;// if there is no given id in list
+    }
+    public static int getAccountIndexById(List<Account> list, int id) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) !=null && list.get(i).getId()==id){
+                return i;
+            }
+        }
+        return -1;// if there is no given id in list
     }
 
 
@@ -105,6 +142,18 @@ public class Validations {
     static Industry getIndustry(String string){
         Industry ind=null;
         for (Industry s : Industry.values())
+        {
+            if (string.equalsIgnoreCase(s.toString()))
+            {
+                ind=s;
+            }
+        }
+        return ind;
+    }
+
+    static Status getStatus(String string){
+        Status ind=null;
+        for (Status s : Status.values())
         {
             if (string.equalsIgnoreCase(s.toString()))
             {

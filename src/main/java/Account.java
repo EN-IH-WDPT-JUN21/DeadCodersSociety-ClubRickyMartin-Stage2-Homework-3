@@ -37,6 +37,15 @@ public class Account {
     this.opportunityList.add(opportunity);
   }
 
+  //returns Account details
+  public String showAccountDetails(){
+    return "ID: ".concat(String.valueOf(this.getId())).concat("\n")
+            .concat("Industry: ").concat(String.valueOf(this.getIndustry())).concat("\n")
+            .concat("Employee count: ").concat(String.valueOf(this.getEmployeeCount())).concat("\n")
+            .concat("City: ").concat(this.getCity()).concat("\n")
+            .concat("Country: ").concat(this.getCountry()).concat("\n");
+  }
+
   public int getId() {
     return id;
   }

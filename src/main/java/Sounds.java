@@ -18,6 +18,7 @@ public class Sounds {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(file.getPath()).getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
+            System.out.println("Clip is open: ".concat(String.valueOf(clip.isOpen())));
             clip.start();
         } catch (Exception ex) {
             System.out.println("Error with playing sound");
@@ -25,7 +26,7 @@ public class Sounds {
         }
     }
 
-    private static File getAudioDirectory() {
+    static File getAudioDirectory() {
         try {
             URL audioDirectoryUrl = Objects.requireNonNull(Sounds.class.getClassLoader().getResource("audio"));
             return new File(audioDirectoryUrl.toURI());

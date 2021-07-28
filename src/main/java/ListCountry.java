@@ -6,13 +6,12 @@ import java.util.Set;
 
 public class ListCountry {
 
+
     private static final Set<String> ISO_LANGUAGES = new HashSet<String>
             (Arrays.asList(Locale.getISOLanguages()));
     private static final Set<String> ISO_COUNTRIES = new HashSet<String>
             (Arrays.asList(Locale.getISOCountries()));
     public static Locale.IsoCountryCode[] isoCountryCode;
-
-
 
 
     public static void listCountry(String[] args) {
@@ -33,21 +32,6 @@ public class ListCountry {
     public static String getCountry(String countryCode){
         Locale l = new Locale("", countryCode);
         return l.getDisplayCountry();
-    }
-
-    public static boolean isValidISOLanguage(String s) {
-        return ISO_LANGUAGES.contains(s);
-    }
-
-    public static boolean isValidISOCountryCode(String s) {
-        String[] locales = Locale.getISOCountries();
-        for (String countryCode : locales) {
-            Locale obj = new Locale("", countryCode);
-            if (obj.getCountry().equalsIgnoreCase(s)){
-                return true;
-        }
-        }
-        return false;
     }
 
     public static boolean isValidISOCountry(String s) {

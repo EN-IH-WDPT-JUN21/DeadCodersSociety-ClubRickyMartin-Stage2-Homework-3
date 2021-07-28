@@ -52,6 +52,7 @@ public class Validations {
         final Pattern closeLost = Pattern.compile("close-lost\\d+");
         final Pattern closeWon = Pattern.compile("close-won\\d+");
         final Pattern help = Pattern.compile("help");
+        final Pattern exit = Pattern.compile("exit");
 
         //converts input into cleaned, lowercase command
         command=Menu.convertUserInputToCommand(command);
@@ -61,6 +62,7 @@ public class Validations {
                 convertLead.matcher(command).matches() ||
                 closeLost.matcher(command).matches() ||
                 closeWon.matcher(command).matches() ||
+                exit.matcher(command).matches() ||
                 help.matcher(command).matches();
     }
     //removes all characters and leaves only digits - used to extract id from input

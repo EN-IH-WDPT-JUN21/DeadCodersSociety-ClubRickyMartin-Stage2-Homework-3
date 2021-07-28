@@ -37,9 +37,9 @@ class LeadTest {
         assertEquals("500500500", leadList.get(0).getPhoneNumber());
     }
 
-    /*
+
     @Test
-    void testNoArgsLeadConstructor(){
+    void testCreateNewLead(){
         List<Lead> leadList=new ArrayList<>();
         String data = "Mat9" +
                 "\n Mat" +
@@ -53,10 +53,11 @@ class LeadTest {
                 "\n Ironhack";
         System.setIn(new ByteArrayInputStream(data.getBytes()));
         Scanner scanner = new Scanner(System.in);
-        Lead lead1=new Lead();
-        assertEquals("500500100", lead1.getPhoneNumber());
+        Menu.createNewLead();
+        //Lead lead1=new Lead();
+        assertEquals("500500100", Menu.leadList.get(0).getPhoneNumber());
     }
-    */
+
 
 
     @Test

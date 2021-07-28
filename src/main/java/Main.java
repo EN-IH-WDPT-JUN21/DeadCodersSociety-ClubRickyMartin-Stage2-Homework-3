@@ -2,7 +2,7 @@
 
 public class Main {
     public static void main(String[] args){
-        ListCountry.run();
+        //ListCountry.run();
         //temporary content
         //logo
         Menu.welcomeScreen();

@@ -38,22 +38,21 @@ public class Menu {
             //create new lead
             case "help" -> help();
 
-            // create new lead
             case "newlead" -> createNewLead();
 
-            // look up lead with given id
-            case "showleads" -> {
-                showLeads();
-            }
+                // look up lead with given id
+            case "showleads" -> showLeads();
+
 
             // look up lead with given id
-            case "lookuplead" -> {
-                lookupLead(numericInput);
-            }
+            case "lookuplead" -> lookupLead(numericInput);
+
 
             // look up lead with given id
-            case "convert" -> {
-                convertLead(numericInput);
+            case "convert" ->  convertLead(numericInput);
+
+
+            case "exit" ->{System.exit(0);
             }
 
             //just a security valve - probably redundant
@@ -123,7 +122,6 @@ public class Menu {
         leadList.add(newLead);
         System.out.println("New lead created: ");
         System.out.println(newLead.showLeadDetails());
-        Menu.mainMenu();
     }
 
     public static String convertUserInputToCommand(String input){
@@ -139,7 +137,6 @@ public class Menu {
                 "Close-lost id - closes Opportunity with given id with status LOST, \n" +
                 "Convert id - closes Opportunity with given id with status WON, \n" +
                 "Help - displays list of available commands ");
-        Menu.mainMenu();
     }
 
     public static void showLeads(){
@@ -244,18 +241,18 @@ public class Menu {
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Please provide the country code for this company. Type LIST for the country list");
 
-        menuChoice= convertUserInputToCommand(console.nextLine());
+        menuChoice= convertUserInputToCommand(console.nextLine()).toUpperCase();
         boolean isValidCode=ListCountry.isValidISOCountry(menuChoice);
 
-        while (isValidCode) {
-            if(menuChoice.compareToIgnoreCase("list")==0) {
+        while (!isValidCode) {
+            if(menuChoice.equalsIgnoreCase("list")) {
                 ListCountry.run();
-                menuChoice= convertUserInputToCommand(console.nextLine());
+                menuChoice= convertUserInputToCommand(console.nextLine()).toUpperCase();
                 isValidCode=ListCountry.isValidISOCountry(menuChoice);
             }else {
                 System.out.println("This is not a valid country code! Type LIST for the country list.");
                 System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
-                menuChoice = convertUserInputToCommand(console.nextLine());
+                menuChoice = convertUserInputToCommand(console.nextLine()).toUpperCase();
                 isValidCode = ListCountry.isValidISOCountry(menuChoice);
             }
         }
@@ -263,6 +260,7 @@ public class Menu {
 
 
         System.out.println("Please enter city name:");
+        menuChoice= convertUserInputToCommand(console.nextLine());
         String city=Validations.removeAllDigits(menuChoice);
         city=WordUtils.capitalizeFully(city.trim());
 

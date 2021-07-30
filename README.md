@@ -12,7 +12,7 @@
 [![Santander][Santander-shield]][Santander-url]
 
 <!-- PROJECT LOGO -->
-![Test Image 3](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2/blob/19d5bcad417c9ac3a8e7c8a35fe3a77734fe773d/src/main/resources/CRM4.jpg)
+![Test Image 3](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2/blob/1f984c0fd7c98b142fa4d2bc8f4592ff22dc110c/src/main/resources/CRM8.jpg)
 
 <br />
 <p align="center">

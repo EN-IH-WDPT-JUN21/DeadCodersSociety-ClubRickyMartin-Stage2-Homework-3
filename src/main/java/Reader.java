@@ -42,7 +42,13 @@ public class Reader {
             throw new IllegalStateException();
         }
 
-        public void close() {
+    public boolean hasNextInteger() {
+        if(!alreadyClosed) {
+            return false;
+        }else return reader.hasNextInt();
+    }
+
+    public void close() {
             alreadyClosed = true;
             reader.close();
         }

@@ -24,4 +24,27 @@ class OpportunityTest {
         assertEquals(1, opportunity1.getId());
         assertEquals(2, opportunity2.getId());
     }
+
+    @Test
+    void printOpportunityDetails() {
+        //given
+        Contact contact1 = new Contact("dummy-name-1", "dummy-phone-number-1", "dummy-email-1", "dummy-company-name-1");
+
+        //when
+        Opportunity opportunity1 = new Opportunity(Product.FLATBED, 2, contact1);
+
+        //then
+        assertEquals("""
+                ID: 1
+                Status: OPEN
+                Product: FLATBED
+                Quantity: 2
+                Contact details:\s
+                ID: 1
+                Company Name: dummy-company-name-1
+                Name: dummy-name-1
+                Phone Number: dummy-phone-number-1
+                Email: dummy-email-1
+                """, opportunity1.showOpportunityDetails());
+    }
 }

@@ -20,4 +20,19 @@ class ContactTest {
         assertEquals(1, contact1.getId());
         assertEquals(2, contact2.getId());
     }
+
+    @Test
+    void printContactDetails() {
+        //when
+        Contact contact1 = new Contact("dummy-name-1", "dummy-phone-number-1", "dummy-email-1", "dummy-company-name-1");
+
+        //then
+        assertEquals("""
+                ID: 1
+                Company Name: dummy-company-name-1
+                Name: dummy-name-1
+                Phone Number: dummy-phone-number-1
+                Email: dummy-email-1
+                 """, contact1.showContactDetails());
+    }
 }

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -12,8 +13,6 @@ public class Account {
   private List<Contact> contactList;
   private List<Opportunity> opportunityList;
 
-
-
   public Account(Industry industry, int employeeCount, String city, String country, List<Contact> contactList, List<Opportunity> opportunityList) {
     this.id = idCounter.incrementAndGet();
     this.industry = industry;
@@ -22,6 +21,27 @@ public class Account {
     this.country = country;
     this.contactList = contactList;
     this.opportunityList = opportunityList;
+  }
+
+  public Account(Industry industry, int employeeCount, String city, String country, Contact contact, Opportunity opportunity) {
+    this.id = idCounter.incrementAndGet();
+    this.industry = industry;
+    this.employeeCount = employeeCount;
+    this.city = city;
+    this.country = country;
+    this.contactList = new ArrayList<>();
+    this.contactList.add(contact);
+    this.opportunityList = new ArrayList<>();
+    this.opportunityList.add(opportunity);
+  }
+
+  //returns Account details
+  public String showAccountDetails(){
+    return "ID: ".concat(String.valueOf(this.getId())).concat("\n")
+            .concat("Industry: ").concat(String.valueOf(this.getIndustry())).concat("\n")
+            .concat("Employee count: ").concat(String.valueOf(this.getEmployeeCount())).concat("\n")
+            .concat("City: ").concat(this.getCity()).concat("\n")
+            .concat("Country: ").concat(this.getCountry()).concat("\n");
   }
 
   public int getId() {

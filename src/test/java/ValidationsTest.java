@@ -6,11 +6,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ValidationsTest {
     @BeforeEach
-    void setUp() {
+    void setUp() throws NoSuchFieldException, IllegalAccessException {
+        TestUtils.resetIdCounter(Lead.class);
+        TestUtils.resetIdCounter(Opportunity.class);
+        TestUtils.resetIdCounter(Account.class);
     }
 
     @AfterEach
     void tearDown() {
+        Menu.leadList.clear();
+        Menu.opportunityList.clear();
+        Menu.accountList.clear();
     }
 
     @Test
@@ -55,8 +61,108 @@ class ValidationsTest {
         assertTrue(Validations.isValidMenuCommand("helP  "));
         assertTrue(Validations.isValidMenuCommand("Show leads"));
         assertTrue(Validations.isValidMenuCommand("close-won 1"));
-        assertFalse(Validations.isValidMenuCommand("close won 1"));
+        assertTrue(Validations.isValidMenuCommand("close won 1"));
         assertTrue(Validations.isValidMenuCommand("look up lead 2"));
         assertFalse(Validations.isValidMenuCommand("look up lead two"));
     }
+
+    @Test
+    void removeAllCharacters() {
+        assertEquals(0, Validations.removeAllCharacters("helP  "));
+        assertEquals(19, Validations.removeAllCharacters("helP 1 9"));
+        assertEquals(1, Validations.removeAllCharacters("close-won 1"));
+        assertEquals(1234, Validations.removeAllCharacters("""
+                        1
+                        a
+                        2
+                        b
+                        3
+                        4
+                        *
+                        """));
+    }
+
+    @Test
+    void removeAllDigitsAndConvertToLowerCaseCommand() {
+        assertEquals("help", Validations.removeAllDigits("helP  "));
+        assertEquals("help", Validations.removeAllDigits("helP 1 9"));
+        assertEquals("close-won", Validations.removeAllDigits("close-won 1"));
+        assertEquals("ab*", Validations.removeAllDigits("""
+                        1
+                        a
+                        2
+                        b
+                        3
+                        4
+                        *
+                        """));
+    }
+
+    @Test
+    void getLeadIndexByIdReturnNegativeOneIfNotPresent() {
+        var lead1=new Lead("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
+        Menu.leadList.add(lead1);
+        assertEquals(0, Validations.getLeadIndexById(Menu.leadList, 1));
+        assertEquals(-1, Validations.getLeadIndexById(Menu.leadList, 2));
+    }
+
+    @Test
+    void getOpportunityIndexById() {
+        var contact1=new Contact("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
+        var opportunity1 =new Opportunity(Product.BOX, 500, contact1);
+        assertEquals(-1, Validations.getOpportunityIndexById(Menu.opportunityList, 1));
+        Menu.opportunityList.add(opportunity1);
+        System.out.println(Menu.opportunityList.isEmpty());
+        System.out.println(opportunity1.getId());
+        assertEquals(0, Validations.getOpportunityIndexById(Menu.opportunityList, 1));
+    }
+
+    @Test
+    void getAccountIndexById() {
+        var contact1=new Contact("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
+        var opportunity1=new Opportunity(Product.BOX, 500, contact1);
+        var account1=new Account(Industry.MEDICAL, 500, "Washington", "United States", contact1, opportunity1);
+        assertEquals(-1, Validations.getAccountIndexById(Menu.accountList, 1));
+        Menu.accountList.add(account1);
+        assertEquals(0, Validations.getAccountIndexById(Menu.accountList, 1));
+    }
+
+    @Test
+    void getProductEnumReturnNullIfInvalidInput() {
+        assertEquals(null, Validations.getProduct("Boxer"));
+        assertEquals(Product.BOX, Validations.getProduct("Box"));
+    }
+
+    @Test
+    void getIndustryEnumReturnNullIfInvalidInput() {
+        assertEquals(null, Validations.getIndustry("others"));
+        assertEquals(Industry.OTHER, Validations.getIndustry("OtheR"));
+    }
+
+    @Test
+    void getStatusEnumReturnNullIfInvalidInput() {
+        assertEquals(null, Validations.getStatus("closed lost"));
+        assertEquals(Status.CLOSED_LOST, Validations.getStatus("closed_LOST"));
+    }
+
+    @Test
+    void isValidInt() {
+        assertTrue(Validations.isValidInt("-10"));
+        assertTrue(Validations.isValidInt("0"));
+        assertFalse(Validations.isValidInt("123.00"));
+        assertFalse(Validations.isValidInt("dog"));
+        assertFalse(Validations.isValidInt(""));
+    }
+
+    @Test
+    void getPositiveIntReturn0IfNegative() {
+        assertEquals(0,Validations.getPositiveInt("-10"));
+        assertEquals(100, Validations.getPositiveInt("100"));
+        assertEquals(0, Validations.getPositiveInt("123.00"));
+        assertEquals(0, Validations.getPositiveInt("dog"));
+        assertEquals(0,Validations.getPositiveInt(""));
+    }
+
+
+
 }

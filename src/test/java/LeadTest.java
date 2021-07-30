@@ -3,16 +3,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LeadTest {
-
 
     @BeforeEach
     void setUp() throws NoSuchFieldException, IllegalAccessException {
@@ -22,6 +18,7 @@ class LeadTest {
     @AfterEach
     void tearDown() {
     }
+
     @Test
     void idIncrementation(){
         Lead lead1=new Lead("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
@@ -31,43 +28,42 @@ class LeadTest {
 
     @Test
     void testAllArgsLeadConstructor(){
-        List<Lead> leadList=new ArrayList<>();
-        Lead lead1=new Lead("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
+        List<Lead> leadList = new ArrayList<>();
+        Lead lead1 = new Lead("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
         leadList.add(lead1);
         assertEquals("500500500", leadList.get(0).getPhoneNumber());
     }
 
     @Test
-    void testNoArgsLeadConstructor(){
-        List<Lead> leadList=new ArrayList<>();
-        String data = "Mat9" +
-                "\n Mat" +
-                "\n Poreda9" +
-                "\n Poreda \n" +
-                "\n PHoneNumber \n" +
-                "500500100" +
-                "\n mat.mat" +
-                "\n mat.mat@gmail.com" +
-                "\n" +
-                "\n Ironhack";
+    void testCreateNewLead() {
+        String data = """
+                Mat9
+                Mat
+                Poreda9
+                Poreda
+                PHoneNumber
+                500500100
+                mat.mat
+                mat.mat@gmail.com
+
+                Ironhack
+                """;
+
         System.setIn(new ByteArrayInputStream(data.getBytes()));
-        Scanner scanner = new Scanner(System.in);
-        Lead lead1=new Lead();
-        assertEquals("500500100", lead1.getPhoneNumber());
+        Menu.createNewLead();
+        assertEquals("500500100", Menu.leadList.get(0).getPhoneNumber());
     }
 
     @Test
     void printLeadDetails() {
         Lead lead1=new Lead("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
-        ;
+
         assertEquals("""
-                     ID: 5
+                     ID: 1
                      Company Name: GooglyEyes
                      Name: John McCormick
                      Phone Number: 500500500
                      Email: John@gmail.com
                      """, lead1.showLeadDetails());
     }
-
-
 }

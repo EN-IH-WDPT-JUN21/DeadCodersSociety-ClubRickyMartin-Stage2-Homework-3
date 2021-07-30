@@ -5,14 +5,18 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 class LeadTest {
+
 
     @BeforeEach
     void setUp() throws NoSuchFieldException, IllegalAccessException {
         TestUtils.resetIdCounter(Lead.class);
+
     }
 
     @AfterEach
@@ -28,36 +32,34 @@ class LeadTest {
 
     @Test
     void testAllArgsLeadConstructor(){
-        List<Lead> leadList = new ArrayList<>();
-        Lead lead1 = new Lead("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
+        List<Lead> leadList=new ArrayList<>();
+        Lead lead1=new Lead("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
         leadList.add(lead1);
         assertEquals("500500500", leadList.get(0).getPhoneNumber());
     }
 
+
     @Test
-    void testCreateNewLead() {
-        String data = """
-                Mat9
-                Mat
-                Poreda9
-                Poreda
-                PHoneNumber
-                500500100
-                mat.mat
-                mat.mat@gmail.com
+    void testCreateNewLead(){
+        String data2 = "Mat9\n" +
+                       " Mat\n" +
+                       "Poreda9 \n" +
+                       "Poreda \n" +
+                       "500500100\n" +
+                       "mat.mat \n" +
+                       "mat.mat@gmail.com \n" +
+                       "Ironhack\n";
 
-                Ironhack
-                """;
-
-        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        System.setIn(new ByteArrayInputStream(data2.getBytes()));
         Menu.createNewLead();
         assertEquals("500500100", Menu.leadList.get(0).getPhoneNumber());
     }
 
+
     @Test
     void printLeadDetails() {
         Lead lead1=new Lead("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
-
+        ;
         assertEquals("""
                      ID: 1
                      Company Name: GooglyEyes

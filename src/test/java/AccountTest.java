@@ -49,6 +49,7 @@ class AccountTest {
         assertEquals(2, acc2.getId());
     }
 
+
     @Test
     void printAccountDetails() {
         //when
@@ -62,5 +63,19 @@ class AccountTest {
                 City: Berlin
                 Country: USA
                  """, acc.showAccountDetails());
+    }
+
+    @Test
+    void noListsAccountCreated() {
+        //given
+        Contact contact = new Contact("dummy-name-1", "dummy-phone-number-1", "dummy-email-1", "dummy-company-name-1");
+
+        //when
+        Opportunity opportunity = new Opportunity(Product.FLATBED, 2, contact);
+        Menu.opportunityList.add(opportunity);
+        Account account = new Account(Industry.MEDICAL, 100, "Warsaw", "Poland", contact, opportunity);
+
+        //then
+        assertEquals("Warsaw", account.getCity());
     }
 }

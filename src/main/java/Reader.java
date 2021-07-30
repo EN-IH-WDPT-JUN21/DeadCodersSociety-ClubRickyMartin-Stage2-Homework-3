@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
-//singleton scanner class
+//singleton scanner class to avoid scanner stream closing issues
+
 public class Reader {
 
         private Scanner reader;
@@ -12,25 +13,12 @@ public class Reader {
             reader = new Scanner(System.in).useDelimiter("\\n");
         }
 
+        //fetch instance of reader
         public static Reader getInstance() {
             if(singleton == null) {
                 singleton = new Reader();
             }
             return singleton;
-        }
-
-        public int nextInt() throws IllegalStateException {
-            if(!alreadyClosed) {
-                return reader.nextInt();
-            }
-            throw new IllegalStateException(); //Custom exception
-        }
-
-        public double nextDouble() throws IllegalStateException {
-            if(!alreadyClosed) {
-                return reader.nextDouble();
-            }
-            throw new IllegalStateException();
         }
 
         public String nextLine() throws IllegalStateException {
@@ -42,15 +30,13 @@ public class Reader {
             throw new IllegalStateException();
         }
 
-    public boolean hasNextInteger() {
-        if(!alreadyClosed) {
-            return false;
-        }else return reader.hasNextInt();
-    }
-
     public void close() {
             alreadyClosed = true;
             reader.close();
         }
+
+    public boolean isAlreadyClosed() {
+        return alreadyClosed;
+    }
 }
 

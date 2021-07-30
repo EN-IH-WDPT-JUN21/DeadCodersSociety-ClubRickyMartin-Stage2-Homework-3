@@ -2,9 +2,15 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ValidationsTest {
+    static List<Lead> leadList=Menu.getLeadList();
+    static List<Opportunity> opportunityList=Menu.getOpportunityList();
+    static List<Account> accountList=Menu.getAccountList();
+
     @BeforeEach
     void setUp() throws NoSuchFieldException, IllegalAccessException {
         TestUtils.resetIdCounter(Lead.class);
@@ -14,9 +20,9 @@ class ValidationsTest {
 
     @AfterEach
     void tearDown() {
-        Menu.leadList.clear();
-        Menu.opportunityList.clear();
-        Menu.accountList.clear();
+        leadList.clear();
+        opportunityList.clear();
+        accountList.clear();
     }
 
     @Test
@@ -101,20 +107,20 @@ class ValidationsTest {
     @Test
     void getLeadIndexByIdReturnNegativeOneIfNotPresent() {
         var lead1=new Lead("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
-        Menu.leadList.add(lead1);
-        assertEquals(0, Validations.getLeadIndexById(Menu.leadList, 1));
-        assertEquals(-1, Validations.getLeadIndexById(Menu.leadList, 2));
+        leadList.add(lead1);
+        assertEquals(0, Validations.getLeadIndexById(leadList, 1));
+        assertEquals(-1, Validations.getLeadIndexById(leadList, 2));
     }
 
     @Test
     void getOpportunityIndexById() {
         var contact1=new Contact("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
         var opportunity1 =new Opportunity(Product.BOX, 500, contact1);
-        assertEquals(-1, Validations.getOpportunityIndexById(Menu.opportunityList, 1));
-        Menu.opportunityList.add(opportunity1);
-        System.out.println(Menu.opportunityList.isEmpty());
+        assertEquals(-1, Validations.getOpportunityIndexById(opportunityList, 1));
+        opportunityList.add(opportunity1);
+        System.out.println(opportunityList.isEmpty());
         System.out.println(opportunity1.getId());
-        assertEquals(0, Validations.getOpportunityIndexById(Menu.opportunityList, 1));
+        assertEquals(0, Validations.getOpportunityIndexById(opportunityList, 1));
     }
 
     @Test
@@ -122,9 +128,9 @@ class ValidationsTest {
         var contact1=new Contact("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
         var opportunity1=new Opportunity(Product.BOX, 500, contact1);
         var account1=new Account(Industry.MEDICAL, 500, "Washington", "United States", contact1, opportunity1);
-        assertEquals(-1, Validations.getAccountIndexById(Menu.accountList, 1));
-        Menu.accountList.add(account1);
-        assertEquals(0, Validations.getAccountIndexById(Menu.accountList, 1));
+        assertEquals(-1, Validations.getAccountIndexById(accountList, 1));
+        accountList.add(account1);
+        assertEquals(0, Validations.getAccountIndexById(accountList, 1));
     }
 
     @Test

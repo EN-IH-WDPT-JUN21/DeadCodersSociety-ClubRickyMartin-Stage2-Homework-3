@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +10,7 @@ class OpportunityTest {
     void setUp() throws NoSuchFieldException, IllegalAccessException {
         TestUtils.resetIdCounter(Opportunity.class);
     }
+
 
     @Test
     void whenNewOpportunityIsBeingCreatedNextIdShouldBeSet() {
@@ -34,17 +36,20 @@ class OpportunityTest {
         Opportunity opportunity1 = new Opportunity(Product.FLATBED, 2, contact1);
 
         //then
-        assertEquals("""
-                ID: 1
+        assertEquals("ID: "+String.valueOf(opportunity1.getId())+"\n"+
+                """
                 Status: OPEN
                 Product: FLATBED
                 Quantity: 2
                 Contact details:\s
-                ID: 1
+                """+
+                "ID: "+String.valueOf(contact1.getId())+"\n"+
+                """
                 Company Name: dummy-company-name-1
                 Name: dummy-name-1
                 Phone Number: dummy-phone-number-1
                 Email: dummy-email-1
+                
                 """, opportunity1.showOpportunityDetails());
     }
 }

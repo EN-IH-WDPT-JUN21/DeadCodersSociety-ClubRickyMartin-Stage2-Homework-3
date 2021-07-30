@@ -7,7 +7,7 @@ import org.apache.commons.lang.WordUtils;
 
 public class Validations {
 
-
+    //check if given email has valid form
     public static boolean isValidEmailAddress(String email) {
         boolean result = true;
         try {
@@ -19,7 +19,7 @@ public class Validations {
         return result;
     }
 
-
+    //check if given phone number matches phone number pattern
     public static boolean isValidPhoneNumber(String phoneNumber) {
         String patterns
                 = "^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$"
@@ -43,8 +43,9 @@ public class Validations {
         return lName.matches( "[a-zA-z]+([ '-][a-zA-Z]+)*" );
     }
 
-
+    //check if input matches available menu commands patterns
     public static boolean isValidMenuCommand(String command) {
+        //patterns
         final Pattern newLead = Pattern.compile("newlead");
         final Pattern showLeads = Pattern.compile("showleads");
         final Pattern showOpportunities = Pattern.compile("showopportunities");
@@ -63,9 +64,10 @@ public class Validations {
         final Pattern definition = Pattern.compile("definition");
         final Pattern bonus = Pattern.compile("\\*");
 
-
         //converts input into cleaned, lowercase command
         command=Menu.convertUserInputToCommand(command);
+
+        //validate if input matches given patterns
         return newLead.matcher(command).matches() ||
                 showLeads.matcher(command).matches() ||
                 showOpportunities.matcher(command).matches() ||
@@ -85,6 +87,7 @@ public class Validations {
                 play.matcher(command).matches()
                 ;
     }
+
     //removes all characters and leaves only digits - used to extract id from input
     public static int removeAllCharacters(String command){
         String text=Menu.convertUserInputToCommand(command).replaceAll("\\D+","");
@@ -94,12 +97,14 @@ public class Validations {
             return 0;
         }
     }
+
     //removes all digits and leaves only command - used to extract command from input
     public static String removeAllDigits(String command){
         String text=Menu.convertUserInputToCommand(command);
         return text.replaceAll("\\d","");
     }
 
+    //finds Lead index in given list
     public static int getLeadIndexById(List<Lead> list, int id) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) !=null && list.get(i).getId()==id){
@@ -109,6 +114,7 @@ public class Validations {
         return -1;// if there is no given id in list
     }
 
+    //finds Opportunity index in given list
     public static int getOpportunityIndexById(List<Opportunity> list, int id) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) !=null && list.get(i).getId()==id){
@@ -117,6 +123,8 @@ public class Validations {
         }
         return -1;// if there is no given id in list
     }
+
+    //finds Account index in given list
     public static int getAccountIndexById(List<Account> list, int id) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) !=null && list.get(i).getId()==id){
@@ -126,12 +134,12 @@ public class Validations {
         return -1;// if there is no given id in list
     }
 
-
-    static Product getProduct(String string){
+    //fetch valid enum
+    static Product getProduct(String product){
         Product prod=null;
         for (Product s : Product.values())
         {
-            if (string.equalsIgnoreCase(s.toString()))
+            if (product.equalsIgnoreCase(s.toString()))
             {
                 prod=s;
             }
@@ -139,11 +147,12 @@ public class Validations {
         return prod;
     }
 
-    static Industry getIndustry(String string){
+    //fetch valid enum
+    static Industry getIndustry(String industry){
         Industry ind=null;
         for (Industry s : Industry.values())
         {
-            if (string.equalsIgnoreCase(s.toString()))
+            if (industry.equalsIgnoreCase(s.toString()))
             {
                 ind=s;
             }
@@ -151,11 +160,12 @@ public class Validations {
         return ind;
     }
 
-    static Status getStatus(String string){
+    //fetch valid enum
+    static Status getStatus(String status){
         Status ind=null;
         for (Status s : Status.values())
         {
-            if (string.equalsIgnoreCase(s.toString()))
+            if (status.equalsIgnoreCase(s.toString()))
             {
                 ind=s;
             }
@@ -163,6 +173,7 @@ public class Validations {
         return ind;
     }
 
+    //check if input is a valid int
     public static boolean isValidInt(String input) {
         boolean result = true;
         try {
@@ -173,6 +184,7 @@ public class Validations {
         return result;
     }
 
+    //check if input is int>0
     public static int getPositiveInt(String input) {
         int result;
         try {

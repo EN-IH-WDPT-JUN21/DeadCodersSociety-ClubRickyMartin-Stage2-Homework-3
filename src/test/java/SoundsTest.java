@@ -2,23 +2,21 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ReaderTest {
+class SoundsTest {
 
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    Reader console2=Reader.getInstance();
-
-
 
 
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
-        console2=Reader.getInstance();
     }
 
     @AfterEach
@@ -27,9 +25,17 @@ class ReaderTest {
     }
 
     @Test
-    void newReaderInstanceEqualsToNextReaderInstance() {
-        var console=Reader.getInstance();
-        var console2=Reader.getInstance();
-        assertTrue(console.equals(console2));
+    void confirmClipIsOpen() {
+        Sounds.playSound();
+        assertEquals("Clip is open: true",
+                outputStreamCaptor.toString().trim());
     }
+
+    @Test
+    void getAudioDirectoryName(){
+        File file=Sounds.getAudioDirectory();
+        assertEquals("audio",
+                file.getName());
+    }
+
 }

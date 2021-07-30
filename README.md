@@ -108,7 +108,7 @@ This application works on a console based user input.
 <br />Program has built in mechanisms which format user input into recognisable commands, therefore commands like "HELP", "heLP" or "HE l P" will be accepted as long as they match the provided pattern.
 <br />
 <br /> Some of the commands will provide user with information, but others like "create lead" will trigger a sequence in which user will have to provide specific data.
-<br /> When all the data will be provided apllication will inform You on the outcome and as for next command.
+<br /> When all the data will be provided apllication will inform You on the outcome and ask for next command.
 <br /> You can exit the program by typing EXIT command.
 </p>
 

@@ -73,7 +73,7 @@ This is a project of CRM application which allow user to manage workflow of acqu
 ![Test Image 3](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2/blob/19d5bcad417c9ac3a8e7c8a35fe3a77734fe773d/src/main/resources/diagrams/Class%20diagram.svg)
 
 ### Use Case Diagram
-![Test Image 3](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2/blob/383c5cab15ec61b98bd88c73be434b55636efec5/src/main/resources/diagrams/Use%20Case%20Diagram.svg)
+![Test Image 3](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2/blob/development_main/src/main/resources/diagrams/Use%20Case%20Diagram.svg)
 
 ### Built With
 

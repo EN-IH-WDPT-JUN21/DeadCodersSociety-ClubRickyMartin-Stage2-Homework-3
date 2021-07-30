@@ -3,15 +3,14 @@ import org.apache.commons.lang.WordUtils;
 import java.util.*;
 
 public class Menu {
-    public static List<Lead> leadList=new ArrayList<>();
-    public static List<Opportunity> opportunityList=new ArrayList<>();
-    public static List<Account> accountList=new ArrayList<>();
-    private static Reader console = Reader.getInstance();
+    public static final List<Lead> leadList=new ArrayList<>();
+    public static final List<Opportunity> opportunityList=new ArrayList<>();
+    public static final List<Account> accountList=new ArrayList<>();
+    public static Reader console = Reader.getInstance();
     private static String menuChoice="";
-    private static String command="";
     private static int numericInput;
-    private static boolean audioOn=true;
 
+    //print the welcome screen
     public static void welcomeScreen(){
         Graphics.mainMenuGraphic();
         System.out.println();
@@ -19,62 +18,76 @@ public class Menu {
         System.out.println("Welcome to the CRM - Customer Relations Management *");
         Menu.mainMenu();
     }
-
+    //main element of menu
     public static void mainMenu(){
-        System.out.println();
-        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println("What do you want to do?");
-        menuChoice= convertUserInputToCommand(console.nextLine());
-        //check if the input is one of the valid options
-        boolean validMainMenuOption = Validations.isValidMenuCommand(menuChoice);
-        //loop while input is an invalid option
-        while (!validMainMenuOption) {
-            System.out.println("This is not a valid option! Type help for the list of available commands.");
+        boolean runProgram=true;
+
+        //run the loop until user will choose to exit
+        while(runProgram) {
+            System.out.println();
             System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
-            menuChoice= convertUserInputToCommand(console.nextLine());
-            validMainMenuOption = Validations.isValidMenuCommand(menuChoice);
-        }
-        command=Validations.removeAllDigits(menuChoice);
-        numericInput=Validations.removeAllCharacters(menuChoice);
-        switch (command) {
-            //create new lead
-            case "help" -> help();
+            System.out.println("What do you want to do?");
 
-            case "newlead" -> createNewLead();
+            //trims and concatenates user input to make it easier to verify with pattern
+            menuChoice = convertUserInputToCommand(console.nextLine());
 
-            case "showleads" -> showLeads();
+            //check if the input is one of the valid options
+            boolean validMainMenuOption = Validations.isValidMenuCommand(menuChoice);
 
-            case "lookuplead" -> lookupLead(numericInput);
+            //loop while input is an invalid option
+            while (!validMainMenuOption) {
+                System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("This is not a valid option! Type help for the list of available commands.");
+                menuChoice = convertUserInputToCommand(console.nextLine());
+                validMainMenuOption = Validations.isValidMenuCommand(menuChoice);
+            }
 
-            case "lookupopportunity" -> lookupOpportunity(numericInput);
+            //removes all digits to convert input into menu command
+            String command = Validations.removeAllDigits(menuChoice);
 
-            case "lookupaccount" -> lookupOpportunity(numericInput);
+            //removes all characters to extract id from input
+            numericInput = Validations.removeAllCharacters(menuChoice);
+            switch (command) {
 
-            case "convert" ->  convertLead(numericInput);
+                case "help" -> help();
 
-            case "close-lost" ->  closeOpportunity(numericInput, Status.CLOSED_LOST);
+                case "newlead" -> createNewLead();
 
-            case "closelost" ->  closeOpportunity(numericInput, Status.CLOSED_LOST);
+                case "showleads" -> showLeads();
 
-            case "close-won" ->  closeOpportunity(numericInput, Status.CLOSED_WON);
+                case "lookuplead" -> lookupLead(numericInput);
 
-            case "closewon" ->  closeOpportunity(numericInput, Status.CLOSED_WON);
+                case "lookupopportunity" -> lookupOpportunity(numericInput);
 
-            case "definition" -> Menu.CRMDefinition();
+                case "lookupaccount" -> lookupAccount(numericInput);
 
-            case "play" -> Sounds.playSound();
+                case "convert" -> convertLead(numericInput);
 
-            case "exit" -> System.exit(0);
+                case "close-lost" -> closeOpportunity(numericInput, Status.CLOSED_LOST);
 
-            case "*" -> Menu.CRMTrueDefinition();
+                case "closelost" -> closeOpportunity(numericInput, Status.CLOSED_LOST);
 
-            //just a security valve - probably redundant
-            default -> {
-                System.out.println("This option is not yet implemented");
-                Menu.mainMenu();
+                case "close-won" -> closeOpportunity(numericInput, Status.CLOSED_WON);
+
+                case "closewon" -> closeOpportunity(numericInput, Status.CLOSED_WON);
+
+                case "definition" -> Menu.CRMDefinition();
+
+                case "play" -> Sounds.playSound();
+
+                case "exit" -> runProgram=false;
+
+                //hidden menu option for users who will spot asterisks in welcome screen
+                case "*" -> Menu.CRMTrueDefinition();
+
+                //just a security valve - probably redundant
+                default -> {
+                    System.out.println("This option is not yet implemented");
+                }
             }
         }
-        Menu.mainMenu();
+        //exit program
+        System.exit(0);
     }
 
     public static void createNewLead(){
@@ -83,16 +96,18 @@ public class Menu {
         String email;
         String companyName;
 
-        Reader console = Reader.getInstance();
-        // Get input from the user
+
         System.out.println("Please enter first name for this lead:");
+        // Get input from the user
         String userInput = console.nextLine();
         //valideate if the first name is valid
         while(!Validations.isValidFirstName(userInput)){
             System.out.println("This first name is invalid. Please enter valid first name for this lead:");
             userInput = console.nextLine();
         }
+        //use validated, trimmed first name and last name
         name = "".concat(userInput.trim());
+
         //validate if last name is valid
         System.out.println("Please enter last name for this lead:");
         userInput = console.nextLine();
@@ -123,6 +138,7 @@ public class Menu {
         //use validated user input
         email=userInput.trim();
 
+        //validate if company name is empty -> there are no limits how the company can be named
         System.out.println("Please enter company name for this lead:");
         userInput = console.nextLine();
         while(userInput == null || userInput.isEmpty()){
@@ -131,16 +147,21 @@ public class Menu {
         }
         companyName=userInput.trim();
 
+        //create new lead
         Lead newLead= new Lead(name, phoneNumber, email, companyName);
+        //add lead to list
         leadList.add(newLead);
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("New lead created: ");
         System.out.println(newLead.showLeadDetails());
     }
 
+    //trim and tidy user input
     public static String convertUserInputToCommand(String input){
         return input.toLowerCase().replaceAll("\\s+", "");
     }
 
+    //helper menu to display available commands
     public static void help(){
         System.out.println(
                 "Available commands are: \n" +
@@ -153,14 +174,15 @@ public class Menu {
                 "Close-won id - closes Opportunity with given id with status WON, \n" +
                 "Help - displays list of available commands, \n" +
                 "Definition - displays definition of CRM, \n" +
-                "Play - play some music, \n" +
+                "Play - play some motivating music, \n" +
                 "EXIT - terminates the program. \n"
         );
 
     }
 
+    //show list of leads stored in leadList
     public static void showLeads(){
-        if (leadList==null || leadList.size()==0){
+        if (leadList.size() == 0){
             System.out.println("No leads found!");
         } else {
             for (Lead lead : leadList) {
@@ -169,7 +191,7 @@ public class Menu {
         }
     }
 
-
+    //verify if lead with given id is stored in the list
     public static void lookupLead(int num){
         int index=Validations.getLeadIndexById(leadList, num);
         if(index==-1){
@@ -182,9 +204,10 @@ public class Menu {
         }
     }
 
+    //convert lead with given id into a new opportunity
     public static void convertLead(int num){
         int index=Validations.getLeadIndexById(leadList, num);
-
+        //validate if given lead exists
         if(index==-1){
             System.out.println("Lead with ID="
                     .concat(String.valueOf(num))
@@ -200,92 +223,102 @@ public class Menu {
             System.out.println(java.util.Arrays.asList(Product.values()));
 
             menuChoice= convertUserInputToCommand(console.nextLine());
-            //loop while input is an invalid option
+            //loop while input is an invalid enum Product
             while (Validations.getProduct(menuChoice)==null) {
+                System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
                 System.out.println("This is not a valid option! available options are:");
                 System.out.println(java.util.Arrays.asList(Product.values()));
-                System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
                 menuChoice= convertUserInputToCommand(console.nextLine());
             }
+            //fetch valid enum
             Product product=Validations.getProduct(menuChoice);
 
+            //get quantity for given product
             System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
             System.out.println("Please choose the number of trucks for this opportunity.");
-
             numericInput=Validations.getPositiveInt(console.nextLine());
             while (numericInput<=0) {
-                System.out.println("This is not a valid quantity!");
                 System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("This is not a valid quantity!");
                 numericInput=Validations.getPositiveInt(console.nextLine());
             }
-
             int quantity=numericInput;
+
+            //create new opportunity, add it to the list and print its details
             Opportunity newOpportunity=new Opportunity(product, quantity, decisionMaker);
             opportunityList.add(newOpportunity);
-
             System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
             System.out.println("New opportunity created as following: ");
             System.out.println(newOpportunity.showOpportunityDetails());
 
+            //remove converted lead from the list
             leadList.remove(lead);
             System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
             System.out.println("Lead id: ".concat(String.valueOf(lead.getId())).concat(" was removed."));
+
+            //move to the account creation method
             Menu.createAccount(newOpportunity);
         }
     }
 
+    //create new account
     public static void createAccount(Opportunity opportunity){
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Please choose the industry for this Account. Available options are: ");
         System.out.println(Arrays.asList(Industry.values()));
 
+        //ask for enum and validate input
         menuChoice= convertUserInputToCommand(console.nextLine());
         //loop while input is an invalid option
         while (Validations.getIndustry(menuChoice)==null) {
+            System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
             System.out.println("This is not a valid option! available options are:");
             System.out.println(java.util.Arrays.asList(Industry.values()));
-            System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
             menuChoice= convertUserInputToCommand(console.nextLine());
         }
+        //fetch valid enum
         Industry industry=Validations.getIndustry(menuChoice);
 
+        //ask for number of employees and validate if number is>0
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Please choose the number of employees in this company.");
-
         numericInput=Validations.getPositiveInt(console.nextLine());
         while (numericInput<=0) {
-            System.out.println("This is not a valid quantity!");
             System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("This is not a valid quantity!");
             numericInput=Validations.getPositiveInt(console.nextLine());
         }
         int employeeCount=numericInput;
 
+        //ask for ISO country code and allow to print the list
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Please provide the country code for this company. Type LIST for the country list");
-
         menuChoice= convertUserInputToCommand(console.nextLine()).toUpperCase();
         boolean isValidCode=ListCountry.isValidISOCountry(menuChoice);
 
+        //loop until input matches one of correct ISO codes
         while (!isValidCode) {
             if(menuChoice.equalsIgnoreCase("list")) {
                 ListCountry.run();
                 menuChoice= convertUserInputToCommand(console.nextLine()).toUpperCase();
                 isValidCode=ListCountry.isValidISOCountry(menuChoice);
             }else {
-                System.out.println("This is not a valid country code! Type LIST for the country list.");
                 System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("This is not a valid country code! Type LIST for the country list.");
                 menuChoice = convertUserInputToCommand(console.nextLine()).toUpperCase();
                 isValidCode = ListCountry.isValidISOCountry(menuChoice);
             }
         }
+        //fetch country name based on ISO code
         String country=ListCountry.getCountry(menuChoice);
 
-
+        //ask for city name, trim and capitalize it
         System.out.println("Please enter city name:");
         menuChoice= convertUserInputToCommand(console.nextLine());
         String city=Validations.removeAllDigits(menuChoice);
         city=WordUtils.capitalizeFully(city.trim());
 
+        //create new account with given data
         Account newAccount=new Account(industry, employeeCount, city, country, opportunity.getDecisionMaker(), opportunity);
         accountList.add(newAccount);
 
@@ -293,25 +326,7 @@ public class Menu {
         System.out.println(newAccount.showAccountDetails());
     }
 
-    public static void CRMDefinition(){
-        System.out.println("According to Wikipedia:");
-        System.out.println("Customer relationship management (CRM) is a process in which a business or other organization \n administers its interactions with customers, typically using data analysis to study large amounts of information.");
-        System.out.println();
-        System.out.println("CRM systems compile data from a range of different communication channels, including a company's website, \n telephone, email, live chat, marketing materials and more recently, social media. \n They allow businesses to learn more about their target audiences and how to best cater for their needs, thus retaining customers and driving sales growth. \n CRM may be used with past, present or potential customers. \n The concepts, procedures, and rules that a corporation follows when communicating with its consumers are referred to as customer relationship management (CRM). \n This complete connection covers direct contact with customers, such as sales and service-related operations, \n forecasting, and the analysis of consumer patterns and behaviors, from the perspective of the company.");
-        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println();
-    }
-    public static void CRMTrueDefinition(){
-        Graphics.trueCRMGraphic();
-        Sounds.playSound();
-        System.out.println("Lesser known fact is that CRM stands for Club Ricky Martin.");
-        System.out.println("Within this definition CRM Users are a group of devoted people who strongly believes that 90's are not yet lost!");
-        System.out.println();
-        System.out.println("The undeniable guru of the CRM Users is Ricky Martin! Let him guide you through this hard day of work!");
-        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println();
-    }
-
+    //verify if given Account exists in the list and print details
     public static void lookupOpportunity(int num){
         int index=Validations.getOpportunityIndexById(opportunityList, num);
         if(index==-1){
@@ -323,7 +338,7 @@ public class Menu {
             System.out.println(opportunityList.get(index).showOpportunityDetails());
         }
     }
-
+    //verify if given opportunity exists in the list and print details
     public static void closeOpportunity(int num, Status status){
         int index=Validations.getOpportunityIndexById(opportunityList, num);
         if(index==-1){
@@ -335,6 +350,52 @@ public class Menu {
             System.out.println("Opportunity found and updated!");
             System.out.println(opportunityList.get(index).showOpportunityDetails());
         }
+    }
+
+    //verify if given Account exists in the list and print details
+    public static void lookupAccount(int num){
+        int index=Validations.getAccountIndexById(accountList, num);
+        if(index==-1){
+            System.out.println("Account with ID="
+                    .concat(String.valueOf(num))
+                    .concat(" was not found!"));
+        } else {
+            System.out.println("Account found!");
+            System.out.println(accountList.get(index).showAccountDetails());
+        }
+    }
+
+    public static List<Lead> getLeadList(){
+        return leadList;
+    }
+    public static List<Opportunity> getOpportunityList(){
+        return opportunityList;
+    }
+
+    public static List<Account> getAccountList(){
+        return Menu.accountList;
+    }
+
+    //print CRM definition from Wikipedia
+    public static void CRMDefinition(){
+        System.out.println("According to Wikipedia:");
+        System.out.println("Customer relationship management (CRM) is a process in which a business or other organization \n administers its interactions with customers, typically using data analysis to study large amounts of information.");
+        System.out.println();
+        System.out.println("CRM systems compile data from a range of different communication channels, including a company's website, \n telephone, email, live chat, marketing materials and more recently, social media. \n They allow businesses to learn more about their target audiences and how to best cater for their needs, thus retaining customers and driving sales growth. \n CRM may be used with past, present or potential customers. \n The concepts, procedures, and rules that a corporation follows when communicating with its consumers are referred to as customer relationship management (CRM). \n This complete connection covers direct contact with customers, such as sales and service-related operations, \n forecasting, and the analysis of consumer patterns and behaviors, from the perspective of the company.");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println();
+    }
+
+    //print lesser known definition of CRM ;)
+    public static void CRMTrueDefinition(){
+        Sounds.playSound();
+        Graphics.trueCRMGraphic();
+        System.out.println("Lesser known fact is that CRM stands for Club Ricky Martin.");
+        System.out.println("Within this definition CRM Users are a group of devoted people who strongly believes that 90's are not yet lost!");
+        System.out.println();
+        System.out.println("The undeniable guru of the CRM Users is Ricky Martin! Let him guide you through this hard day of work!");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println();
     }
 
 }

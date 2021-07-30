@@ -7,13 +7,19 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.Random;
 
+//class build for audio output
 public class Sounds {
     public static void playSound() {
         final File dir = getAudioDirectory();
 
+        //get files from directory
         File[] files = dir.listFiles();
+
+        //choose random file
         int randomInt = new Random().nextInt(Objects.requireNonNull(files).length);
         File file = files[randomInt];
+
+        //play chosen file
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(file.getPath()).getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
@@ -26,6 +32,7 @@ public class Sounds {
         }
     }
 
+    //fetch directory where audio files are stored
     static File getAudioDirectory() {
         try {
             URL audioDirectoryUrl = Objects.requireNonNull(Sounds.class.getClassLoader().getResource("audio"));

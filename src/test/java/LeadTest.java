@@ -3,13 +3,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 class LeadTest {
 
@@ -17,6 +16,7 @@ class LeadTest {
     @BeforeEach
     void setUp() throws NoSuchFieldException, IllegalAccessException {
         TestUtils.resetIdCounter(Lead.class);
+
     }
 
     @AfterEach
@@ -41,22 +41,19 @@ class LeadTest {
 
     @Test
     void testCreateNewLead(){
-        String data = "Mat9" +
-                "\n Mat" +
-                "\n Poreda9" +
-                "\n Poreda \n" +
-                "\n PHoneNumber \n" +
-                "500500100" +
-                "\n mat.mat" +
-                "\n mat.mat@gmail.com" +
-                "\n" +
-                "\n Ironhack";
+        String data2 = "Mat9\n" +
+                       " Mat\n" +
+                       "Poreda9 \n" +
+                       "Poreda \n" +
+                       "500500100\n" +
+                       "mat.mat \n" +
+                       "mat.mat@gmail.com \n" +
+                       "Ironhack\n";
 
-        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        System.setIn(new ByteArrayInputStream(data2.getBytes()));
         Menu.createNewLead();
         assertEquals("500500100", Menu.leadList.get(0).getPhoneNumber());
     }
-
 
 
     @Test
@@ -71,6 +68,4 @@ class LeadTest {
                      Email: John@gmail.com
                      """, lead1.showLeadDetails());
     }
-
-
 }

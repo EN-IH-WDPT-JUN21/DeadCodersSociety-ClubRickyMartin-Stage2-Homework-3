@@ -34,7 +34,6 @@ class SoundsTest {
     @Test
     void getAudioDirectoryName(){
         File file=Sounds.getAudioDirectory();
-        System.out.println(file.getName());
         assertEquals("audio",
                 file.getName());
     }

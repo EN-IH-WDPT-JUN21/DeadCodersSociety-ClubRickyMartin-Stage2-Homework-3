@@ -1,8 +1,6 @@
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Field;
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,55 +8,59 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class AccountTest {
 
-  @BeforeEach
-  void setUp() throws NoSuchFieldException, IllegalAccessException {
-    TestUtils.resetIdCounter(Account.class);
-  }
-
-  @AfterEach
-  void tearDown() {
-  }
-
-  private void resetPrivateStaticIntegerFieldToZero(Class aClass, String fieldName) {
-    try {
-      // get declared field - f.e. `private static int accountCount` of `Account`
-      //using magic (aka Reflection)
-      Field field = aClass.getDeclaredField(fieldName);
-      // remove the `private` modifier
-      field.setAccessible(true);
-      // set the static field value to 0.
-      // first argument is the class instance. Since we want the static field there is no instance, hence null.
-      field.set(null, 0);
-    } catch (Exception e) {
-      throw new RuntimeException();
+    @BeforeEach
+    void setUp() throws NoSuchFieldException, IllegalAccessException {
+        TestUtils.resetIdCounter(Account.class);
     }
-  }
 
-  @Test
-  void accountPropertiesHaveGivenValues() {
-    var acc = new Account(Industry.PRODUCE, 10, "Berlin", "USA", Collections.emptyList(), Collections.emptyList());
+    @Test
+    void accountPropertiesHaveGivenValues() {
+        //when
+        Account acc = new Account(Industry.PRODUCE, 10, "Berlin", "USA", Collections.emptyList(), Collections.emptyList());
 
-    assertEquals(Industry.PRODUCE, acc.getIndustry());
-    assertEquals(10, acc.getEmployeeCount());
-    assertEquals("Berlin", acc.getCity());
-    assertEquals("USA", acc.getCountry());
-    assertNotNull(acc.getContactList());
-    assertEquals(0, acc.getContactList().size());
-    assertNotNull(acc.getOpportunityList());
-    assertEquals(0, acc.getOpportunityList().size());
-  }
+        //then
+        assertEquals(Industry.PRODUCE, acc.getIndustry());
+        assertEquals(10, acc.getEmployeeCount());
+        assertEquals("Berlin", acc.getCity());
+        assertEquals("USA", acc.getCountry());
+        assertNotNull(acc.getContactList());
+        assertEquals(0, acc.getContactList().size());
+        assertNotNull(acc.getOpportunityList());
+        assertEquals(0, acc.getOpportunityList().size());
+    }
 
-  @Test
-  void firstAccountGetsIdOne() {
-    var acc = new Account(Industry.PRODUCE, 10, "Berlin", "USA", Collections.emptyList(), Collections.emptyList());
-    assertEquals(1, acc.getId());
-  }
+    @Test
+    void firstAccountGetsIdOne() {
+        //when
+        Account acc = new Account(Industry.PRODUCE, 10, "Berlin", "USA", Collections.emptyList(), Collections.emptyList());
 
-  @Test
-  void secondAccountGetsIdTwo() {
-    var acc1 = new Account(Industry.PRODUCE, 10, "Berlin", "USA", Collections.emptyList(), Collections.emptyList());
-    var acc2 = new Account(Industry.PRODUCE, 10, "Berlin", "USA", Collections.emptyList(), Collections.emptyList());
-    assertEquals(1, acc1.getId());
-    assertEquals(2, acc2.getId());
-  }
+        //then
+        assertEquals(1, acc.getId());
+    }
+
+    @Test
+    void secondAccountGetsIdTwo() {
+        //when
+        Account acc1 = new Account(Industry.PRODUCE, 10, "Berlin", "USA", Collections.emptyList(), Collections.emptyList());
+        Account acc2 = new Account(Industry.PRODUCE, 10, "Berlin", "USA", Collections.emptyList(), Collections.emptyList());
+
+        //then
+        assertEquals(1, acc1.getId());
+        assertEquals(2, acc2.getId());
+    }
+
+    @Test
+    void printAccountDetails() {
+        //when
+        Account acc = new Account(Industry.PRODUCE, 10, "Berlin", "USA", Collections.emptyList(), Collections.emptyList());
+
+        //then
+        assertEquals("""
+                ID: 1
+                Industry: PRODUCE
+                Employee count: 10
+                City: Berlin
+                Country: USA
+                 """, acc.showAccountDetails());
+    }
 }

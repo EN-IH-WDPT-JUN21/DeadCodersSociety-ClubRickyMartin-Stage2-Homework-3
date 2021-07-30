@@ -1,23 +1,19 @@
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Locale;
-import java.util.Locale.IsoCountryCode;
 import java.util.Set;
 
 public class ListCountry {
 
-    private static final Set<String> ISO_LANGUAGES = new HashSet<String>
+    private static final Set<String> ISO_LANGUAGES = new HashSet<>
             (Arrays.asList(Locale.getISOLanguages()));
-    private static final Set<String> ISO_COUNTRIES = new HashSet<String>
+    private static final Set<String> ISO_COUNTRIES = new HashSet<>
             (Arrays.asList(Locale.getISOCountries()));
     public static Locale.IsoCountryCode[] isoCountryCode;
 
-
-
-
     public static void listCountry(String[] args) {
         ListCountry obj = new ListCountry();
-        obj.run();
+        run();
     }
 
     public static void run() {

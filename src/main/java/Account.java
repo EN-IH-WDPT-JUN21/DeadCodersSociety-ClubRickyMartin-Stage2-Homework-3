@@ -13,8 +13,6 @@ public class Account {
   private List<Contact> contactList;
   private List<Opportunity> opportunityList;
 
-
-
   public Account(Industry industry, int employeeCount, String city, String country, List<Contact> contactList, List<Opportunity> opportunityList) {
     this.id = idCounter.incrementAndGet();
     this.industry = industry;
@@ -31,9 +29,9 @@ public class Account {
     this.employeeCount = employeeCount;
     this.city = city;
     this.country = country;
-    this.contactList = new ArrayList<Contact>();
+    this.contactList = new ArrayList<>();
     this.contactList.add(contact);
-    this.opportunityList = new ArrayList<Opportunity>();
+    this.opportunityList = new ArrayList<>();
     this.opportunityList.add(opportunity);
   }
 

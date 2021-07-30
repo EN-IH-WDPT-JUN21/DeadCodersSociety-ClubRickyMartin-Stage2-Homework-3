@@ -118,9 +118,9 @@ After starting the project you will be asked for a command. Each input has to be
 <!-- ROADMAP -->
 ## Roadmap
 This project is still in early development. Some of the features to be added are:
-⋅⋅* more precise validation of user input
-⋅⋅* storing data in a database
-⋅⋅* reporting functionalities
+* more precise validation of user input
+* storing data in a database
+* reporting functionalities
 
 ## Issues
 See the [open issues](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2/issues) for a list of known issues.

@@ -35,4 +35,25 @@ class ContactTest {
                 Email: dummy-email-1
                  """, contact1.showContactDetails());
     }
+
+
+    @Test
+    void gettersAndSettersSetAndGet() {
+        //given
+        Contact contact1 = new Contact("dummy-name-1", "dummy-phone-number-1", "dummy-email-1", "dummy-company-name-1");
+
+        //when
+        contact1.setName("setName");
+        contact1.setPhoneNumber("500500500");
+        contact1.setEmail("email@email");
+        contact1.setCompanyName("setCompanyName");
+
+        //then
+        assertEquals("setName", contact1.getName());
+        assertEquals("500500500", contact1.getPhoneNumber());
+        assertEquals("email@email", contact1.getEmail());
+        assertEquals("setCompanyName", contact1.getCompanyName());
+
+    }
+
 }

@@ -1,7 +1,9 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -78,4 +80,34 @@ class AccountTest {
         //then
         assertEquals("Warsaw", account.getCity());
     }
+
+    @Test
+    void gettersAndSettersSetAndGet(){
+        //given
+        Account acc1 = new Account(Industry.PRODUCE, 10, "Berlin", "USA", new ArrayList<>(), new ArrayList<>());
+        Account acc2 = new Account(Industry.OTHER, 100, "Warsaw", "Poland", new ArrayList<>(), new ArrayList<>());
+        Contact contact2 = new Contact("dummy-name-2", "dummy-phone-number-2", "dummy-email-2", "dummy-company-name-2");
+        Opportunity opportunity1 = new Opportunity(Product.FLATBED, 2, contact2);
+
+        //when
+        acc1.setCity(acc2.getCity());
+        acc1.setCountry(acc2.getCountry());
+        acc1.setIndustry(acc2.getIndustry());
+        acc1.setEmployeeCount(acc2.getEmployeeCount());
+        acc2.getContactList().add(contact2);
+        acc2.getOpportunityList().add(opportunity1);
+        acc1.setContactList(acc2.getContactList());
+        acc1.setOpportunityList(acc2.getOpportunityList());
+
+        //then
+        assertEquals(acc1.getCity(), acc2.getCity());
+        assertEquals(acc1.getIndustry(), acc2.getIndustry());
+        assertEquals(acc1.getEmployeeCount(), acc2.getEmployeeCount());
+        assertEquals(acc1.getCountry(), acc2.getCountry());
+        assertEquals(acc1.getOpportunityList(), acc2.getOpportunityList());
+        assertEquals(acc1.getContactList(), acc2.getContactList());
+
+    }
+
+
 }

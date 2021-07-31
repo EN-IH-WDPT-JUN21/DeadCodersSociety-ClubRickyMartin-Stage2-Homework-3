@@ -3,12 +3,14 @@ import org.apache.commons.lang.WordUtils;
 import java.util.*;
 
 public class Menu {
-    public static final List<Lead> leadList=new ArrayList<>();
-    public static final List<Opportunity> opportunityList=new ArrayList<>();
-    public static final List<Account> accountList=new ArrayList<>();
-    public static Reader console = Reader.getInstance();
-    private static String menuChoice="";
+    public static  List<Lead> leadList=new ArrayList<>();
+    public static  List<Opportunity> opportunityList=new ArrayList<>();
+    public static  List<Account> accountList=new ArrayList<>();
+    public static  Scanner console = new Scanner(System.in);
+    private static String menuChoice;
     private static int numericInput;
+
+
 
     //print the welcome screen
     public static void welcomeScreen(){
@@ -16,18 +18,19 @@ public class Menu {
         System.out.println();
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Welcome to the CRM - Customer Relations Management *");
-        Menu.mainMenu();
+
     }
     //main element of menu
     public static void mainMenu(){
         boolean runProgram=true;
+        console = new Scanner(System.in);
 
         //run the loop until user will choose to exit
         while(runProgram) {
+
             System.out.println();
             System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
             System.out.println("What do you want to do?");
-
             //trims and concatenates user input to make it easier to verify with pattern
             menuChoice = convertUserInputToCommand(console.nextLine());
 
@@ -61,7 +64,12 @@ public class Menu {
 
                 case "lookupaccount" -> lookupAccount(numericInput);
 
-                case "convert" -> convertLead(numericInput);
+                case "convert" -> {
+                    int opportunityIndex=convertLead(numericInput);
+                    if (opportunityIndex >= 0) {
+                        createAccount(opportunityList.get(opportunityIndex));
+                    }
+                }
 
                 case "close-lost" -> closeOpportunity(numericInput, Status.CLOSED_LOST);
 
@@ -81,13 +89,11 @@ public class Menu {
                 case "*" -> Menu.CRMTrueDefinition();
 
                 //just a security valve - probably redundant
-                default -> {
-                    System.out.println("This option is not yet implemented");
-                }
+                default -> System.out.println("This option is not yet implemented");
             }
         }
+
         //exit program
-        System.exit(0);
     }
 
     public static void createNewLead(){
@@ -95,7 +101,7 @@ public class Menu {
         String phoneNumber;
         String email;
         String companyName;
-
+        console = new Scanner(System.in);
 
         System.out.println("Please enter first name for this lead:");
         // Get input from the user
@@ -164,18 +170,20 @@ public class Menu {
     //helper menu to display available commands
     public static void help(){
         System.out.println(
-                "Available commands are: \n" +
-                "New Lead - allows creation of a new Lead,\n" +
-                "Show Leads - displays a list of all available Leads, \n" +
-                "Lookup Lead id - display Lead with given id,\n" +
-                "Convert id - converts Lead with given id to an Opportunity, \n" +
-                "Lookup Opportunity id - display Opportunity with given id,\n" +
-                "Close-lost id - closes Opportunity with given id with status LOST, \n" +
-                "Close-won id - closes Opportunity with given id with status WON, \n" +
-                "Help - displays list of available commands, \n" +
-                "Definition - displays definition of CRM, \n" +
-                "Play - play some motivating music, \n" +
-                "EXIT - terminates the program. \n"
+                """
+                        Available commands are:
+                        New Lead - allows creation of a new Lead,
+                        Show Leads - displays a list of all available Leads,
+                        Lookup Lead id - display Lead with given id,
+                        Convert id - converts Lead with given id to an Opportunity,
+                        Lookup Opportunity id - display Opportunity with given id,
+                        Close-lost id - closes Opportunity with given id with status LOST,
+                        Close-won id - closes Opportunity with given id with status WON,
+                        Help - displays list of available commands,
+                        Definition - displays definition of CRM,
+                        Play - play some motivating music,
+                        EXIT - terminates the program.
+                        """
         );
 
     }
@@ -205,13 +213,16 @@ public class Menu {
     }
 
     //convert lead with given id into a new opportunity
-    public static void convertLead(int num){
+    public static int convertLead(int num){
+        console = new Scanner(System.in);
+
         int index=Validations.getLeadIndexById(leadList, num);
         //validate if given lead exists
         if(index==-1){
             System.out.println("Lead with ID="
                     .concat(String.valueOf(num))
                     .concat(" was not found!"));
+            return -1;
         } else {
             Lead lead=leadList.get(index);
             Contact decisionMaker=new Contact(lead.getName(), lead.getPhoneNumber(), lead.getEmail(), lead.getCompanyName());
@@ -256,13 +267,17 @@ public class Menu {
             System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
             System.out.println("Lead id: ".concat(String.valueOf(lead.getId())).concat(" was removed."));
 
-            //move to the account creation method
-            Menu.createAccount(newOpportunity);
+            //go to Opportunity creator
+            newOpportunity.getId();
+            return Validations.getOpportunityIndexById(opportunityList,newOpportunity.getId());
         }
+
     }
 
     //create new account
     public static void createAccount(Opportunity opportunity){
+
+        console = new Scanner(System.in);
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Please choose the industry for this Account. Available options are: ");
         System.out.println(Arrays.asList(Industry.values()));
@@ -352,6 +367,9 @@ public class Menu {
                 opportunityList.get(index).setStatus(status);
                 System.out.println("Opportunity found and updated!");
                 System.out.println(opportunityList.get(index).showOpportunityDetails());
+                if (status==Status.CLOSED_WON){
+                    Sounds.playSound();
+                }
             }
         }
     }

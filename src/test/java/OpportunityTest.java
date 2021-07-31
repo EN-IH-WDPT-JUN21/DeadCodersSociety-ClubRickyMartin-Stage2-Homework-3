@@ -52,4 +52,27 @@ class OpportunityTest {
                 
                 """, opportunity1.showOpportunityDetails());
     }
+
+    @Test
+    void gettersAndSettersSetAndGet() {
+        //given
+        Contact contact1 = new Contact("dummy-name-1", "dummy-phone-number-1", "dummy-email-1", "dummy-company-name-1");
+        Contact contact2 = new Contact("dummy-name-2", "dummy-phone-number-2", "dummy-email-2", "dummy-company-name-2");
+
+        //when
+        Opportunity opportunity1 = new Opportunity(Product.FLATBED, 2, contact1);
+
+        //then
+        opportunity1.setProduct(Product.BOX);
+        opportunity1.setQuantity(500);
+        opportunity1.setDecisionMaker(contact2);
+
+        assertEquals(Product.BOX, opportunity1.getProduct());
+        assertEquals(500, opportunity1.getQuantity());
+        assertEquals(contact2, opportunity1.getDecisionMaker());
+
+
+    }
+
+
 }

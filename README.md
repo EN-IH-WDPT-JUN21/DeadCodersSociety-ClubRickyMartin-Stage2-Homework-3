@@ -70,7 +70,7 @@
 This is a project of CRM application which allow user to manage workflow of acquiring *leads* and convert them to sale *opportunities*.
 
 ### Class Diagram
-![Test Image 3](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2/blob/19d5bcad417c9ac3a8e7c8a35fe3a77734fe773d/src/main/resources/diagrams/Class%20diagram.svg)
+![Test Image 3](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2/blob/32f86ed03278e146919c2630dc06654a2dbd952f/src/main/resources/diagrams/Class%20Diagram.svg)
 
 ### Use Case Diagram
 ![Test Image 3](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2/blob/development_main/src/main/resources/diagrams/Use%20Case%20Diagram.svg)

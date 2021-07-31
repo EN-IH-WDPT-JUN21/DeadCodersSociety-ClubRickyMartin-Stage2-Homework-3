@@ -268,7 +268,6 @@ public class Menu {
             System.out.println("Lead id: ".concat(String.valueOf(lead.getId())).concat(" was removed."));
 
             //go to Opportunity creator
-            newOpportunity.getId();
             return Validations.getOpportunityIndexById(opportunityList,newOpportunity.getId());
         }
 
@@ -368,6 +367,7 @@ public class Menu {
                 System.out.println("Opportunity found and updated!");
                 System.out.println(opportunityList.get(index).showOpportunityDetails());
                 if (status==Status.CLOSED_WON){
+                    System.out.println("You've won this opportunity! Congratulations! \nLet's celebrate it with some music!");
                     Sounds.playSound();
                 }
             }

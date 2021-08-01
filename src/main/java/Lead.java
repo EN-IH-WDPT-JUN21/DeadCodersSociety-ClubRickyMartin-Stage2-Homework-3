@@ -1,6 +1,3 @@
-import org.apache.commons.lang.WordUtils;
-
-import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Lead {

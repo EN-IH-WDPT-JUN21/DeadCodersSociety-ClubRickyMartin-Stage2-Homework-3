@@ -1,67 +1,49 @@
-import java.util.concurrent.atomic.AtomicInteger;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+
+@Entity
+@Getter
+@Setter
 public class Opportunity {
 
-    private static AtomicInteger idCounter = new AtomicInteger(0);
-
-    private final int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(value = AccessLevel.NONE)
+    @Column(name = "opportunity_id")
+    private int id;
     private Status status;
     private Product product;
     private int quantity;
+
+    @OneToOne
+    @JoinColumn(name = "contact_id")
     private Contact decisionMaker;
 
-    public Opportunity(Product product, int quantity, Contact decisionMaker) {
-        id = idCounter.incrementAndGet();
-        status = Status.OPEN;
+    @OneToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
+    @OneToOne
+    @JoinColumn(name = "sales_rep_id")
+    private SalesRep salesRep;
+
+    public Opportunity(Product product, int quantity, Contact decisionMaker) {
+        status = Status.OPEN;
         this.product = product;
         this.quantity = quantity;
-        this.decisionMaker = decisionMaker;
+        //this.decisionMaker = decisionMaker;
     }
 
     //returns Opportunity details
-    public String showOpportunityDetails(){
+    public String showOpportunityDetails() {
         return "ID: ".concat(String.valueOf(this.getId())).concat("\n")
                 .concat("Status: ").concat(this.getStatus().name()).concat("\n")
                 .concat("Product: ").concat(this.getProduct().name()).concat("\n")
                 .concat("Quantity: ").concat(String.valueOf(this.getQuantity())).concat("\n")
                 .concat("Contact details: ").concat("\n")
                 .concat(this.getDecisionMaker().showContactDetails()).concat("\n");
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public Contact getDecisionMaker() {
-        return decisionMaker;
-    }
-
-    public void setDecisionMaker(Contact decisionMaker) {
-        this.decisionMaker = decisionMaker;
     }
 }

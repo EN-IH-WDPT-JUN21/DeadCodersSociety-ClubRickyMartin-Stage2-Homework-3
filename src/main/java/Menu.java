@@ -1,6 +1,9 @@
 import org.apache.commons.lang.WordUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
 public class Menu {
     public static  List<Lead> leadList=new ArrayList<>();
@@ -9,8 +12,6 @@ public class Menu {
     public static  Scanner console = new Scanner(System.in);
     private static String menuChoice;
     private static int numericInput;
-
-
 
     //print the welcome screen
     public static void welcomeScreen(){
@@ -83,10 +84,13 @@ public class Menu {
 
                 case "play" -> Sounds.playSound();
 
-                case "exit" -> runProgram=false;
+                case "exit" -> runProgram = false;
 
                 //hidden menu option for users who will spot asterisks in welcome screen
                 case "*" -> Menu.CRMTrueDefinition();
+
+                // case "Report Lead by SalesRep" -> Report()
+
 
                 //just a security valve - probably redundant
                 default -> System.out.println("This option is not yet implemented");
@@ -96,7 +100,11 @@ public class Menu {
         //exit program
     }
 
-    public static void createNewLead(){
+    public static void reportBySalesRep() {
+
+    }
+
+    public static void createNewLead() {
         String name;
         String phoneNumber;
         String email;

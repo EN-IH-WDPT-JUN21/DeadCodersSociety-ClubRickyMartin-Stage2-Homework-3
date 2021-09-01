@@ -1,8 +1,14 @@
+package DeadCodersSocietyClubRickyMartinStage2Homework3;
+
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Account;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Lead;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Opportunity;
 import org.apache.commons.lang.WordUtils;
 
 public class Validations {
@@ -65,7 +71,7 @@ public class Validations {
         final Pattern bonus = Pattern.compile("\\*");
 
         //converts input into cleaned, lowercase command
-        command=Menu.convertUserInputToCommand(command);
+        command= Menu.convertUserInputToCommand(command);
 
         //validate if input matches given patterns
         return newLead.matcher(command).matches() ||
@@ -90,7 +96,7 @@ public class Validations {
 
     //removes all characters and leaves only digits - used to extract id from input
     public static int removeAllCharacters(String command){
-        String text=Menu.convertUserInputToCommand(command).replaceAll("\\D+","");
+        String text= Menu.convertUserInputToCommand(command).replaceAll("\\D+","");
         if(!text.equals("")) {
             return Integer.parseInt(text.replaceAll("\\D+", ""));
         }else {
@@ -100,11 +106,11 @@ public class Validations {
 
     //removes all digits and leaves only command - used to extract command from input
     public static String removeAllDigits(String command){
-        String text=Menu.convertUserInputToCommand(command);
+        String text= Menu.convertUserInputToCommand(command);
         return text.replaceAll("\\d","");
     }
 
-    //finds Lead index in given list
+    //finds DeadCodersSocietyClubRickyMartinStage2Homework3.dao.dao2.Lead index in given list
     public static int getLeadIndexById(List<Lead> list, int id) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) !=null && list.get(i).getId()==id){
@@ -114,7 +120,7 @@ public class Validations {
         return -1;// if there is no given id in list
     }
 
-    //finds Opportunity index in given list
+    //finds DeadCodersSocietyClubRickyMartinStage2Homework3.dao.dao2.Opportunity index in given list
     public static int getOpportunityIndexById(List<Opportunity> list, int id) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) !=null && list.get(i).getId()==id){
@@ -124,7 +130,7 @@ public class Validations {
         return -1;// if there is no given id in list
     }
 
-    //finds Account index in given list
+    //finds DeadCodersSocietyClubRickyMartinStage2Homework3.dao.dao2.Account index in given list
     public static int getAccountIndexById(List<Account> list, int id) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) !=null && list.get(i).getId()==id){
@@ -135,7 +141,7 @@ public class Validations {
     }
 
     //fetch valid enum
-    static Product getProduct(String product){
+    public static Product getProduct(String product){
         Product prod=null;
         for (Product s : Product.values())
         {
@@ -148,7 +154,7 @@ public class Validations {
     }
 
     //fetch valid enum
-    static Industry getIndustry(String industry){
+    public static Industry getIndustry(String industry){
         Industry ind=null;
         for (Industry s : Industry.values())
         {
@@ -161,7 +167,7 @@ public class Validations {
     }
 
     //fetch valid enum
-    static Status getStatus(String status){
+    public static Status getStatus(String status){
         Status ind=null;
         for (Status s : Status.values())
         {

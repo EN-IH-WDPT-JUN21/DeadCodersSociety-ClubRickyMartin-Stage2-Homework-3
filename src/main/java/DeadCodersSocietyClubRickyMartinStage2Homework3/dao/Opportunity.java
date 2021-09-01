@@ -1,12 +1,17 @@
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+package DeadCodersSocietyClubRickyMartinStage2Homework3.dao;
+
+import DeadCodersSocietyClubRickyMartinStage2Homework3.Product;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.Status;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "opportunities")
 public class Opportunity {
 
     @Id
@@ -37,13 +42,13 @@ public class Opportunity {
         //this.decisionMaker = decisionMaker;
     }
 
-    //returns Opportunity details
+    //returns dao2.Opportunity details
     public String showOpportunityDetails() {
         return "ID: ".concat(String.valueOf(this.getId())).concat("\n")
-                .concat("Status: ").concat(this.getStatus().name()).concat("\n")
-                .concat("Product: ").concat(this.getProduct().name()).concat("\n")
+                .concat("DeadCodersSocietyClubRickyMartinStage2Homework3.Status: ").concat(this.getStatus().name()).concat("\n")
+                .concat("DeadCodersSocietyClubRickyMartinStage2Homework3.Product: ").concat(this.getProduct().name()).concat("\n")
                 .concat("Quantity: ").concat(String.valueOf(this.getQuantity())).concat("\n")
-                .concat("Contact details: ").concat("\n")
+                .concat("dao2.Contact details: ").concat("\n")
                 .concat(this.getDecisionMaker().showContactDetails()).concat("\n");
     }
 }

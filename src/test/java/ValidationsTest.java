@@ -1,14 +1,23 @@
+import DeadCodersSocietyClubRickyMartinStage2Homework3.Menu;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.Validations;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Account;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Contact;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Lead;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Opportunity;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.Industry;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.Product;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.Status;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ValidationsTest {
-    static List<Lead> leadList=Menu.getLeadList();
-    static List<Opportunity> opportunityList=Menu.getOpportunityList();
+    static List<Lead> leadList= Menu.getLeadList();
+    static List<Opportunity> opportunityList= Menu.getOpportunityList();
     static List<Account> accountList=Menu.getAccountList();
 
     @BeforeEach
@@ -166,7 +175,7 @@ class ValidationsTest {
         assertEquals(100, Validations.getPositiveInt("100"));
         assertEquals(0, Validations.getPositiveInt("123.00"));
         assertEquals(0, Validations.getPositiveInt("dog"));
-        assertEquals(0,Validations.getPositiveInt(""));
+        assertEquals(0, Validations.getPositiveInt(""));
     }
 
 

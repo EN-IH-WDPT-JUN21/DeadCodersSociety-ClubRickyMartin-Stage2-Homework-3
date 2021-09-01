@@ -1,6 +1,6 @@
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+package DeadCodersSocietyClubRickyMartinStage2Homework3.dao;
+
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -8,7 +8,9 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@Table(name = "sales_rep")
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "sales_reps")
 public class SalesRep {
 
     @Id
@@ -28,7 +30,7 @@ public class SalesRep {
         this.name = name;
     }
 
-    //returns SalesRep details
+    //returns dao2.SalesRep details
     public String showSalesRepDetails() {
         return "ID: ".concat(String.valueOf(this.getId())).concat("\n")
                 .concat("Name: ").concat(this.getName()).concat("\n");

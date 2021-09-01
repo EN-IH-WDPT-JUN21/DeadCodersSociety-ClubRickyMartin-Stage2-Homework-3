@@ -1,3 +1,5 @@
+package DeadCodersSocietyClubRickyMartinStage2Homework3;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -33,7 +35,7 @@ public class Sounds {
     }
 
     //fetch directory where audio files are stored
-    static File getAudioDirectory() {
+    public static File getAudioDirectory() {
         try {
             URL audioDirectoryUrl = Objects.requireNonNull(Sounds.class.getClassLoader().getResource("audio"));
             return new File(audioDirectoryUrl.toURI());

@@ -1,12 +1,15 @@
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+package DeadCodersSocietyClubRickyMartinStage2Homework3.dao;
+
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "leads")
 public class Lead {
 
     @Id
@@ -27,7 +30,7 @@ public class Lead {
     @JoinColumn(name = "contact_id")
     private Contact contact;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "sales_rep_id")
     private SalesRep salesRep;
 

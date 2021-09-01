@@ -1,11 +1,34 @@
-import org.apache.commons.lang.WordUtils;
+package DeadCodersSocietyClubRickyMartinStage2Homework3;
 
+import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Account;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Contact;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Lead;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Opportunity;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.repository.*;
+import org.apache.commons.lang.WordUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Menu {
+
+    @Autowired
+    static AccountRepository accountRepository;
+    @Autowired
+    static ContactRepository contactRepository;
+    @Autowired
+    static LeadRepository leadRepository;
+    @Autowired
+    static OpportunityRepository opportunityRepository;
+    @Autowired
+    static SalesRepRepository salesRepRepository;
+
+
     public static  List<Lead> leadList=new ArrayList<>();
     public static  List<Opportunity> opportunityList=new ArrayList<>();
     public static  List<Account> accountList=new ArrayList<>();
@@ -89,7 +112,7 @@ public class Menu {
                 //hidden menu option for users who will spot asterisks in welcome screen
                 case "*" -> Menu.CRMTrueDefinition();
 
-                // case "Report Lead by SalesRep" -> Report()
+                // case "Report DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Lead by DeadCodersSocietyClubRickyMartinStage2Homework3.dao.SalesRep" -> Report()
 
 
                 //just a security valve - probably redundant
@@ -162,12 +185,13 @@ public class Menu {
         companyName=userInput.trim();
 
         //create new lead
-        Lead newLead= new Lead(name, phoneNumber, email, companyName);
+        //Lead newLead= new Lead(name, phoneNumber, email, companyName);
         //add lead to list
-        leadList.add(newLead);
+        //leadList.add(newLead);
+        Lead newLead = leadRepository.save(new Lead(name, phoneNumber, email, companyName));
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("New lead created: ");
-        System.out.println(newLead.showLeadDetails());
+        //System.out.println(newLead.showLeadDetails());
     }
 
     //trim and tidy user input
@@ -180,13 +204,13 @@ public class Menu {
         System.out.println(
                 """
                         Available commands are:
-                        New Lead - allows creation of a new Lead,
+                        New dao2.Lead - allows creation of a new dao2.Lead,
                         Show Leads - displays a list of all available Leads,
-                        Lookup Lead id - display Lead with given id,
-                        Convert id - converts Lead with given id to an Opportunity,
-                        Lookup Opportunity id - display Opportunity with given id,
-                        Close-lost id - closes Opportunity with given id with status LOST,
-                        Close-won id - closes Opportunity with given id with status WON,
+                        Lookup dao2.Lead id - display dao2.Lead with given id,
+                        Convert id - converts dao2.Lead with given id to an dao2.Opportunity,
+                        Lookup dao2.Opportunity id - display dao2.Opportunity with given id,
+                        Close-lost id - closes dao2.Opportunity with given id with status LOST,
+                        Close-won id - closes dao2.Opportunity with given id with status WON,
                         Help - displays list of available commands,
                         Definition - displays definition of CRM,
                         Play - play some motivating music,
@@ -211,11 +235,11 @@ public class Menu {
     public static void lookupLead(int num){
         int index=Validations.getLeadIndexById(leadList, num);
         if(index==-1){
-            System.out.println("Lead with ID="
+            System.out.println("dao2.Lead with ID="
                     .concat(String.valueOf(num))
                     .concat(" was not found!"));
         } else {
-            System.out.println("Lead found!");
+            System.out.println("dao2.Lead found!");
             System.out.println(leadList.get(index).showLeadDetails());
         }
     }
@@ -227,14 +251,14 @@ public class Menu {
         int index=Validations.getLeadIndexById(leadList, num);
         //validate if given lead exists
         if(index==-1){
-            System.out.println("Lead with ID="
+            System.out.println("dao2.Lead with ID="
                     .concat(String.valueOf(num))
                     .concat(" was not found!"));
             return -1;
         } else {
             Lead lead=leadList.get(index);
             Contact decisionMaker=new Contact(lead.getName(), lead.getPhoneNumber(), lead.getEmail(), lead.getCompanyName());
-            System.out.println("Lead found!");
+            System.out.println("dao2.Lead found!");
             System.out.println("New contact created with following data:");
             System.out.println(decisionMaker.showContactDetails());
             System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -242,7 +266,7 @@ public class Menu {
             System.out.println(java.util.Arrays.asList(Product.values()));
 
             menuChoice= convertUserInputToCommand(console.nextLine());
-            //loop while input is an invalid enum Product
+            //loop while input is an invalid enum DeadCodersSocietyClubRickyMartinStage2Homework3.Product
             while (Validations.getProduct(menuChoice)==null) {
                 System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
                 System.out.println("This is not a valid option! available options are:");
@@ -273,9 +297,9 @@ public class Menu {
             //remove converted lead from the list
             leadList.remove(lead);
             System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
-            System.out.println("Lead id: ".concat(String.valueOf(lead.getId())).concat(" was removed."));
+            System.out.println("dao2.Lead id: ".concat(String.valueOf(lead.getId())).concat(" was removed."));
 
-            //go to Opportunity creator
+            //go to DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Opportunity creator
             return Validations.getOpportunityIndexById(opportunityList,newOpportunity.getId());
         }
 
@@ -286,7 +310,7 @@ public class Menu {
 
         console = new Scanner(System.in);
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println("Please choose the industry for this Account. Available options are: ");
+        System.out.println("Please choose the industry for this dao2.Account. Available options are: ");
         System.out.println(Arrays.asList(Industry.values()));
 
         //ask for enum and validate input
@@ -344,19 +368,19 @@ public class Menu {
         Account newAccount=new Account(industry, employeeCount, city, country, opportunity.getDecisionMaker(), opportunity);
         accountList.add(newAccount);
 
-        System.out.println("New Account created with following details: ");
+        System.out.println("New dao2.Account created with following details: ");
         System.out.println(newAccount.showAccountDetails());
     }
 
-    //verify if given Account exists in the list and print details
+    //verify if given DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Account exists in the list and print details
     public static void lookupOpportunity(int num){
         int index=Validations.getOpportunityIndexById(opportunityList, num);
         if(index==-1){
-            System.out.println("Opportunity with ID="
+            System.out.println("dao2.Opportunity with ID="
                     .concat(String.valueOf(num))
                     .concat(" was not found!"));
         } else {
-            System.out.println("Opportunity found!");
+            System.out.println("dao2.Opportunity found!");
             System.out.println(opportunityList.get(index).showOpportunityDetails());
         }
     }
@@ -367,12 +391,12 @@ public class Menu {
         } else {
             int index = Validations.getOpportunityIndexById(opportunityList, num);
             if (index == -1) {
-                System.out.println("Opportunity with ID="
+                System.out.println("dao2.Opportunity with ID="
                         .concat(String.valueOf(num))
                         .concat(" was not found!"));
             } else {
                 opportunityList.get(index).setStatus(status);
-                System.out.println("Opportunity found and updated!");
+                System.out.println("dao2.Opportunity found and updated!");
                 System.out.println(opportunityList.get(index).showOpportunityDetails());
                 if (status==Status.CLOSED_WON){
                     System.out.println("You've won this opportunity! Congratulations! \nLet's celebrate it with some music!");
@@ -382,15 +406,15 @@ public class Menu {
         }
     }
 
-    //verify if given Account exists in the list and print details
+    //verify if given DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Account exists in the list and print details
     public static void lookupAccount(int num){
         int index=Validations.getAccountIndexById(accountList, num);
         if(index==-1){
-            System.out.println("Account with ID="
+            System.out.println("dao2.Account with ID="
                     .concat(String.valueOf(num))
                     .concat(" was not found!"));
         } else {
-            System.out.println("Account found!");
+            System.out.println("dao2.Account found!");
             System.out.println(accountList.get(index).showAccountDetails());
         }
     }

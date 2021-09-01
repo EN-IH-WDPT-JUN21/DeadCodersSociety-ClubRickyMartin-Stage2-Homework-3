@@ -1,12 +1,15 @@
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+package DeadCodersSocietyClubRickyMartinStage2Homework3.dao;
+
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "contacts")
 public class Contact {
 
     @Id

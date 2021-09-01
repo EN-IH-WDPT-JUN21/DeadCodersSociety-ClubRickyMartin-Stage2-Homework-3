@@ -1,3 +1,10 @@
+import dao.Account;
+import dao.Contact;
+import dao.Lead;
+import dao.Opportunity;
+import enums.Industry;
+import enums.Product;
+import enums.Status;
 import org.apache.commons.lang.WordUtils;
 
 import java.util.ArrayList;
@@ -89,7 +96,7 @@ public class Menu {
                 //hidden menu option for users who will spot asterisks in welcome screen
                 case "*" -> Menu.CRMTrueDefinition();
 
-                // case "Report Lead by SalesRep" -> Report()
+                // case "Report dao.Lead by dao.SalesRep" -> Report()
 
 
                 //just a security valve - probably redundant
@@ -180,13 +187,13 @@ public class Menu {
         System.out.println(
                 """
                         Available commands are:
-                        New Lead - allows creation of a new Lead,
+                        New dao.Lead - allows creation of a new dao.Lead,
                         Show Leads - displays a list of all available Leads,
-                        Lookup Lead id - display Lead with given id,
-                        Convert id - converts Lead with given id to an Opportunity,
-                        Lookup Opportunity id - display Opportunity with given id,
-                        Close-lost id - closes Opportunity with given id with status LOST,
-                        Close-won id - closes Opportunity with given id with status WON,
+                        Lookup dao.Lead id - display dao.Lead with given id,
+                        Convert id - converts dao.Lead with given id to an dao.Opportunity,
+                        Lookup dao.Opportunity id - display dao.Opportunity with given id,
+                        Close-lost id - closes dao.Opportunity with given id with status LOST,
+                        Close-won id - closes dao.Opportunity with given id with status WON,
                         Help - displays list of available commands,
                         Definition - displays definition of CRM,
                         Play - play some motivating music,
@@ -211,11 +218,11 @@ public class Menu {
     public static void lookupLead(int num){
         int index=Validations.getLeadIndexById(leadList, num);
         if(index==-1){
-            System.out.println("Lead with ID="
+            System.out.println("dao.Lead with ID="
                     .concat(String.valueOf(num))
                     .concat(" was not found!"));
         } else {
-            System.out.println("Lead found!");
+            System.out.println("dao.Lead found!");
             System.out.println(leadList.get(index).showLeadDetails());
         }
     }
@@ -227,14 +234,14 @@ public class Menu {
         int index=Validations.getLeadIndexById(leadList, num);
         //validate if given lead exists
         if(index==-1){
-            System.out.println("Lead with ID="
+            System.out.println("dao.Lead with ID="
                     .concat(String.valueOf(num))
                     .concat(" was not found!"));
             return -1;
         } else {
             Lead lead=leadList.get(index);
             Contact decisionMaker=new Contact(lead.getName(), lead.getPhoneNumber(), lead.getEmail(), lead.getCompanyName());
-            System.out.println("Lead found!");
+            System.out.println("dao.Lead found!");
             System.out.println("New contact created with following data:");
             System.out.println(decisionMaker.showContactDetails());
             System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -242,7 +249,7 @@ public class Menu {
             System.out.println(java.util.Arrays.asList(Product.values()));
 
             menuChoice= convertUserInputToCommand(console.nextLine());
-            //loop while input is an invalid enum Product
+            //loop while input is an invalid enum enums.Product
             while (Validations.getProduct(menuChoice)==null) {
                 System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
                 System.out.println("This is not a valid option! available options are:");
@@ -273,9 +280,9 @@ public class Menu {
             //remove converted lead from the list
             leadList.remove(lead);
             System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
-            System.out.println("Lead id: ".concat(String.valueOf(lead.getId())).concat(" was removed."));
+            System.out.println("dao.Lead id: ".concat(String.valueOf(lead.getId())).concat(" was removed."));
 
-            //go to Opportunity creator
+            //go to dao.Opportunity creator
             return Validations.getOpportunityIndexById(opportunityList,newOpportunity.getId());
         }
 
@@ -286,7 +293,7 @@ public class Menu {
 
         console = new Scanner(System.in);
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println("Please choose the industry for this Account. Available options are: ");
+        System.out.println("Please choose the industry for this dao.Account. Available options are: ");
         System.out.println(Arrays.asList(Industry.values()));
 
         //ask for enum and validate input
@@ -344,19 +351,19 @@ public class Menu {
         Account newAccount=new Account(industry, employeeCount, city, country, opportunity.getDecisionMaker(), opportunity);
         accountList.add(newAccount);
 
-        System.out.println("New Account created with following details: ");
+        System.out.println("New dao.Account created with following details: ");
         System.out.println(newAccount.showAccountDetails());
     }
 
-    //verify if given Account exists in the list and print details
+    //verify if given dao.Account exists in the list and print details
     public static void lookupOpportunity(int num){
         int index=Validations.getOpportunityIndexById(opportunityList, num);
         if(index==-1){
-            System.out.println("Opportunity with ID="
+            System.out.println("dao.Opportunity with ID="
                     .concat(String.valueOf(num))
                     .concat(" was not found!"));
         } else {
-            System.out.println("Opportunity found!");
+            System.out.println("dao.Opportunity found!");
             System.out.println(opportunityList.get(index).showOpportunityDetails());
         }
     }
@@ -367,12 +374,12 @@ public class Menu {
         } else {
             int index = Validations.getOpportunityIndexById(opportunityList, num);
             if (index == -1) {
-                System.out.println("Opportunity with ID="
+                System.out.println("dao.Opportunity with ID="
                         .concat(String.valueOf(num))
                         .concat(" was not found!"));
             } else {
                 opportunityList.get(index).setStatus(status);
-                System.out.println("Opportunity found and updated!");
+                System.out.println("dao.Opportunity found and updated!");
                 System.out.println(opportunityList.get(index).showOpportunityDetails());
                 if (status==Status.CLOSED_WON){
                     System.out.println("You've won this opportunity! Congratulations! \nLet's celebrate it with some music!");
@@ -382,15 +389,15 @@ public class Menu {
         }
     }
 
-    //verify if given Account exists in the list and print details
+    //verify if given dao.Account exists in the list and print details
     public static void lookupAccount(int num){
         int index=Validations.getAccountIndexById(accountList, num);
         if(index==-1){
-            System.out.println("Account with ID="
+            System.out.println("dao.Account with ID="
                     .concat(String.valueOf(num))
                     .concat(" was not found!"));
         } else {
-            System.out.println("Account found!");
+            System.out.println("dao.Account found!");
             System.out.println(accountList.get(index).showAccountDetails());
         }
     }

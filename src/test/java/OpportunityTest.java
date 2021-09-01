@@ -1,3 +1,6 @@
+import dao.Contact;
+import dao.Opportunity;
+import enums.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

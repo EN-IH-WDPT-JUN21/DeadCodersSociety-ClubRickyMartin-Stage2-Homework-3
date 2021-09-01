@@ -1,3 +1,10 @@
+import dao.Account;
+import dao.Contact;
+import dao.Lead;
+import dao.Opportunity;
+import enums.Industry;
+import enums.Product;
+import enums.Status;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

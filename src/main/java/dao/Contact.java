@@ -1,3 +1,5 @@
+package dao;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +26,7 @@ public class Contact {
     private String companyName;
 
     @OneToOne
-    @JoinColumn(name = "account_id")
+    @JoinColumn(name = "account_id")    //maybe we should change this relation from dao.Account to dao.Opportunity...
     private Account account;
 
     public Contact(String name, String phoneNumber, String email, String companyName) {

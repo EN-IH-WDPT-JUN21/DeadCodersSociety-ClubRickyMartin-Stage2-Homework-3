@@ -57,7 +57,7 @@
     <li><a href="#issues">Known Issues</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact">dao.Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
@@ -148,7 +148,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 
 <!-- CONTACT -->
-## Contact
+## dao.Contact
 
 Project Link: [https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2)
 

@@ -1,3 +1,5 @@
+package dao;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,10 +26,10 @@ public class Lead {
     private String companyName;
 
     @OneToOne
-    @JoinColumn(name = "contact_id")
+    @JoinColumn(name = "contact_id")    //maybe to delete
     private Contact contact;
 
-    @OneToOne
+    @OneToOne       //maybe @ManyToOne... salesRep could have many Leads
     @JoinColumn(name = "sales_rep_id")
     private SalesRep salesRep;
 

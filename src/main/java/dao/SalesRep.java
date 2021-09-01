@@ -1,3 +1,5 @@
+package dao;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,7 +30,7 @@ public class SalesRep {
         this.name = name;
     }
 
-    //returns SalesRep details
+    //returns dao.SalesRep details
     public String showSalesRepDetails() {
         return "ID: ".concat(String.valueOf(this.getId())).concat("\n")
                 .concat("Name: ").concat(this.getName()).concat("\n");

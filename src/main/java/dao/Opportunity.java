@@ -1,3 +1,6 @@
+package dao;
+
+import enums.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,11 +25,11 @@ public class Opportunity {
     @JoinColumn(name = "contact_id")
     private Contact decisionMaker;
 
-    @OneToOne
+    @OneToOne       //Maybe @ManyToOne - Account could have relation with Opportunities
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @OneToOne
+    @OneToOne       //Maybe @ManyToOne - salesRep could have many Opportunities
     @JoinColumn(name = "sales_rep_id")
     private SalesRep salesRep;
 
@@ -37,13 +40,13 @@ public class Opportunity {
         //this.decisionMaker = decisionMaker;
     }
 
-    //returns Opportunity details
+    //returns dao.Opportunity details
     public String showOpportunityDetails() {
         return "ID: ".concat(String.valueOf(this.getId())).concat("\n")
-                .concat("Status: ").concat(this.getStatus().name()).concat("\n")
-                .concat("Product: ").concat(this.getProduct().name()).concat("\n")
+                .concat("enums.Status: ").concat(this.getStatus().name()).concat("\n")
+                .concat("enums.Product: ").concat(this.getProduct().name()).concat("\n")
                 .concat("Quantity: ").concat(String.valueOf(this.getQuantity())).concat("\n")
-                .concat("Contact details: ").concat("\n")
+                .concat("dao.Contact details: ").concat("\n")
                 .concat(this.getDecisionMaker().showContactDetails()).concat("\n");
     }
 }

@@ -3,6 +3,13 @@ import javax.mail.internet.InternetAddress;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import dao.Account;
+import dao.Lead;
+import dao.Opportunity;
+import enums.Industry;
+import enums.Product;
+import enums.Status;
 import org.apache.commons.lang.WordUtils;
 
 public class Validations {
@@ -104,7 +111,7 @@ public class Validations {
         return text.replaceAll("\\d","");
     }
 
-    //finds Lead index in given list
+    //finds dao.Lead index in given list
     public static int getLeadIndexById(List<Lead> list, int id) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) !=null && list.get(i).getId()==id){
@@ -114,7 +121,7 @@ public class Validations {
         return -1;// if there is no given id in list
     }
 
-    //finds Opportunity index in given list
+    //finds dao.Opportunity index in given list
     public static int getOpportunityIndexById(List<Opportunity> list, int id) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) !=null && list.get(i).getId()==id){
@@ -124,7 +131,7 @@ public class Validations {
         return -1;// if there is no given id in list
     }
 
-    //finds Account index in given list
+    //finds dao.Account index in given list
     public static int getAccountIndexById(List<Account> list, int id) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) !=null && list.get(i).getId()==id){

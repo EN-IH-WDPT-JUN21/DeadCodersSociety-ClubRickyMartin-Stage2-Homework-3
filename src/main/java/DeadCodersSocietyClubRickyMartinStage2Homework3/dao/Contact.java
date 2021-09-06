@@ -26,23 +26,31 @@ public class Contact {
     @Column(name = "company_name")
     private String companyName;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id")
     private Account account;
 
     public Contact(String name, String phoneNumber, String email, String companyName) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.companyName = companyName;
+        setName(name);
+        setPhoneNumber(phoneNumber);;
+        setEmail(email);
+        setCompanyName(companyName);
+    }
+    public Contact(String name, String phoneNumber, String email, String companyName, Account account) {
+        setName(name);
+        setPhoneNumber(phoneNumber);;
+        setEmail(email);
+        setCompanyName(companyName);
+        setAccount(account);
     }
 
     //returns contact details
     public String showContactDetails() {
-        return "ID: ".concat(String.valueOf(this.getId())).concat("\n")
-                .concat("Company Name: ").concat(this.getCompanyName()).concat("\n")
-                .concat("Name: ").concat(this.getName()).concat("\n")
-                .concat("Phone Number: ").concat(this.getPhoneNumber()).concat("\n")
-                .concat("Email: ").concat(this.getEmail()).concat("\n");
+        return "Contact Details: ".concat("\n")
+                .concat("   ID: ").concat(String.valueOf(this.getId())).concat("\n")
+                .concat("   Company Name: ").concat(this.getCompanyName()).concat("\n")
+                .concat("   Name: ").concat(this.getName()).concat("\n")
+                .concat("   Phone Number: ").concat(this.getPhoneNumber()).concat("\n")
+                .concat("   Email: ").concat(this.getEmail()).concat("\n");
     }
 }

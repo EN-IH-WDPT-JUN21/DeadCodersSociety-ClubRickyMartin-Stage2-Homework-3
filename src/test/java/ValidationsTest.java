@@ -4,34 +4,31 @@ import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Account;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Contact;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Lead;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Opportunity;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.repository.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.Industry;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.Product;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.Status;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ValidationsTest {
-    static List<Lead> leadList= Menu.getLeadList();
-    static List<Opportunity> opportunityList= Menu.getOpportunityList();
-    static List<Account> accountList=Menu.getAccountList();
+    Menu Menu;
+    Validations Validations;
+
 
     @BeforeEach
     void setUp() throws NoSuchFieldException, IllegalAccessException {
-        TestUtils.resetIdCounter(Lead.class);
-        TestUtils.resetIdCounter(Opportunity.class);
-        TestUtils.resetIdCounter(Account.class);
     }
 
     @AfterEach
     void tearDown() {
-        leadList.clear();
-        opportunityList.clear();
-        accountList.clear();
     }
 
     @Test
@@ -111,35 +108,6 @@ class ValidationsTest {
                         4
                         *
                         """));
-    }
-
-    @Test
-    void getLeadIndexByIdReturnNegativeOneIfNotPresent() {
-        var lead1=new Lead("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
-        leadList.add(lead1);
-        assertEquals(0, Validations.getLeadIndexById(leadList, 1));
-        assertEquals(-1, Validations.getLeadIndexById(leadList, 2));
-    }
-
-    @Test
-    void getOpportunityIndexById() {
-        var contact1=new Contact("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
-        var opportunity1 =new Opportunity(Product.BOX, 500, contact1);
-        assertEquals(-1, Validations.getOpportunityIndexById(opportunityList, 1));
-        opportunityList.add(opportunity1);
-        System.out.println(opportunityList.isEmpty());
-        System.out.println(opportunity1.getId());
-        assertEquals(0, Validations.getOpportunityIndexById(opportunityList, 1));
-    }
-
-    @Test
-    void getAccountIndexById() {
-        var contact1=new Contact("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
-        var opportunity1=new Opportunity(Product.BOX, 500, contact1);
-        var account1=new Account(Industry.MEDICAL, 500, "Washington", "United States", contact1, opportunity1);
-        assertEquals(-1, Validations.getAccountIndexById(accountList, 1));
-        accountList.add(account1);
-        assertEquals(0, Validations.getAccountIndexById(accountList, 1));
     }
 
     @Test

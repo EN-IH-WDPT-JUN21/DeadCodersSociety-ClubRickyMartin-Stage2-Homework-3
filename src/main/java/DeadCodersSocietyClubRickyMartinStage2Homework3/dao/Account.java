@@ -4,6 +4,7 @@ import DeadCodersSocietyClubRickyMartinStage2Homework3.Industry;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -29,10 +30,10 @@ public class Account {
   private String city;
   private String country;
 
-  @OneToMany(mappedBy = "account")
+  @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
   private Set<Opportunity> opportunities;
 
-  @OneToMany(mappedBy = "account")
+  @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
   private Set<Contact> contacts;
 
 
@@ -45,23 +46,22 @@ public class Account {
     //this.opportunityList = opportunityList;
   }
 
-  public Account(Industry industry, int employeeCount, String city, String country, Contact contact, Opportunity opportunity) {
-    this.industry = industry;
-    this.employeeCount = employeeCount;
-    this.city = city;
-    this.country = country;
-    //this.contactList = new ArrayList<dao2.Contact>();
-    //this.contactList.add(contact);
-    //this.opportunityList = new ArrayList<dao2.Opportunity>();
-    //this.opportunityList.add(opportunity);
+  public Account(Industry industry, int employeeCount, String city, String country, Opportunity opportunity,Contact contact) {
+    setIndustry(industry);
+    setEmployeeCount(employeeCount);
+    setCity(city);
+    setCountry(country);
+    this.opportunities= Collections.singleton(opportunity);
+    this.contacts= Collections.singleton(contact);
   }
 
   //returns dao2.Account details
   public String showAccountDetails(){
-    return "ID: ".concat(String.valueOf(this.getId())).concat("\n")
-            .concat("DeadCodersSocietyClubRickyMartinStage2Homework3.Industry: ").concat(String.valueOf(this.getIndustry())).concat("\n")
-            .concat("Employee count: ").concat(String.valueOf(this.getEmployeeCount())).concat("\n")
-            .concat("City: ").concat(this.getCity()).concat("\n")
-            .concat("Country: ").concat(this.getCountry()).concat("\n");
+    return "Account details: ".concat("\n")
+            .concat(" ID: ").concat(String.valueOf(this.getId())).concat("\n")
+            .concat(" Industry: ").concat(String.valueOf(this.getIndustry())).concat("\n")
+            .concat(" Employee count: ").concat(String.valueOf(this.getEmployeeCount())).concat("\n")
+            .concat(" City: ").concat(this.getCity()).concat("\n")
+            .concat(" Country: ").concat(this.getCountry()).concat("\n");
   }
 }

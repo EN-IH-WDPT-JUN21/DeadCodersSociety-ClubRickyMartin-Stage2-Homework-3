@@ -12,9 +12,15 @@ import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Opportunity;
 import org.apache.commons.lang.WordUtils;
 
 public class Validations {
+    Menu Menu;
+
+    //trim and tidy user input
+    public  String convertUserInputToCommand(String input){
+        return input.toLowerCase().replaceAll("\\s+", "");
+    }
 
     //check if given email has valid form
-    public static boolean isValidEmailAddress(String email) {
+    public  boolean isValidEmailAddress(String email) {
         boolean result = true;
         try {
             InternetAddress emailAddr = new InternetAddress(email);
@@ -26,7 +32,7 @@ public class Validations {
     }
 
     //check if given phone number matches phone number pattern
-    public static boolean isValidPhoneNumber(String phoneNumber) {
+    public  boolean isValidPhoneNumber(String phoneNumber) {
         String patterns
                 = "^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$"
                 + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?){2}\\d{3}$"
@@ -37,23 +43,35 @@ public class Validations {
     }
 
 
-    public static boolean isValidFirstName(String firstName)
+    public  boolean isValidFirstName(String firstName)
     {
         String fName= WordUtils.capitalizeFully(firstName.trim());
         return fName.matches( "[A-Z][a-zA-Z]*" );
     }
 
-    public static boolean isValidLastName(String lastName)
+    public  boolean inputIsYesOrNo(String yesOrNo)
+    {
+        yesOrNo=convertUserInputToCommand(yesOrNo);
+        if(yesOrNo.matches("yes") || yesOrNo.matches("y") || yesOrNo.matches("n")|| yesOrNo.matches("no")) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public  boolean isValidLastName(String lastName)
     {
         String lName= WordUtils.capitalizeFully(lastName.trim());
         return lName.matches( "[a-zA-z]+([ '-][a-zA-Z]+)*" );
     }
 
     //check if input matches available menu commands patterns
-    public static boolean isValidMenuCommand(String command) {
+    public  boolean isValidMenuCommand(String command) {
         //patterns
         final Pattern newLead = Pattern.compile("newlead");
         final Pattern showLeads = Pattern.compile("showleads");
+        final Pattern newSalesRep = Pattern.compile("newsalesrep");
+        final Pattern showSalesReps = Pattern.compile("showsalesreps");
         final Pattern showOpportunities = Pattern.compile("showopportunities");
         final Pattern showAccounts = Pattern.compile("showaccounts");
         final Pattern lookUpLeads = Pattern.compile("lookuplead\\d+");
@@ -71,11 +89,13 @@ public class Validations {
         final Pattern bonus = Pattern.compile("\\*");
 
         //converts input into cleaned, lowercase command
-        command= Menu.convertUserInputToCommand(command);
+        command= convertUserInputToCommand(command);
 
         //validate if input matches given patterns
-        return newLead.matcher(command).matches() ||
+        return  newLead.matcher(command).matches() ||
+                newSalesRep.matcher(command).matches() ||
                 showLeads.matcher(command).matches() ||
+                showSalesReps.matcher(command).matches() ||
                 showOpportunities.matcher(command).matches() ||
                 showAccounts.matcher(command).matches() ||
                 lookUpLeads.matcher(command).matches() ||
@@ -95,8 +115,8 @@ public class Validations {
     }
 
     //removes all characters and leaves only digits - used to extract id from input
-    public static int removeAllCharacters(String command){
-        String text= Menu.convertUserInputToCommand(command).replaceAll("\\D+","");
+    public  int removeAllCharacters(String command){
+        String text= convertUserInputToCommand(command).replaceAll("\\D+","");
         if(!text.equals("")) {
             return Integer.parseInt(text.replaceAll("\\D+", ""));
         }else {
@@ -104,14 +124,17 @@ public class Validations {
         }
     }
 
+    public Validations() {
+    }
+
     //removes all digits and leaves only command - used to extract command from input
-    public static String removeAllDigits(String command){
-        String text= Menu.convertUserInputToCommand(command);
+    public  String removeAllDigits(String command){
+        String text= convertUserInputToCommand(command);
         return text.replaceAll("\\d","");
     }
 
     //finds DeadCodersSocietyClubRickyMartinStage2Homework3.dao.dao2.Lead index in given list
-    public static int getLeadIndexById(List<Lead> list, int id) {
+    public  int getLeadIndexById(List<Lead> list, int id) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) !=null && list.get(i).getId()==id){
                 return i;
@@ -121,7 +144,7 @@ public class Validations {
     }
 
     //finds DeadCodersSocietyClubRickyMartinStage2Homework3.dao.dao2.Opportunity index in given list
-    public static int getOpportunityIndexById(List<Opportunity> list, int id) {
+    public  int getOpportunityIndexById(List<Opportunity> list, int id) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) !=null && list.get(i).getId()==id){
                 return i;
@@ -131,7 +154,7 @@ public class Validations {
     }
 
     //finds DeadCodersSocietyClubRickyMartinStage2Homework3.dao.dao2.Account index in given list
-    public static int getAccountIndexById(List<Account> list, int id) {
+    public  int getAccountIndexById(List<Account> list, int id) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) !=null && list.get(i).getId()==id){
                 return i;
@@ -141,7 +164,7 @@ public class Validations {
     }
 
     //fetch valid enum
-    public static Product getProduct(String product){
+    public  Product getProduct(String product){
         Product prod=null;
         for (Product s : Product.values())
         {
@@ -154,7 +177,7 @@ public class Validations {
     }
 
     //fetch valid enum
-    public static Industry getIndustry(String industry){
+    public  Industry getIndustry(String industry){
         Industry ind=null;
         for (Industry s : Industry.values())
         {
@@ -167,7 +190,7 @@ public class Validations {
     }
 
     //fetch valid enum
-    public static Status getStatus(String status){
+    public  Status getStatus(String status){
         Status ind=null;
         for (Status s : Status.values())
         {
@@ -180,7 +203,7 @@ public class Validations {
     }
 
     //check if input is a valid int
-    public static boolean isValidInt(String input) {
+    public  boolean isValidInt(String input) {
         boolean result = true;
         try {
             Integer.parseInt(input);
@@ -191,7 +214,7 @@ public class Validations {
     }
 
     //check if input is int>0
-    public static int getPositiveInt(String input) {
+    public  int getPositiveInt(String input) {
         int result;
         try {
             result=Integer.parseInt(input);

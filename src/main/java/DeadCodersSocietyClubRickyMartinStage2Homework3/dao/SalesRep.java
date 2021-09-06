@@ -20,19 +20,20 @@ public class SalesRep {
     private int id;
     private String name;
 
-    @OneToMany(mappedBy = "salesRep")
+    @OneToMany(mappedBy = "salesRep", fetch = FetchType.EAGER)
     private Set<Lead> leads;
 
-    @OneToMany(mappedBy = "salesRep")
+    @OneToMany(mappedBy = "salesRep", fetch = FetchType.EAGER)
     private Set<Opportunity> opportunities;
 
     public SalesRep(String name) {
         this.name = name;
     }
 
-    //returns dao2.SalesRep details
+    //returns SalesRep details
     public String showSalesRepDetails() {
-        return "ID: ".concat(String.valueOf(this.getId())).concat("\n")
+        return "SalesRep details: ".concat("\n")
+                .concat("ID: ").concat(String.valueOf(this.getId())).concat("\n")
                 .concat("Name: ").concat(this.getName()).concat("\n");
     }
 }

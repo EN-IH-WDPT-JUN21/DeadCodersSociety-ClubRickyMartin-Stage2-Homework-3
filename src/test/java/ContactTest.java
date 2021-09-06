@@ -8,7 +8,6 @@ class ContactTest {
 
     @BeforeEach
     void setUp() throws NoSuchFieldException, IllegalAccessException {
-        TestUtils.resetIdCounter(Contact.class);
     }
 
     @Test

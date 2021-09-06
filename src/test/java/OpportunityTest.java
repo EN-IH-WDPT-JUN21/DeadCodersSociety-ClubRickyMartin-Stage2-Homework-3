@@ -10,7 +10,6 @@ class OpportunityTest {
 
     @BeforeEach
     void setUp() throws NoSuchFieldException, IllegalAccessException {
-        TestUtils.resetIdCounter(Opportunity.class);
     }
 
 

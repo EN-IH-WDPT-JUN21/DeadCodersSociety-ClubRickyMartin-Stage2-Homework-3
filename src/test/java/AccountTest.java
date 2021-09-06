@@ -2,10 +2,13 @@ import DeadCodersSocietyClubRickyMartinStage2Homework3.Menu;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Account;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Contact;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Opportunity;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.repository.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.Industry;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,10 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class AccountTest {
+    Menu Menu;
 
     @BeforeEach
     void setUp() throws NoSuchFieldException, IllegalAccessException {
-        TestUtils.resetIdCounter(Account.class);
     }
 
     @Test
@@ -42,7 +45,7 @@ class AccountTest {
         Account acc = new Account(Industry.PRODUCE, 10, "Berlin", "USA", Collections.emptyList(), Collections.emptyList());
 
         //then
-        assertEquals(1, acc.getId());
+        assertEquals(0, acc.getId());
     }
 
     @Test
@@ -52,8 +55,8 @@ class AccountTest {
         Account acc2 = new Account(Industry.PRODUCE, 10, "Berlin", "USA", Collections.emptyList(), Collections.emptyList());
 
         //then
-        assertEquals(1, acc1.getId());
-        assertEquals(2, acc2.getId());
+        assertEquals(0, acc1.getId());
+        assertEquals(1, acc2.getId());
     }
 
 
@@ -80,7 +83,7 @@ class AccountTest {
         //when
         Opportunity opportunity = new Opportunity(Product.FLATBED, 2, contact);
         Menu.opportunityList.add(opportunity);
-        Account account = new Account(Industry.MEDICAL, 100, "Warsaw", "Poland", contact, opportunity);
+        Account account = new Account(Industry.MEDICAL, 100, "Warsaw", "Poland", opportunity, contact);
 
         //then
         assertEquals("Warsaw", account.getCity());

@@ -4,6 +4,7 @@ import com.ironhack.homework3.dao.*;
 import com.ironhack.homework3.enums.Industry;
 import com.ironhack.homework3.enums.Product;
 import com.ironhack.homework3.enums.Status;
+import com.ironhack.homework3.repository.LeadRepository;
 import org.apache.commons.lang.WordUtils;
 
 import java.util.ArrayList;
@@ -170,8 +171,16 @@ public class Menu {
 
     //create new lead
     Lead newLead = new Lead(name, phoneNumber, email, companyName);
+
+    //save list on DB
+    // step 1: get LeadRepository using SpringBoot magic
+    LeadRepository leadRepository = Main.applicationContext.getBean(LeadRepository.class);
+    // step 2: save lead using the repository
+    leadRepository.save(newLead);
+
     //add lead to list
     leadList.add(newLead);
+
     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
     System.out.println("New lead created: ");
     System.out.println(newLead.showLeadDetails());

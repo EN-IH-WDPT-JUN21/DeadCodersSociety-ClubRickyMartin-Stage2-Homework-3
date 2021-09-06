@@ -1,5 +1,8 @@
+import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Contact;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Opportunity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.Product;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,7 +10,6 @@ class OpportunityTest {
 
     @BeforeEach
     void setUp() throws NoSuchFieldException, IllegalAccessException {
-        TestUtils.resetIdCounter(Opportunity.class);
     }
 
 

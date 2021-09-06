@@ -1,3 +1,4 @@
+import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Contact;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +8,6 @@ class ContactTest {
 
     @BeforeEach
     void setUp() throws NoSuchFieldException, IllegalAccessException {
-        TestUtils.resetIdCounter(Contact.class);
     }
 
     @Test

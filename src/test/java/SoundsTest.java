@@ -1,3 +1,4 @@
+import DeadCodersSocietyClubRickyMartinStage2Homework3.Sounds;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ class SoundsTest {
 
     @Test
     void getAudioDirectoryName(){
-        File file=Sounds.getAudioDirectory();
+        File file= Sounds.getAudioDirectory();
         assertEquals("audio",
                 file.getName());
     }

@@ -1,6 +1,10 @@
+import DeadCodersSocietyClubRickyMartinStage2Homework3.Menu;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Lead;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.repository.LeadRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -12,10 +16,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LeadTest {
     InputStream stdin = System.in;
+    Menu Menu;
+
+    @Autowired
+    LeadRepository leadRepository;
 
     @BeforeEach
     void setUp() throws NoSuchFieldException, IllegalAccessException {
-        TestUtils.resetIdCounter(Lead.class);
         System.setIn(stdin);
 
 
@@ -80,4 +87,14 @@ class LeadTest {
                      Email: John@gmail.com
                      """, lead1.showLeadDetails());
     }
+
+    @Test
+    void testtest() {
+        Lead lead1 = new Lead("John McCormick", "500500500", "John@gmail.com", "GooglyEyes");
+        leadRepository.save(lead1);
+        ;
+        assertEquals("500500500", leadRepository.findAll().get(0).getPhoneNumber());
+    }
+
+
 }

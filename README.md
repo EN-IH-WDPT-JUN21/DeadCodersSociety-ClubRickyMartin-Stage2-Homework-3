@@ -57,7 +57,7 @@
     <li><a href="#issues">Known Issues</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact">DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
@@ -101,13 +101,13 @@ To get a local copy up and running follow these simple steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 <p>
-Start the aplication by running Main class.
+Start the aplication by running DeadCodersSocietyClubRickyMartinStage2Homework3.Main class.
 This application works on a console based user input.
 <br />After starting the project you will be asked for a command. Each input has to be confirmed by presssing enter key.
 <br />List of available commands can be displayed after typing help in the console.
 <br />Program has built in mechanisms which format user input into recognisable commands, therefore commands like "HELP", "heLP" or "HE l P" will be accepted as long as they match the provided pattern.
 <br />
-<br /> Some of the commands will provide user with information, but others like "create lead" will trigger a sequence in which user will have to provide specific data.
+<br /> Some of the commands will provide user with information, but others like "new lead" will trigger a sequence in which user will have to provide specific data.
 <br /> When all the data will be provided apllication will inform You on the outcome and ask for next command.
 <br /> You can exit the program by typing EXIT command.
 </p>
@@ -148,7 +148,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 
 <!-- CONTACT -->
-## Contact
+## DeadCodersSocietyClubRickyMartinStage2Homework3.dao.DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Contact
 
 Project Link: [https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2)
 

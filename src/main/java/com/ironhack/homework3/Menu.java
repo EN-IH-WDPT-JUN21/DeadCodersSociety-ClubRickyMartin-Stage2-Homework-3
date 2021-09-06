@@ -172,7 +172,7 @@ public class Menu {
     //create new lead
     Lead newLead = new Lead(name, phoneNumber, email, companyName);
 
-    //save list on DB
+    //save lead on DB
     // step 1: get LeadRepository using SpringBoot magic
     LeadRepository leadRepository = Main.applicationContext.getBean(LeadRepository.class);
     // step 2: save lead using the repository

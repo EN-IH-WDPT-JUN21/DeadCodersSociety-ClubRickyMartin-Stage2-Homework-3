@@ -21,7 +21,7 @@ public class Account {
   @Setter(value = AccessLevel.NONE)
   @Column(name = "account_id")
   private int id;
-
+  @Enumerated(EnumType.STRING)
   private Industry industry;
 
   @Column(name = "employee_count")

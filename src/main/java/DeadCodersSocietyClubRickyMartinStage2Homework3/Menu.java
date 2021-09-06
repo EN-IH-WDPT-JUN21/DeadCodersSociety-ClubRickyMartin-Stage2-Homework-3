@@ -25,6 +25,7 @@ public class Menu {
         this.accountRepository =accountRepository;
         this.contactRepository = contactRepository;
         this.opportunityRepository = opportunityRepository;
+        //this.reportingRepository = reportingRepository;
     }
 
     Validations Validations=new Validations();
@@ -108,6 +109,43 @@ public class Menu {
                 case "close-won" -> closeOpportunity(numericInput, Status.CLOSED_WON);
 
                 case "closewon" -> closeOpportunity(numericInput, Status.CLOSED_WON);
+
+                //////////Reports
+                case "reportleadbysalesrep"->{for(String record: leadRepository.reportLeadBySalesRep()){System.out.println(record);}}
+                case "reportopportunitybysalesrep"->{for(String record: opportunityRepository.reportOpportunityBySalesRep()){System.out.println(record);}}
+                case "reportclosed-wonbysalesrep"->{for(String record: opportunityRepository.reportCLOSEDWONbySalesRep()){System.out.println(record);}}
+                case "reportclosed-lostbysalesrep"->{for(String record: opportunityRepository.reportCLOSEDLOSTbySalesRep()){System.out.println(record);}}
+                case "reportopenbysalesrep"->{for(String record: opportunityRepository.reportOPENbySalesRep()){System.out.println(record);}}
+                case "reportopportunitybytheproduct"->{for(String record: opportunityRepository.reportOpportunitybytheproduct()){System.out.println(record);}}
+                case "reportclosed-wonbytheproduct"->{for(String record: opportunityRepository.reportCLOSEDWONbytheproduct()){System.out.println(record);}}
+                case "reportclosed-lostbytheproduct"->{for(String record: opportunityRepository.reportCLOSEDLOSTbytheproduct()){System.out.println(record);}}
+                case "reportopenbytheproduct"->{for(String record: opportunityRepository.reportOPENbytheproduct()){System.out.println(record);}}
+                case "reportopportunitybycountry"->{for(String record: opportunityRepository.reportOpportunitybyCountry()){System.out.println(record);}}
+                case "reportclosed-wonbycountry"->{for(String record: opportunityRepository.reportCLOSEDWONbyCountry()){System.out.println(record);}}
+                case "reportclosed-lostbycountry"->{for(String record: opportunityRepository.reportCLOSEDLOSTbyCountry()){System.out.println(record);}}
+                case "reportopenbycountry"->{for(String record: opportunityRepository.reportOPENbyCountry()){System.out.println(record);}}
+                case "reportopportunitybycity"->{for(String record: opportunityRepository.reportOpportunitybyCity()){System.out.println(record);}}
+                case "reportclosed-wonbycity"->{for(String record: opportunityRepository.reportCLOSEDWONbyCity()){System.out.println(record);}}
+                case "reportclosed-lostbycity"->{for(String record: opportunityRepository.reportCLOSEDLOSTbyCity()){System.out.println(record);}}
+                case "reportopenbycity"->{for(String record: opportunityRepository.reportOPENbyCity()){System.out.println(record);}}
+                case "reportopportunitybyindustry"->{for(String record: opportunityRepository.reportOpportunitybyIndustry()){System.out.println(record);}}
+                case "reportclosed-wonbyindustry"->{for(String record: opportunityRepository.reportCLOSEDWONbyIndustry()){System.out.println(record);}}
+                case "reportclosed-lostbyindustry"->{for(String record: opportunityRepository.reportCLOSEDLOSTbyIndustry()){System.out.println(record);}}
+                case "reportopenbyindustry"->{for(String record: opportunityRepository.reportOPENbyIndustry()){System.out.println(record);}}
+                case "meanemployeecount"->{for(String record: accountRepository.meanEmployeeCount()){System.out.println(record);}}
+//                case "medianemployeecount"->{for(String record: salesRepRepository.MedianEmployeeCount()){System.out.println(record);}}
+//                case "maxemployeecount"->{for(String record: salesRepRepository.MaxEmployeeCount()){System.out.println(record);}}
+//                case "minemployeecount"->{for(String record: salesRepRepository.MinEmployeeCount()){System.out.println(record);}}
+//                case "meanquantity"->{for(String record: salesRepRepository.MeanQuantity()){System.out.println(record);}}
+//                case "medianquantity"->{for(String record: salesRepRepository.MedianQuantity()){System.out.println(record);}}
+//                case "maxquantity"->{for(String record: salesRepRepository.MaxQuantity()){System.out.println(record);}}
+//                case "minquantity"->{for(String record: salesRepRepository.MinQuantity()){System.out.println(record);}}
+//                case "meanoppsperaccount"->{for(String record: salesRepRepository.MeanOppsperAccount()){System.out.println(record);}}
+//                case "medianoppsperaccount"->{for(String record: salesRepRepository.MedianOppsperAccount()){System.out.println(record);}}
+//                case "maxoppsperaccount"->{for(String record: salesRepRepository.MaxOppsperAccount()){System.out.println(record);}}
+//                case "minoppsperaccount"->{for(String record: salesRepRepository.MinOppsperAccount()){System.out.println(record);}}
+
+
 
                 case "definition" -> CRMDefinition();
 
@@ -440,7 +478,8 @@ public class Menu {
             }else {
                 account = createAccount(opportunityRepository.findFirstByProductAndQuantityAndDecisionMakerAndSalesRep(product, quantity, decisionMaker, lead.getSalesRep()).get());
             }
-
+            decisionMaker.setAccount(account);
+            contactRepository.save(decisionMaker);
             newOpportunity.setAccount(account);
             opportunityRepository.save(newOpportunity);
             }
@@ -562,16 +601,6 @@ public class Menu {
         }
     }
 
-//    public  List<Lead> getLeadList(){
-//        return leadList;
-//    }
-//    public  List<Opportunity> getOpportunityList(){
-//        return opportunityList;
-//    }
-//
-//    public  List<Account> getAccountList(){
-//        return accountList;
-//    }
 
     //print CRM definition from Wikipedia
     public  void CRMDefinition(){

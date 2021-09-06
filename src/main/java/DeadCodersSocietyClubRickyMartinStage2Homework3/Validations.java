@@ -86,6 +86,57 @@ public class Validations {
         final Pattern exit = Pattern.compile("exit");
         final Pattern play = Pattern.compile("play");
         final Pattern definition = Pattern.compile("definition");
+
+        //by salesrep
+        final Pattern reportLeadBySalesRep        = Pattern.compile("reportleadbysalesrep");
+        final Pattern reportOpportunityBySalesRep = Pattern.compile("reportopportunitybysalesrep");
+        final Pattern ReportCLOSEDWONbySalesRep   = Pattern.compile("reportclosed-wonbysalesrep");
+        final Pattern ReportCLOSEDLOSTbySalesRep  = Pattern.compile("reportclosed-lostbysalesrep");
+        final Pattern ReportOPENbySalesRep        = Pattern.compile("reportopenbysalesrep");
+
+        //by product
+        final Pattern ReportOpportunitybytheproduct = Pattern.compile("reportopportunitybytheproduct");
+        final Pattern ReportCLOSEDWONbytheproduct   = Pattern.compile("reportclosed-wonbytheproduct");
+        final Pattern ReportCLOSEDLOSTbytheproduct  = Pattern.compile("reportclosed-lostbytheproduct");
+        final Pattern ReportOPENbytheproduct        = Pattern.compile("reportopenbytheproduct");
+
+        //by country
+        final Pattern ReportOpportunitybyCountry = Pattern.compile("reportopportunitybycountry");
+        final Pattern ReportCLOSEDWONbyCountry   = Pattern.compile("reportclosed-wonbycountry");
+        final Pattern ReportCLOSEDLOSTbyCountry  = Pattern.compile("reportclosed-lostbycountry");
+        final Pattern ReportOPENbyCountry        = Pattern.compile("reportopenbycountry");
+
+        //by city
+        final Pattern ReportOpportunitybyCity = Pattern.compile("reportopportunitybycity");
+        final Pattern ReportCLOSEDWONbyCity   = Pattern.compile("reportclosed-wonbycity");
+        final Pattern ReportCLOSEDLOSTbyCity  = Pattern.compile("reportclosed-lostbycity");
+        final Pattern ReportOPENbyCity        = Pattern.compile("reportopenbycity");
+
+        //By Industry
+        final Pattern ReportOpportunitybyIndustry = Pattern.compile("reportopportunitybyindustry");
+        final Pattern ReportCLOSEDWONbyIndustry   = Pattern.compile("reportclosed-wonbyindustry");
+        final Pattern ReportCLOSEDLOSTbyIndustry  = Pattern.compile("reportclosed-lostbyindustry");
+        final Pattern ReportOPENbyIndustry        = Pattern.compile("reportopenbyindustry");
+
+        //EmployeeCount	States
+        final Pattern MeanEmployeeCount   = Pattern.compile("meanemployeecount");
+        final Pattern MedianEmployeeCount = Pattern.compile("medianemployeecount");
+        final Pattern MaxEmployeeCount    = Pattern.compile("maxemployeecount");
+        final Pattern MinEmployeeCount    = Pattern.compile("minemployeecount");
+
+        // Quantity States
+        final Pattern MeanQuantity   = Pattern.compile("meanquantity");
+        final Pattern MedianQuantity = Pattern.compile("medianquantity");
+        final Pattern MaxQuantity    = Pattern.compile("maxquantity");
+        final Pattern MinQuantity    = Pattern.compile("minquantity");
+
+        // Opportunity	States
+        final Pattern MeanOppsperAccount   = Pattern.compile("meanoppsperaccount");
+        final Pattern MedianOppsperAccount = Pattern.compile("medianoppsperaccount");
+        final Pattern MaxOppsperAccount    = Pattern.compile("maxoppsperaccount");
+        final Pattern MinOppsperAccount    = Pattern.compile("minoppsperaccount");
+
+
         final Pattern bonus = Pattern.compile("\\*");
 
         //converts input into cleaned, lowercase command
@@ -110,8 +161,50 @@ public class Validations {
                 lookUpAccount.matcher(command).matches() ||
                 bonus.matcher(command).matches()||
                 definition.matcher(command).matches()||
-                play.matcher(command).matches()
-                ;
+                play.matcher(command).matches() ||
+
+                reportLeadBySalesRep.matcher(command).matches() ||
+                reportOpportunityBySalesRep.matcher(command).matches() ||
+                ReportCLOSEDWONbySalesRep.matcher(command).matches() ||
+                ReportCLOSEDLOSTbySalesRep.matcher(command).matches() ||
+                ReportOPENbySalesRep.matcher(command).matches() ||
+
+                ReportOpportunitybytheproduct.matcher(command).matches() ||
+                ReportCLOSEDWONbytheproduct.matcher(command).matches() ||
+                ReportCLOSEDLOSTbytheproduct.matcher(command).matches() ||
+                ReportOPENbytheproduct.matcher(command).matches() ||
+
+                ReportOpportunitybyCountry.matcher(command).matches() ||
+                ReportCLOSEDWONbyCountry.matcher(command).matches() ||
+                ReportCLOSEDLOSTbyCountry.matcher(command).matches() ||
+                ReportOPENbyCountry.matcher(command).matches() ||
+
+                ReportOpportunitybyCity.matcher(command).matches() ||
+                ReportCLOSEDWONbyCity.matcher(command).matches() ||
+                ReportCLOSEDLOSTbyCity.matcher(command).matches() ||
+                ReportOPENbyCity.matcher(command).matches() ||
+
+                ReportOpportunitybyIndustry.matcher(command).matches() ||
+                ReportCLOSEDWONbyIndustry.matcher(command).matches() ||
+                ReportCLOSEDLOSTbyIndustry.matcher(command).matches() ||
+                ReportOPENbyIndustry.matcher(command).matches() ||
+
+                MeanEmployeeCount.matcher(command).matches() ||
+                MedianEmployeeCount.matcher(command).matches() ||
+                MaxEmployeeCount.matcher(command).matches() ||
+                MinEmployeeCount.matcher(command).matches() ||
+
+                MeanQuantity.matcher(command).matches() ||
+                MedianQuantity.matcher(command).matches() ||
+                MaxQuantity.matcher(command).matches() ||
+                MinQuantity.matcher(command).matches() ||
+
+                MeanOppsperAccount.matcher(command).matches() ||
+                MedianOppsperAccount.matcher(command).matches() ||
+                MaxOppsperAccount.matcher(command).matches() ||
+                MinOppsperAccount.matcher(command).matches()
+        ;
+
     }
 
     //removes all characters and leaves only digits - used to extract id from input

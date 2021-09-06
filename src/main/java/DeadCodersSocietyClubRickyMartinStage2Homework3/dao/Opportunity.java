@@ -19,7 +19,9 @@ public class Opportunity {
     @Setter(value = AccessLevel.NONE)
     @Column(name = "opportunity_id")
     private int id;
+    @Enumerated(EnumType.STRING)
     private Status status;
+    @Enumerated(EnumType.STRING)
     private Product product;
     private int quantity;
 

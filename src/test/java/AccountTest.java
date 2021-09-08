@@ -3,6 +3,7 @@ import DeadCodersSocietyClubRickyMartinStage2Homework3.RestApplicationTest;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Account;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Contact;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Opportunity;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.repository.AccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Industry;
@@ -10,8 +11,11 @@ import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Product;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,13 +26,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = RestApplicationTest.class)
 @ActiveProfiles("test")
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+@Transactional
 class AccountTest {
   @Autowired
   Menu menu;
-
-  @BeforeEach
-  void setUp() throws NoSuchFieldException, IllegalAccessException {
-  }
 
   @Test
   void accountPropertiesHaveGivenValues() {
@@ -55,15 +57,23 @@ class AccountTest {
     assertEquals(0, acc.getId());
   }
 
+  @Autowired
+  private AccountRepository accountRepository;
+
   @Test
   void secondAccountGetsIdTwo() {
     //when
     Account acc1 = new Account(Industry.PRODUCE, 10, "Berlin", "USA", Collections.emptyList(), Collections.emptyList());
     Account acc2 = new Account(Industry.PRODUCE, 10, "Berlin", "USA", Collections.emptyList(), Collections.emptyList());
 
+    //saving sets the ID
+    accountRepository.save(acc1);
+    accountRepository.save(acc2);
+
     //then
-    assertEquals(0, acc1.getId());
-    assertEquals(1, acc2.getId());
+    //since we are using a clean DB for testing, the ids will be 1 and 2
+    assertEquals(1, acc1.getId());
+    assertEquals(2, acc2.getId());
   }
 
 
@@ -71,14 +81,16 @@ class AccountTest {
   void printAccountDetails() {
     //when
     Account acc = new Account(Industry.PRODUCE, 10, "Berlin", "USA", Collections.emptyList(), Collections.emptyList());
+    accountRepository.save(acc); //saving sets the ID
 
     //then
     assertEquals("""
-        ID: 1
-        Industry: PRODUCE
-        Employee count: 10
-        City: Berlin
-        Country: USA
+        Account details:\s
+         ID: 1
+         Industry: PRODUCE
+         Employee count: 10
+         City: Berlin
+         Country: USA             
          """, acc.showAccountDetails());
   }
 

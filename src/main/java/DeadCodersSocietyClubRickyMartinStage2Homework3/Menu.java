@@ -35,7 +35,6 @@ public class Menu {
     public   List<Lead> leadList=new ArrayList<>();
     public   List<Opportunity> opportunityList=new ArrayList<>();
     public   List<Account> accountList=new ArrayList<>();
-    private  Lead lead;
     public   Scanner console = new Scanner(System.in);
     private  String menuChoice;
     private  int numericInput;
@@ -105,7 +104,7 @@ public class Menu {
 
                 case "lookupaccount" -> lookupAccount(numericInput);
 
-                case "convert" ->{convertLead(numericInput);}
+                case "convert" -> convertLead(numericInput);
 
                 case "close-lost" -> closeOpportunity(numericInput, Status.CLOSED_LOST);
 
@@ -168,10 +167,6 @@ public class Menu {
         }
 
         //exit program
-    }
-
-    public  void reportBySalesRep() {
-
     }
 
     public  void createNewLead() {
@@ -251,7 +246,7 @@ public class Menu {
         //create new lead
         if(leadRepository.findFirstByNameAndPhoneNumberAndEmailAndCompanyNameAndSalesRep(name, phoneNumber, email, companyName, salesRep).isEmpty()) {
             leadRepository.save(new Lead(name, phoneNumber, email, companyName, salesRep));
-            lead = leadRepository.findFirstByNameAndPhoneNumberAndEmailAndCompanyNameAndSalesRep(name, phoneNumber, email, companyName, salesRep).get();
+            Lead lead = leadRepository.findFirstByNameAndPhoneNumberAndEmailAndCompanyNameAndSalesRep(name, phoneNumber, email, companyName, salesRep).get();
             System.out.println(lead.showLeadDetails());
             System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
             System.out.println("New lead created: ");

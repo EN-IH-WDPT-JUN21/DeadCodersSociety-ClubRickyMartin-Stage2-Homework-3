@@ -7,13 +7,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.Locale;
 
 @SpringBootApplication
-public class RestApplication implements CommandLineRunner {
+public class Application implements CommandLineRunner {
 
     @Autowired
     Menu menu;
 
     public static void main(String[] args) {
-        SpringApplication.run(RestApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
     @Override

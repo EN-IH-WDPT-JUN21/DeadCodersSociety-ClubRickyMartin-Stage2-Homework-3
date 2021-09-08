@@ -12,7 +12,7 @@
 [![Santander][Santander-shield]][Santander-url]
 
 <!-- PROJECT LOGO -->
-![Test Image 3](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2/blob/1f984c0fd7c98b142fa4d2bc8f4592ff22dc110c/src/main/resources/CRM8.jpg)
+![Logo](src/main/resources/images/CRM8.jpg)
 
 <br />
 <p align="center">
@@ -57,7 +57,7 @@
     <li><a href="#issues">Known Issues</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Contact</a></li>
+    <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
@@ -70,10 +70,10 @@
 This is a project of CRM application which allow user to manage workflow of acquiring *leads* and convert them to sale *opportunities*.
 
 ### Class Diagram
-![Test Image 3](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2/blob/32f86ed03278e146919c2630dc06654a2dbd952f/src/main/resources/diagrams/Class%20Diagram.svg)
+![Class Diagram](src/main/resources/diagrams/Class%20Diagram.svg)
 
 ### Use Case Diagram
-![Test Image 3](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2/blob/development_main/src/main/resources/diagrams/Use%20Case%20Diagram.svg)
+![Use Case Diagram](src/main/resources/diagrams/Use%20Case%20Diagram.svg)
 
 ### Built With
 
@@ -92,16 +92,28 @@ To get a local copy up and running follow these simple steps.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2.git
+   git clone https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Stage2-Homework-3.git
    ```
 2. Build a new project in IntelliJ by File -> New -> Project from Version Control
 3. Paste the copied URL and follow instructions.
+4. Start your MySql Workbench and run the code included in db_configuration_file.sql file or copy from below:
+   ```sh
+   /*Creating a database*/
+   CREATE DATABASE IF NOT EXISTS CRM;
+   USE CRM;
+
+   /*Creating a database user*/
+   CREATE USER IF NOT EXISTS 'ClubRickyMartin'@'localhost' IDENTIFIED BY 'ClubRickyMartin123';
+   GRANT ALL PRIVILEGES ON *.* TO 'ClubRickyMartin'@'localhost';
+   FLUSH PRIVILEGES;
+   ```
+5. Run the application.
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 <p>
-Start the aplication by running DeadCodersSocietyClubRickyMartinStage2Homework3.Main class.
+Start the aplication by running Application class.
 This application works on a console based user input.
 <br />After starting the project you will be asked for a command. Each input has to be confirmed by presssing enter key.
 <br />List of available commands can be displayed after typing help in the console.
@@ -117,10 +129,7 @@ This application works on a console based user input.
 
 <!-- ROADMAP -->
 ## Roadmap
-This project is still in early development. Some of the features to be added are:
-* more precise validation of user input
-* storing data in a database
-* reporting functionalities
+This project is still in early development. Future functionalities are yet to be determined.
 
 ## Issues
 See the [open issues](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2/issues) for a list of known issues.
@@ -148,9 +157,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 
 <!-- CONTACT -->
-## DeadCodersSocietyClubRickyMartinStage2Homework3.dao.DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Contact
+## Contact
 
-Project Link: [https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2)
+Project Link: [https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Stage2-Homework-3](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Stage2-Homework-3)
 
 
 

@@ -9,10 +9,16 @@ import java.util.regex.Pattern;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Account;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Lead;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Opportunity;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Industry;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Product;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Status;
 import org.apache.commons.lang.WordUtils;
 
 public class Validations {
     Menu Menu;
+
+    public Validations() {
+    }
 
     //trim and tidy user input
     public  String convertUserInputToCommand(String input){
@@ -21,14 +27,9 @@ public class Validations {
 
     //check if given email has valid form
     public  boolean isValidEmailAddress(String email) {
-        boolean result = true;
-        try {
-            InternetAddress emailAddr = new InternetAddress(email);
-            emailAddr.validate();
-        } catch (AddressException ex) {
-            result = false;
-        }
-        return result;
+            Pattern pattern = Pattern.compile("^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$");
+            Matcher matcher = pattern.matcher(email);
+            return matcher.matches();
     }
 
     //check if given phone number matches phone number pattern
@@ -86,6 +87,7 @@ public class Validations {
         final Pattern exit = Pattern.compile("exit");
         final Pattern play = Pattern.compile("play");
         final Pattern definition = Pattern.compile("definition");
+        final Pattern reports = Pattern.compile("reports");
 
         //by salesrep
         final Pattern reportLeadBySalesRep        = Pattern.compile("reportleadbysalesrep");
@@ -161,6 +163,7 @@ public class Validations {
                 lookUpAccount.matcher(command).matches() ||
                 bonus.matcher(command).matches()||
                 definition.matcher(command).matches()||
+                reports.matcher(command).matches()||
                 play.matcher(command).matches() ||
 
                 reportLeadBySalesRep.matcher(command).matches() ||
@@ -217,8 +220,6 @@ public class Validations {
         }
     }
 
-    public Validations() {
-    }
 
     //removes all digits and leaves only command - used to extract command from input
     public  String removeAllDigits(String command){
@@ -257,7 +258,7 @@ public class Validations {
     }
 
     //fetch valid enum
-    public  Product getProduct(String product){
+    public Product getProduct(String product){
         Product prod=null;
         for (Product s : Product.values())
         {
@@ -270,7 +271,7 @@ public class Validations {
     }
 
     //fetch valid enum
-    public  Industry getIndustry(String industry){
+    public Industry getIndustry(String industry){
         Industry ind=null;
         for (Industry s : Industry.values())
         {
@@ -319,5 +320,4 @@ public class Validations {
         }
         return result;
     }
-
 }

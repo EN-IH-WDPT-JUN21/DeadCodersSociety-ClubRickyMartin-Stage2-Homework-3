@@ -1,6 +1,6 @@
 package DeadCodersSocietyClubRickyMartinStage2Homework3.repository;
 
-import DeadCodersSocietyClubRickyMartinStage2Homework3.Product;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Product;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Contact;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Opportunity;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.SalesRep;

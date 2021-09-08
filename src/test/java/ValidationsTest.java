@@ -1,20 +1,11 @@
 import DeadCodersSocietyClubRickyMartinStage2Homework3.Menu;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.Validations;
-import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Account;
-import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Contact;
-import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Lead;
-import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Opportunity;
-import DeadCodersSocietyClubRickyMartinStage2Homework3.repository.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import DeadCodersSocietyClubRickyMartinStage2Homework3.Industry;
-import DeadCodersSocietyClubRickyMartinStage2Homework3.Product;
-import DeadCodersSocietyClubRickyMartinStage2Homework3.Status;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Industry;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Product;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Status;
 
 import static org.junit.jupiter.api.Assertions.*;
 

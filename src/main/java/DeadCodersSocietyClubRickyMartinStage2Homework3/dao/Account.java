@@ -1,6 +1,6 @@
 package DeadCodersSocietyClubRickyMartinStage2Homework3.dao;
 
-import DeadCodersSocietyClubRickyMartinStage2Homework3.Industry;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Industry;
 import lombok.*;
 
 import javax.persistence.*;

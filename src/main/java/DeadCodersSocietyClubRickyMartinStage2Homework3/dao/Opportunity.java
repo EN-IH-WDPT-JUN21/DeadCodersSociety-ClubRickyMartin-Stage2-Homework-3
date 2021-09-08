@@ -1,7 +1,7 @@
 package DeadCodersSocietyClubRickyMartinStage2Homework3.dao;
 
-import DeadCodersSocietyClubRickyMartinStage2Homework3.Product;
-import DeadCodersSocietyClubRickyMartinStage2Homework3.Status;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Product;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Status;
 import lombok.*;
 
 import javax.persistence.*;

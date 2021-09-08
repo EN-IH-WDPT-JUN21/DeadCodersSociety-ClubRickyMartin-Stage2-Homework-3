@@ -1,6 +1,9 @@
 package DeadCodersSocietyClubRickyMartinStage2Homework3;
 
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.*;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Industry;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Product;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Status;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.repository.*;
 import org.apache.commons.lang.WordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,6 +85,8 @@ public class Menu {
 
                 case "help" -> help();
 
+                case "reports" -> reports();
+
                 case "newlead" -> createNewLead();
 
                 case "newsalesrep" -> createNewSalesRep();
@@ -133,19 +138,17 @@ public class Menu {
                 case "reportclosed-lostbyindustry"->{for(String record: opportunityRepository.reportCLOSEDLOSTbyIndustry()){System.out.println(record);}}
                 case "reportopenbyindustry"->{for(String record: opportunityRepository.reportOPENbyIndustry()){System.out.println(record);}}
                 case "meanemployeecount"->{for(String record: accountRepository.meanEmployeeCount()){System.out.println(record);}}
-//                case "medianemployeecount"->{for(String record: salesRepRepository.MedianEmployeeCount()){System.out.println(record);}}
-//                case "maxemployeecount"->{for(String record: salesRepRepository.MaxEmployeeCount()){System.out.println(record);}}
-//                case "minemployeecount"->{for(String record: salesRepRepository.MinEmployeeCount()){System.out.println(record);}}
-//                case "meanquantity"->{for(String record: salesRepRepository.MeanQuantity()){System.out.println(record);}}
-//                case "medianquantity"->{for(String record: salesRepRepository.MedianQuantity()){System.out.println(record);}}
-//                case "maxquantity"->{for(String record: salesRepRepository.MaxQuantity()){System.out.println(record);}}
-//                case "minquantity"->{for(String record: salesRepRepository.MinQuantity()){System.out.println(record);}}
-//                case "meanoppsperaccount"->{for(String record: salesRepRepository.MeanOppsperAccount()){System.out.println(record);}}
-//                case "medianoppsperaccount"->{for(String record: salesRepRepository.MedianOppsperAccount()){System.out.println(record);}}
-//                case "maxoppsperaccount"->{for(String record: salesRepRepository.MaxOppsperAccount()){System.out.println(record);}}
-//                case "minoppsperaccount"->{for(String record: salesRepRepository.MinOppsperAccount()){System.out.println(record);}}
-
-
+                case "medianemployeecount"->{for(String record: accountRepository.medianEmployeeCount()){System.out.println(record);}}
+                case "maxemployeecount"->{for(String record: accountRepository.maxEmployeeCount()){System.out.println(record);}}
+                case "minemployeecount"->{for(String record: accountRepository.minEmployeeCount()){System.out.println(record);}}
+                case "meanquantity"->{for(String record: accountRepository.meanQuantity()){System.out.println(record);}}
+                case "medianquantity"->{for(String record: accountRepository.medianQuantity()){System.out.println(record);}}
+                case "maxquantity"->{for(String record: accountRepository.maxQuantity()){System.out.println(record);}}
+                case "minquantity"->{for(String record: accountRepository.minQuantity()){System.out.println(record);}}
+                case "meanoppsperaccount"->{for(String record: accountRepository.meanOppsperAccount()){System.out.println(record);}}
+                case "medianoppsperaccount"->{for(String record: accountRepository.medianOppsperAccount()){System.out.println(record);}}
+                case "maxoppsperaccount"->{for(String record: accountRepository.maxOppsperAccount()){System.out.println(record);}}
+                case "minoppsperaccount"->{for(String record: accountRepository.minOppsperAccount()){System.out.println(record);}}
 
                 case "definition" -> CRMDefinition();
 
@@ -233,8 +236,15 @@ public class Menu {
         System.out.println("Please enter SalesRep Id for this lead:");
         userInput = console.nextLine();
         while(userInput == null || userInput.isEmpty() || salesRepRepository.findById(Integer.valueOf(userInput)).isEmpty()){
-            System.out.println("No SalesRep with given ID was found. Please enter valid Id:");
-            userInput = console.nextLine();
+            if(salesRepRepository.findAll().isEmpty()){
+                System.out.println("No salesRep was found! Please create new salesRep.");
+                createNewSalesRep();
+                System.out.println("Please enter SalesRep Id for this lead:");
+                userInput = console.nextLine();
+            }else {
+                System.out.println("No SalesRep with given ID was found. Please enter valid Id:");
+                userInput = console.nextLine();
+            }
         }
         salesRep=salesRepRepository.findById(Integer.parseInt(userInput.trim())).get();
 
@@ -307,12 +317,80 @@ public class Menu {
                         Lookup Lead id - display Lead with given id,
                         Convert id - converts Lead with given id to an Opportunity,
                         Lookup Opportunity id - display Opportunity with given id,
+                        Lookup Account id - display Account with given id,
                         Close-lost id - closes Opportunity with given id with status LOST,
                         Close-won id - closes Opportunity with given id with status WON,
                         Help - displays list of available commands,
+                        Reports - displays a list of available reports,
                         Definition - displays definition of CRM,
                         Play - play some motivating music,
                         EXIT - terminates the program.
+                        """
+        );
+
+    }
+
+    //helper menu to display available reports
+    public  void reports(){
+        System.out.println(
+                """
+                        Available reports are:
+                        By SalesRep
+                        1. A count of Leads by SalesRep can be displayed by typing “Report Lead by SalesRep”
+                        2. A count of all Opportunities by SalesRep can be displayed by typing “Report Opportunity by SalesRep”
+                        3. A count of all CLOSED_WON Opportunities by SalesRep can be displayed by typing “Report CLOSED-WON by SalesRep”
+                        4. A count of all CLOSED_LOST Opportunities by SalesRep can be displayed by typing “Report CLOSED-LOST by SalesRep”
+                        5. A count of all OPEN Opportunities by SalesRep can be displayed by typing “Report OPEN by SalesRep”
+                                                
+                                                
+                        By Product
+                        1. A count of all Opportunities by the product can be displayed by typing “Report Opportunity by the product”
+                        2. A count of all CLOSED_WON Opportunities by the product can be displayed by typing “Report CLOSED-WON by the product”
+                        3. A count of all CLOSED_LOST Opportunities by the product can be displayed by typing “Report CLOSED-LOST by the product”
+                        4. A count of all OPEN Opportunities by the product can be displayed by typing “Report OPEN by the product”
+                                                
+                                                
+                        By Country
+                        1. A count of all Opportunities by country can be displayed by typing “Report Opportunity by Country”
+                        2. A count of all CLOSED_WON Opportunities by country can be displayed by typing “Report CLOSED-WON by Country”
+                        3. A count of all CLOSED_LOST Opportunities by country can be displayed by typing “Report CLOSED-LOST by Country”
+                        4. A count of all OPEN Opportunities by country can be displayed by typing “Report OPEN by Country”
+                                                
+                                                
+                        By City
+                        1. A count of all Opportunities by the city can be displayed by typing “Report Opportunity by City”
+                        2. A count of all CLOSED_WON Opportunities by the city can be displayed by typing “Report CLOSED-WON by City”
+                        3. A count of all CLOSED_LOST Opportunities by the city can be displayed by typing “Report CLOSED-LOST by City”
+                        4. A count of all OPEN Opportunities by the city can be displayed by typing “Report OPEN by City”
+                                                
+                                                
+                        By Industry
+                        1. A count of all Opportunities by industry can be displayed by typing “Report Opportunity by Industry”
+                        2. A count of all CLOSED_WON Opportunities by industry can be displayed by typing “Report CLOSED-WON by Industry”
+                        3. A count of all CLOSED_LOST Opportunities by industry can be displayed by typing “Report CLOSED-LOST by Industry”
+                        4. A count of all OPEN Opportunities by industry can be displayed by typing “Report OPEN by Industry”
+                                                
+                                                
+                        EmployeeCount States
+                        1. The mean employeeCount can be displayed by typing “Mean EmployeeCount”
+                        2. The median employeeCount can be displayed by typing “Median EmployeeCount”
+                        3. The maximum employeeCount can be displayed by typing “Max EmployeeCount”
+                        4. The minimum employeeCount can be displayed by typing “Min EmployeeCount”
+                                                
+                                                
+                        Quantity States
+                        1. The mean quantity of products order can be displayed by typing “Mean Quantity”
+                        2. The median quantity of products order can be displayed by typing “Median Quantity”
+                        3. The maximum quantity of products order can be displayed by typing “Max Quantity”
+                        4. The minimum quantity of products order can be displayed by typing “Min Quantity”
+                                                
+                                                
+                        Opportunity States
+                        1. The mean number of Opportunities associated with an Account can be displayed by typing “Mean Opps per Account”
+                        2. The median number of Opportunities associated with an Account can be displayed by typing “Median Opps per Account”
+                        3. The maximum number of Opportunities associated with an Account can be displayed by typing “Max Opps per Account”
+                        4. The minimum number of Opportunities associated with an Account can be displayed by typing “Min Opps per Account”
+                                                                  
                         """
         );
 
@@ -390,7 +468,7 @@ public class Menu {
 
         console = new Scanner(System.in);
         Product product;
-        int quantity;
+        int     quantity;
         if (leadRepository.findById(num).isEmpty()) {
             System.out.println("Lead with ID="
                     .concat(String.valueOf(num))
@@ -408,7 +486,7 @@ public class Menu {
             System.out.println(java.util.Arrays.asList(Product.values()));
 
             menuChoice = Validations.convertUserInputToCommand(console.nextLine());
-            //loop while input is an invalid enum DeadCodersSocietyClubRickyMartinStage2Homework3.Product
+            //loop while input is an invalid enum DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Product
             while (Validations.getProduct(menuChoice) == null) {
                 System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
                 System.out.println("This is not a valid option! available options are:");
@@ -544,6 +622,11 @@ public class Menu {
         //ask for city name, trim and capitalize it
         System.out.println("Please enter city name:");
         menuChoice= Validations.convertUserInputToCommand(console.nextLine());
+        //validate if city is empty
+        while(menuChoice == null || menuChoice.isEmpty()){
+            System.out.println("City name cannot be empty. Please enter valid city:");
+            menuChoice = Validations.convertUserInputToCommand(console.nextLine());
+        }
         String city=Validations.removeAllDigits(menuChoice);
         city=WordUtils.capitalizeFully(city.trim());
 

@@ -1,24 +1,13 @@
 package DeadCodersSocietyClubRickyMartinStage2Homework3;
 
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Account;
-import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Lead;
-import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Opportunity;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Industry;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Product;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Status;
 import org.apache.commons.lang.WordUtils;
 
 public class Validations {
-    Menu Menu;
-
-    public Validations() {
-    }
 
     //trim and tidy user input
     public  String convertUserInputToCommand(String input){
@@ -35,9 +24,9 @@ public class Validations {
     //check if given phone number matches phone number pattern
     public  boolean isValidPhoneNumber(String phoneNumber) {
         String patterns
-                = "^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$"
-                + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?){2}\\d{3}$"
-                + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?)(\\d{2}[ ]?){2}\\d{2}$";
+                = "".concat("^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$")
+                .concat("|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?){2}\\d{3}$")
+                .concat("|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?)(\\d{2}[ ]?){2}\\d{2}$");
         Pattern pattern = Pattern.compile(patterns);
         Matcher matcher = pattern.matcher(phoneNumber);
         return matcher.matches();
@@ -53,11 +42,7 @@ public class Validations {
     public  boolean inputIsYesOrNo(String yesOrNo)
     {
         yesOrNo=convertUserInputToCommand(yesOrNo);
-        if(yesOrNo.matches("yes") || yesOrNo.matches("y") || yesOrNo.matches("n")|| yesOrNo.matches("no")) {
-            return true;
-        }else{
-            return false;
-        }
+        return yesOrNo.matches("yes") || yesOrNo.matches("y") || yesOrNo.matches("n") || yesOrNo.matches("no");
     }
 
     public  boolean isValidLastName(String lastName)
@@ -225,36 +210,6 @@ public class Validations {
     public  String removeAllDigits(String command){
         String text= convertUserInputToCommand(command);
         return text.replaceAll("\\d","");
-    }
-
-    //finds DeadCodersSocietyClubRickyMartinStage2Homework3.dao.dao2.Lead index in given list
-    public  int getLeadIndexById(List<Lead> list, int id) {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) !=null && list.get(i).getId()==id){
-                return i;
-            }
-        }
-        return -1;// if there is no given id in list
-    }
-
-    //finds DeadCodersSocietyClubRickyMartinStage2Homework3.dao.dao2.Opportunity index in given list
-    public  int getOpportunityIndexById(List<Opportunity> list, int id) {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) !=null && list.get(i).getId()==id){
-                return i;
-            }
-        }
-        return -1;// if there is no given id in list
-    }
-
-    //finds DeadCodersSocietyClubRickyMartinStage2Homework3.dao.dao2.Account index in given list
-    public  int getAccountIndexById(List<Account> list, int id) {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) !=null && list.get(i).getId()==id){
-                return i;
-            }
-        }
-        return -1;// if there is no given id in list
     }
 
     //fetch valid enum

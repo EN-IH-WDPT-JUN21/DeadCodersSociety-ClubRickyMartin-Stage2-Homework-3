@@ -42,8 +42,6 @@ public class Account {
     this.employeeCount = employeeCount;
     this.city = city;
     this.country = country;
-    //this.contactList = contactList;
-    //this.opportunityList = opportunityList;
   }
 
   public Account(Industry industry, int employeeCount, String city, String country, Opportunity opportunity,Contact contact) {

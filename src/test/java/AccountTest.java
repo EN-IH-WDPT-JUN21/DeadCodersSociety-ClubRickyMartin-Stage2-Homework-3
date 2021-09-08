@@ -52,9 +52,9 @@ class AccountTest {
   void firstAccountGetsIdOne() {
     //when
     Account acc = new Account(Industry.PRODUCE, 10, "Berlin", "USA", Collections.emptyList(), Collections.emptyList());
-
+    accountRepository.save(acc); //saving sets the ID
     //then
-    assertEquals(0, acc.getId());
+    assertEquals(1, acc.getId());
   }
 
   @Autowired

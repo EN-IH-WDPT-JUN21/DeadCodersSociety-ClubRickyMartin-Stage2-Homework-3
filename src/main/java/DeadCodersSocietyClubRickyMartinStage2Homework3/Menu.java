@@ -32,7 +32,6 @@ public class Menu {
     }
 
     Validations Validations=new Validations();
-    public   List<Lead> leadList=new ArrayList<>();
     public   List<Opportunity> opportunityList=new ArrayList<>();
     public   List<Account> accountList=new ArrayList<>();
     private  Lead lead;

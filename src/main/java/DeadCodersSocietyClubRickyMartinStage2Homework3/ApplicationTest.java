@@ -6,9 +6,9 @@ import org.springframework.context.annotation.Profile;
 
 @SpringBootApplication
 @Profile("test")
-public class RestApplicationTest {
+public class ApplicationTest {
   public static void main(String[] args) {
-    SpringApplication app = new SpringApplication(RestApplicationTest.class);
+    SpringApplication app = new SpringApplication(ApplicationTest.class);
     app.setLogStartupInfo(false);
     app.run(args);
   }

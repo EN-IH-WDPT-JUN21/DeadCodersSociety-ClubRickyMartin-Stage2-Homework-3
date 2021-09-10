@@ -1,5 +1,5 @@
 import DeadCodersSocietyClubRickyMartinStage2Homework3.Menu;
-import DeadCodersSocietyClubRickyMartinStage2Homework3.RestApplicationTest;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.ApplicationTest;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Account;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Contact;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Opportunity;
@@ -20,7 +20,7 @@ import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest(classes = RestApplicationTest.class)
+@SpringBootTest(classes = ApplicationTest.class)
 @ActiveProfiles("test")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class AccountTest {

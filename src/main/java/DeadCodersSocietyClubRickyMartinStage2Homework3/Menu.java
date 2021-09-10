@@ -32,7 +32,8 @@ public class Menu {
   }
 
   Validations Validations = new Validations();
-  private Lead lead;
+
+
   public Scanner console = new Scanner(System.in);
   private String menuChoice;
   private int numericInput;
@@ -301,9 +302,9 @@ public class Menu {
     //exit program
   }
 
-  public void reportBySalesRep() {
 
-  }
+
+
 
   public void createNewLead() {
     String name;
@@ -382,7 +383,7 @@ public class Menu {
     //create new lead
     if (leadRepository.findFirstByNameAndPhoneNumberAndEmailAndCompanyNameAndSalesRep(name, phoneNumber, email, companyName, salesRep).isEmpty()) {
       leadRepository.save(new Lead(name, phoneNumber, email, companyName, salesRep));
-      lead = leadRepository.findFirstByNameAndPhoneNumberAndEmailAndCompanyNameAndSalesRep(name, phoneNumber, email, companyName, salesRep).get();
+            Lead lead = leadRepository.findFirstByNameAndPhoneNumberAndEmailAndCompanyNameAndSalesRep(name, phoneNumber, email, companyName, salesRep).get();
       System.out.println(lead.showLeadDetails());
       System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
       System.out.println("New lead created: ");
@@ -432,6 +433,7 @@ public class Menu {
     }
 
   }
+
 
 
   //helper menu to display available commands
@@ -843,5 +845,4 @@ public class Menu {
   }
 
 }
-
 

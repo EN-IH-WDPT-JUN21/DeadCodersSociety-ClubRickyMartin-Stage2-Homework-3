@@ -1,11 +1,6 @@
 package DeadCodersSocietyClubRickyMartinStage2Homework3.dao;
 
-import DeadCodersSocietyClubRickyMartinStage2Homework3.repository.LeadRepository;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-
 import javax.persistence.*;
 
 @Entity

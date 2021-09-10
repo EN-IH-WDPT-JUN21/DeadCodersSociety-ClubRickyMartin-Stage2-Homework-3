@@ -1,5 +1,5 @@
 import DeadCodersSocietyClubRickyMartinStage2Homework3.Menu;
-import DeadCodersSocietyClubRickyMartinStage2Homework3.RestApplicationTest;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.ApplicationTest;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Lead;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.SalesRep;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.repository.LeadRepository;
@@ -20,7 +20,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest(classes = RestApplicationTest.class)
+@SpringBootTest(classes = ApplicationTest.class)
 @ActiveProfiles("test")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class LeadTest {

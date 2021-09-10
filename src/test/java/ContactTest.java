@@ -1,4 +1,4 @@
-import DeadCodersSocietyClubRickyMartinStage2Homework3.RestApplicationTest;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.ApplicationTest;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Contact;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.repository.ContactRepository;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import org.springframework.test.context.ActiveProfiles;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-@SpringBootTest(classes = RestApplicationTest.class)
+@SpringBootTest(classes = ApplicationTest.class)
 @ActiveProfiles("test")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class ContactTest {

@@ -4,6 +4,8 @@ import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Account;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Contact;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.dao.Opportunity;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.repository.AccountRepository;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.repository.ContactRepository;
+import DeadCodersSocietyClubRickyMartinStage2Homework3.repository.OpportunityRepository;
 import org.junit.jupiter.api.Test;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Industry;
 import DeadCodersSocietyClubRickyMartinStage2Homework3.enums.Product;
@@ -27,6 +29,12 @@ class AccountTest {
 
   @Autowired
   private AccountRepository accountRepository;
+
+  @Autowired
+  ContactRepository contactRepository;
+
+  @Autowired
+  OpportunityRepository opportunityRepository;
 
   @Test
   void accountPropertiesHaveGivenValues() {
@@ -91,10 +99,11 @@ class AccountTest {
   void noListsAccountCreated() {
     //given
     Contact contact = new Contact("dummy-name-1", "dummy-phone-number-1", "dummy-email-1", "dummy-company-name-1");
-
+    contact = contactRepository.save(contact);
     //when
     Opportunity opportunity = new Opportunity(Product.FLATBED, 2, contact);
-    menu.opportunityList.add(opportunity);
+    opportunity = opportunityRepository.save(opportunity);
+
     Account account = new Account(Industry.MEDICAL, 100, "Warsaw", "Poland", opportunity, contact);
 
     //then

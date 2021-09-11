@@ -101,6 +101,4 @@ class LeadTest {
     leadRepository.save(lead1);
     assertEquals("500500500", leadRepository.findAll().get(0).getPhoneNumber());
   }
-
-
 }

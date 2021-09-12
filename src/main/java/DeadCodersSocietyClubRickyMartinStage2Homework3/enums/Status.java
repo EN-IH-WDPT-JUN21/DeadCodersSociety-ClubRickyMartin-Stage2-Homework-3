@@ -1,3 +1,5 @@
+package DeadCodersSocietyClubRickyMartinStage2Homework3.enums;
+
 public enum Status {
     OPEN,
     CLOSED_WON,

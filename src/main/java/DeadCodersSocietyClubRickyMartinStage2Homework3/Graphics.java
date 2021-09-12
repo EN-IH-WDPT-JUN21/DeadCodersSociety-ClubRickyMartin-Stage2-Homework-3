@@ -1,3 +1,5 @@
+package DeadCodersSocietyClubRickyMartinStage2Homework3;
+
 public class Graphics {
 
     public static void mainMenuGraphic(){

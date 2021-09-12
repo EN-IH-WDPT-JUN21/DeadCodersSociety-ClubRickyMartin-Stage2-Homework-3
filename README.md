@@ -12,7 +12,7 @@
 [![Santander][Santander-shield]][Santander-url]
 
 <!-- PROJECT LOGO -->
-![Test Image 3](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2/blob/1f984c0fd7c98b142fa4d2bc8f4592ff22dc110c/src/main/resources/CRM8.jpg)
+![Logo](src/main/resources/images/CRM8.jpg)
 
 <br />
 <p align="center">
@@ -69,11 +69,22 @@
 
 This is a project of CRM application which allow user to manage workflow of acquiring *leads* and convert them to sale *opportunities*.
 
+Watch our promotional video:
+[![Promo video](src/main/resources/images/VID_IMG.jpg)](https://biteable.com/watch/3222992/5eb39a67866be17856d0c8bda41fb1da)
+
+
 ### Class Diagram
-![Test Image 3](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2/blob/32f86ed03278e146919c2630dc06654a2dbd952f/src/main/resources/diagrams/Class%20Diagram.svg)
+![Class Diagram](src/main/resources/diagrams/Class%20Diagram.svg)
 
 ### Use Case Diagram
-![Test Image 3](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2/blob/development_main/src/main/resources/diagrams/Use%20Case%20Diagram.svg)
+![Use Case Diagram](src/main/resources/diagrams/Use%20Case%20Diagram.svg)
+
+#### Use Case Diagram main assumptions:
+* Sales Associate cannot manually remove a lead 
+* it is not possible to manually create an Account by the Sales Associate - he can change the account details only during lead conversion 
+* the contact is created automatically during the lead conversion by the CRM system, and all data is collected from the lead 
+* it is not possible to create an opportunity without Contact and an Account
+* the Sales Director can also take part in the sales process - then he acts as a Sales Associate
 
 ### Built With
 
@@ -92,22 +103,34 @@ To get a local copy up and running follow these simple steps.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2.git
+   git clone https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Stage2-Homework-3.git
    ```
 2. Build a new project in IntelliJ by File -> New -> Project from Version Control
 3. Paste the copied URL and follow instructions.
+4. Start your MySql Workbench and run the code included in db_configuration_file.sql file or copy from below:
+   ```sh
+   /*Creating a database*/
+   CREATE DATABASE IF NOT EXISTS CRM;
+   USE CRM;
+
+   /*Creating a database user*/
+   CREATE USER IF NOT EXISTS 'ClubRickyMartin'@'localhost' IDENTIFIED BY 'ClubRickyMartin123';
+   GRANT ALL PRIVILEGES ON *.* TO 'ClubRickyMartin'@'localhost';
+   FLUSH PRIVILEGES;
+   ```
+5. Run the application.
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 <p>
-Start the aplication by running Main class.
+Start the aplication by running Application class.
 This application works on a console based user input.
 <br />After starting the project you will be asked for a command. Each input has to be confirmed by presssing enter key.
 <br />List of available commands can be displayed after typing help in the console.
 <br />Program has built in mechanisms which format user input into recognisable commands, therefore commands like "HELP", "heLP" or "HE l P" will be accepted as long as they match the provided pattern.
 <br />
-<br /> Some of the commands will provide user with information, but others like "create lead" will trigger a sequence in which user will have to provide specific data.
+<br /> Some of the commands will provide user with information, but others like "new lead" will trigger a sequence in which user will have to provide specific data.
 <br /> When all the data will be provided apllication will inform You on the outcome and ask for next command.
 <br /> You can exit the program by typing EXIT command.
 </p>
@@ -117,10 +140,7 @@ This application works on a console based user input.
 
 <!-- ROADMAP -->
 ## Roadmap
-This project is still in early development. Some of the features to be added are:
-* more precise validation of user input
-* storing data in a database
-* reporting functionalities
+This project is still in early development. Future functionalities are yet to be determined.
 
 ## Issues
 See the [open issues](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2/issues) for a list of known issues.
@@ -150,7 +170,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Project Link: [https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Homework-2)
+Project Link: [https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Stage2-Homework-3](https://github.com/EN-IH-WDPT-JUN21/DeadCodersSociety-ClubRickyMartin-Stage2-Homework-3)
 
 
 

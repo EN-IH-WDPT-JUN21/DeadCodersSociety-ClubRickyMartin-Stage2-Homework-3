@@ -79,6 +79,13 @@ Watch our promotional video:
 ### Use Case Diagram
 ![Use Case Diagram](src/main/resources/diagrams/Use%20Case%20Diagram.svg)
 
+#### Use Case Diagram main assumptions:
+* Sales Associate cannot manually remove a lead 
+* it is not possible to manually create an Account by the Sales Associate - he can change the account details only during lead conversion 
+* the contact is created automatically during the lead conversion by the CRM system, and all data is collected from the lead 
+* it is not possible to create an opportunity without Contact and an Account
+* the Sales Director can also take part in the sales process - then he acts as a Sales Associate
+
 ### Built With
 
 * [IntelliJ](https://www.jetbrains.com/idea/)

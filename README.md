@@ -70,7 +70,7 @@
 This is a project of CRM application which allow user to manage workflow of acquiring *leads* and convert them to sale *opportunities*.
 
 Watch our promotional video:
-[![Promo video](src/main/resources/images/VID_IMG.jpg)](https://biteable.com/watch/3222992/5eb39a67866be17856d0c8bda41fb1da)
+[![Promo video](src/assets/img/promo_vid.png)](https://app.animaker.com/video/G9ZJHDG652J17TK8)
 
 
 ### Class Diagram
